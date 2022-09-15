@@ -1,0 +1,14 @@
+﻿  CamManager.cpp
+  Camera.cpp
+  Window.cpp
+c:\users\myles\desktop\openglroot\assignment\firstproj\window.h(17): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
+c:\users\myles\desktop\openglroot\assignment\firstproj\window.h(18): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
+c:\users\myles\desktop\openglroot\assignment\firstproj\window.cpp(159): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\myles\desktop\openglroot\assignment\firstproj\window.cpp(160): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\myles\desktop\openglroot\assignment\firstproj\window.cpp(164): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\myles\desktop\openglroot\assignment\firstproj\window.cpp(165): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\myles\desktop\openglroot\assignment\firstproj\window.cpp(167): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\myles\desktop\openglroot\assignment\firstproj\window.cpp(168): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+  Generating Code...
+c:\users\myles\desktop\openglroot\assignment\firstproj\window.cpp(90): warning C4715: 'Window::Initialise': not all control paths return a value
+  FirstProj.vcxproj -> C:\Users\Myles\Desktop\OpenGLRoot\Assignment\Debug\FirstProj.exe
