@@ -90,7 +90,9 @@ void Camera::update()
 
 void Camera::ChangeCameraPosition()
 {
-	//sets the camera data to the data of the selected cam  (The CamIndex is global and is stored in CamManager)
+	//method is called from Window::HandleKeys when pressing left or right
+	//this method sets the cameras position, pitch and yaw to that of one in the array.
+	//CamIndex is a global instance that keeps track of which angle is in use
 	position.x = camPositions[CamIndex].position.x;
 	position.y = camPositions[CamIndex].position.y;
 	position.z = camPositions[CamIndex].position.z;

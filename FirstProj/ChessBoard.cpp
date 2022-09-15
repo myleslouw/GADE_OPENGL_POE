@@ -149,7 +149,7 @@ void ChessBoard::CreateCellBlock(glm::mat4 worldProjection, Camera worldCam, int
 
 void ChessBoard::GenerateChessBoard(glm::mat4 worldProjection, Camera worldCam )
 {
-	//THIS LOADS ALL THE ITEMS FOR THE CHESS BOARD
+	//THIS RENDERS ALL THE ITEMS FOR THE CHESS BOARD
 
 	//1st
 	//border

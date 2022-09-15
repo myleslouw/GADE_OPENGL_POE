@@ -1,5 +1,6 @@
 #include "Shader.h"
 
+//done in class
 Shader::Shader()
 {
 	shaderID = 0;

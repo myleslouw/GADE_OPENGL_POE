@@ -42,7 +42,7 @@ int main()
 
 	glm::mat4 projection = glm::perspective(glm::radians(45.0f), mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 100.0f);
 
-	//create chessboard
+	//create chessboard 
 	chessboard = ChessBoard();		
 	//terrain = Terrain();
 

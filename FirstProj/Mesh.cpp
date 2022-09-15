@@ -3,6 +3,7 @@
 
 #include <iostream>
 
+//done in class
 Mesh::Mesh()
 {
 	VAO = 0;
