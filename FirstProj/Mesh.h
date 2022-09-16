@@ -11,6 +11,7 @@ public:
 	void renderTerrainMesh(const int numStrips, const int numTrisPerStrip);
 	void clearMesh();
 
+
 	~Mesh();
 
 private: 

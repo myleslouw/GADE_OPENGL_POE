@@ -3,12 +3,13 @@
 
 
 int rez = 1;
+Mesh* terrainMesh;
 Terrain::Terrain()
 {
 	uniformProj = 0;
 	uniformMod = 0;
 	uniformV = 0;
-	vBorderShader = "Shaders/vBorderShader.vert";
+	vBorderShader = "Shaders/vTerrainShader.vert";
 	fShader = "Shaders/fShader.frag";
 
 }
@@ -16,7 +17,8 @@ Terrain::Terrain()
 void Terrain::GenTerriainData()
 {
 	stbi_set_flip_vertically_on_load(true);
-	data = stbi_load("Textures/Heightmap2.png", &width, &height, &nChannels, 0);
+	data = stbi_load("Textures/clouds.png", &width, &height, &nChannels, 0);
+	//std::cout << data << std::endl;
 
 	if (data)
 	{
@@ -26,6 +28,7 @@ void Terrain::GenTerriainData()
 	{
 		std::cout << "Failed to load texture" << std::endl;
 	}
+
 
 	std::vector<GLfloat> vertices;
 	float yScale = 64.0f / 256.0f, yShift = 16.0f;
@@ -48,7 +51,7 @@ void Terrain::GenTerriainData()
 	//Sets the data in the array to a GLfloat pointer
 	VertexArr = vertices.data();
 
-	std::cout << "Loaded " << vertices.size() / 3 << " vertices" << std::endl;
+	//std::cout << "Loaded " << vertices.size() / 3 << " vertices" << std::endl;
 
 	stbi_image_free(data);
 #pragma endregion
@@ -68,13 +71,20 @@ void Terrain::GenTerriainData()
 	}
 	IndicesArr = indices.data();
 
-	std::cout << "Loaded " << indices.size() << " indices" << std::endl;
+	//std::cout << "Loaded " << indices.size() << " indices" << std::endl;
 #pragma endregion
 
 
-	Mesh* terrainMesh = new Mesh();
+	terrainMesh = new Mesh();
 	terrainMesh->createMesh(VertexArr, IndicesArr, sizeof(VertexArr), sizeof(IndicesArr));
 	meshList.push_back(terrainMesh);
+
+
+	//std::cout << "Vertex Data:" << vertices.data() << std::endl;
+	//std::cout << "Indices Data:" << indices.data() << std::endl;
+	//std::cout << std::endl;
+	//std::cout << "VData" << VertexArr << std::endl;
+	//std::cout << "IData" << IndicesArr << std::endl;
 }
 
 void Terrain::LoadShaderData()
@@ -82,12 +92,16 @@ void Terrain::LoadShaderData()
 	Shader* terrainShader = new Shader();
 	terrainShader->CreateFromFiles(vBorderShader, fShader);
 	shaderList.push_back(terrainShader);
+
+	Tmodel = glm::mat4(1.0f);
+
+	Tmodel = glm::scale(Tmodel, glm::vec3(100.0f, 100.0f, 100.0f));
 }
 
 void Terrain::RenderTerrain(glm::mat4 worldProjection, Camera worldCam)
 {
-	const int numStrips = (height - 1) / rez;
-	const int numTrisPerStrip = (width / rez) * 2 - 2;
+	const int numStrips = height - 1;
+	const int numTrisPerStrip = width * 2;
 
 
 	shaderList[0]->useShader();
@@ -96,15 +110,20 @@ void Terrain::RenderTerrain(glm::mat4 worldProjection, Camera worldCam)
 	uniformProj = shaderList[0]->getProjectionLocation(); //Gets the model projection from the shader
 	uniformV = shaderList[0]->getViewLocation(); //Gets the view from  shader
 
+
+
 	//Matrix  view
 	Tmodel = glm::mat4(1.0f);
 
-	Tmodel = glm::scale(Tmodel, glm::vec3(1.0f, 1.0f, 1.0f));
+	Tmodel = glm::scale(Tmodel, glm::vec3(100.0f, 100.0f, 100.0f));
 
 	glUniformMatrix4fv(uniformMod, 1, GL_FALSE, glm::value_ptr(Tmodel));
 	glUniformMatrix4fv(uniformProj, 1, GL_FALSE, glm::value_ptr(worldProjection));
 	glUniformMatrix4fv(uniformV, 1, GL_FALSE, glm::value_ptr(worldCam.calculateViewMatrix()));
 
+	//meshList[0]->renderMesh();
+	terrainMesh->renderTerrainMesh(numStrips, numTrisPerStrip);
+	//terrainMesh->renderMesh();
 	/*
 	//GLuint VAO, VBO, IBO;
 	//glGenVertexArrays(1, &VAO);
@@ -130,8 +149,6 @@ void Terrain::RenderTerrain(glm::mat4 worldProjection, Camera worldCam)
 	//glBindVertexArray(0);
 
 	*/
-
-	meshList[0]->renderTerrainMesh(numStrips, numTrisPerStrip);
 }
 Terrain::~Terrain()
 {

@@ -49,8 +49,8 @@ int main()
 	chessboard.LoadMeshes();		//createobjects
 	chessboard.LoadShaders();		//createShaders
 
-	//terrain.GenTerriainData();		//create objects
-	//terrain.LoadShaderData();		//createshaders
+	terrain.GenTerriainData();		//create objects
+	terrain.LoadShaderData();		//createshaders
 
 	//loop until window closed
 	while (!mainWindow.getShouldClose())
@@ -75,7 +75,7 @@ int main()
 		chessboard.GenerateChessBoard(projection, globalCamera);
 
 
-		//terrain.RenderTerrain(projection, camera);
+		terrain.RenderTerrain(projection,globalCamera);
 
 		glUseProgram(0);	//unassigning the shader
 
