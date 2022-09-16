@@ -51,7 +51,15 @@ void Terrain::GenTerriainData()
 	//Sets the data in the array to a GLfloat pointer
 	VertexArr = vertices.data();
 
-	//std::cout << "Loaded " << vertices.size() / 3 << " vertices" << std::endl;
+
+	/*std::cout << "Vertices:";
+	for (size_t i = 0; i < sizeof(vertices) - 1; i++)
+	{
+		std::cout << vertices[i] << "/";
+		std::cout << VertexArr[i];
+		std::cout << std::endl;
+	}*/
+	std::cout << "Loaded " << vertices.size() / 3 << " vertices" << std::endl;
 
 	stbi_image_free(data);
 #pragma endregion
@@ -70,14 +78,24 @@ void Terrain::GenTerriainData()
 		}
 	}
 	IndicesArr = indices.data();
+	/*std::cout << "Indices:";
+	for (size_t i = 0; i < sizeof(indices) - 1; i++)
+	{
 
-	//std::cout << "Loaded " << indices.size() << " indices" << std::endl;
+		std::cout << indices[i]<< "/";
+		std::cout << IndicesArr[i];
+		std::cout << std::endl;
+	}*/
+
+
+	std::cout << "Loaded " << indices.size() << " indices" << std::endl;
 #pragma endregion
 
 
 	terrainMesh = new Mesh();
 	terrainMesh->createMesh(VertexArr, IndicesArr, sizeof(VertexArr), sizeof(IndicesArr));
 	meshList.push_back(terrainMesh);
+
 
 
 	//std::cout << "Vertex Data:" << vertices.data() << std::endl;
@@ -122,7 +140,7 @@ void Terrain::RenderTerrain(glm::mat4 worldProjection, Camera worldCam)
 	glUniformMatrix4fv(uniformV, 1, GL_FALSE, glm::value_ptr(worldCam.calculateViewMatrix()));
 
 	//meshList[0]->renderMesh();
-	terrainMesh->renderTerrainMesh(numStrips, numTrisPerStrip);
+	meshList[0]->renderTerrainMesh(numStrips, numTrisPerStrip);
 	//terrainMesh->renderMesh();
 	/*
 	//GLuint VAO, VBO, IBO;

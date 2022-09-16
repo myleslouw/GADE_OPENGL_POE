@@ -79,6 +79,8 @@ void Mesh::renderTerrainMesh(const int numStrips, const int numTrisPerStrip)
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
 	//glGenVertexArrays(1, &VAO);
+	//std::cout << "VAO:" << VAO << "" <<std::endl;
+	//std::cout << "IBO:" << IBO<< "" << std::endl;
 
 
 	//glGenBuffers(1, &VBO);
@@ -94,12 +96,11 @@ void Mesh::renderTerrainMesh(const int numStrips, const int numTrisPerStrip)
 	//glBufferData(GL_ARRAY_BUFFER, sizeof(Ind[0]) * sizeof(Ind), Ind, GL_STATIC_DRAW);
 
 	//glBindVertexArray(VAO);
-	for (unsigned strip = 0; strip < numStrips; strip++)
-	{
-		glDrawElements(GL_TRIANGLE_STRIP, numTrisPerStrip + 2, GL_UNSIGNED_INT, (void*)(sizeof(unsigned int) * (numTrisPerStrip + 2) * strip));
+	
+		glDrawElements(GL_TRIANGLE_STRIP, numTrisPerStrip + 2, GL_UNSIGNED_INT, 0);
 		//std::cout << "Strip count:" << strip;
 
-	}
+	
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 	//std::cout << "nS: " << numStrips << "nTri: " << numTrisPerStrip;
