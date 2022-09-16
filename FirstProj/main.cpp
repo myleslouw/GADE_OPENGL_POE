@@ -24,8 +24,9 @@ const float degreeToRadians = 3.14159265 / 100.0f;
 
 Window mainWindow;
 
+//Terrain terrain;
 ChessBoard chessboard;
-Terrain terrain;
+
 
 GLfloat deltaTime = 0.0f;
 GLfloat lastTime = 0.0f;
@@ -42,15 +43,19 @@ int main()
 
 	glm::mat4 projection = glm::perspective(glm::radians(45.0f), mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 100.0f);
 
-	//create chessboard 
-	chessboard = ChessBoard();		
+	//create terrain obj
 	//terrain = Terrain();
+
+	//create chessboard obj
+	chessboard = ChessBoard();		
+	
+	//terrain.LoadImage();			//loads image data
+	//terrain.LoadMesh();				//creates a mesh out of data ^
 
 	chessboard.LoadMeshes();		//createobjects
 	chessboard.LoadShaders();		//createShaders
+	
 
-	terrain.GenTerriainData();		//create objects
-	terrain.LoadShaderData();		//createshaders
 
 	//loop until window closed
 	while (!mainWindow.getShouldClose())
@@ -71,11 +76,16 @@ int main()
 		//clear window
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+
+
+		//-------------------------------------------------------------
+		//generate heightmap/terrain
+		//terrain.RenderHeightMap(projection, globalCamera);
+
 		//generates the chessboard
 		chessboard.GenerateChessBoard(projection, globalCamera);
 
-
-		terrain.RenderTerrain(projection,globalCamera);
+		//------------------------------------------------------------------
 
 		glUseProgram(0);	//unassigning the shader
 

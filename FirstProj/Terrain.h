@@ -20,6 +20,7 @@
 
 #include "Mesh.h"
 #include "Shader.h"
+#include "TerrainShader.h"
 #include "Camera.h"
 
 
@@ -35,17 +36,28 @@ public:
 
 	void GenTerriainData();
 	void LoadShaderData();
-
 	void RenderTerrain(glm::mat4 worldProjection, Camera worldCam);
+
+	void LoadImage();
+	void LoadMesh();
+	void RenderHeightMap(glm::mat4 worldProjection, Camera worldCam);
+
 
 	~Terrain();
 
 private:
-	const char* vBorderShader;
-	const char* fShader;
+	const char* vTerrainShader;
+	const char* fTerrainShader;
 
-	int width, height, nChannels;
+	int width, height, nrChannels;
+
+	TerrainShader terrainShader;
 	unsigned char* data;
+	unsigned int terrainVAO, terrainVBO, terrainIBO;
+
+	int numStrips;
+	int numTrisPerStrip;
+
 	GLfloat* VertexArr;
 	unsigned int*  IndicesArr;
 

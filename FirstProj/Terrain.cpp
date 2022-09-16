@@ -1,23 +1,33 @@
 #include "Terrain.h"
-
-
+#include "TerrainShader.h"
 
 int rez = 1;
 Mesh* terrainMesh;
+
 Terrain::Terrain()
 {
 	uniformProj = 0;
 	uniformMod = 0;
 	uniformV = 0;
-	vBorderShader = "Shaders/vTerrainShader.vert";
-	fShader = "Shaders/fShader.frag";
+	vTerrainShader = "Shaders/vTerrainShader.vert";
+	fTerrainShader = "Shaders/fTerrainShader.frag";
+
+	printf("starting shader creation");
+	terrainShader = TerrainShader(vTerrainShader, fTerrainShader);
+
+	printf("shader created");
+
+	numStrips = 0;
+	numTrisPerStrip = 0;
 
 }
+
+//METHOD 1  - NOT WORKING
 
 void Terrain::GenTerriainData()
 {
 	stbi_set_flip_vertically_on_load(true);
-	data = stbi_load("Textures/clouds.png", &width, &height, &nChannels, 0);
+	data = stbi_load("Textures/clouds.png", &width, &height, &nrChannels, 0);
 	//std::cout << data << std::endl;
 
 	if (data)
@@ -32,7 +42,7 @@ void Terrain::GenTerriainData()
 
 	std::vector<GLfloat> vertices;
 	float yScale = 64.0f / 256.0f, yShift = 16.0f;
-	unsigned bytePerPixel = nChannels;
+	unsigned bytePerPixel = nrChannels;
 
 #pragma region Vertex Gen
 	for (int i = 0; i < height; i++)
@@ -108,7 +118,7 @@ void Terrain::GenTerriainData()
 void Terrain::LoadShaderData()
 {
 	Shader* terrainShader = new Shader();
-	terrainShader->CreateFromFiles(vBorderShader, fShader);
+	terrainShader->CreateFromFiles(vTerrainShader, fTerrainShader);
 	shaderList.push_back(terrainShader);
 
 	Tmodel = glm::mat4(1.0f);
@@ -168,6 +178,113 @@ void Terrain::RenderTerrain(glm::mat4 worldProjection, Camera worldCam)
 
 	*/
 }
+
+
+//METHOD 2  - NOT WORKING
+void Terrain::LoadImage()
+{
+	//gets the data from teh heightmap image
+	stbi_set_flip_vertically_on_load(true);
+	data = stbi_load("Textures/clouds.png", &width, &height, &nrChannels, 0);
+	if (data)
+	{
+		std::cout << "Loaded heightmap of size " << height << " x " << width << std::endl;
+	}
+	else
+	{
+		std::cout << "Failed to load texture" << std::endl;
+	}
+}
+
+void Terrain::LoadMesh()
+{
+	//loads the data from the height map into vertices and indices
+	std::vector<float> vertices;
+	float yScale = 64.0f / 256.0f, yShift = 16.0f;
+	int rez = 1;
+	unsigned bytePerPixel = nrChannels;
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; j < width; j++)
+		{
+
+			//loads the image data into vertices
+			unsigned char* pixelOffset = data + (j + width * i) * bytePerPixel;
+			unsigned char y = pixelOffset[0];
+
+			// vertex
+			vertices.push_back(-height / 2.0f + height * i / (float)height);   // vx
+			vertices.push_back((int)y * yScale - yShift);   // vy
+			vertices.push_back(-width / 2.0f + width * j / (float)width);   // vz
+		}
+	}
+	std::cout << "Loaded " << vertices.size() / 3 << " vertices" << std::endl;
+	stbi_image_free(data);
+
+	//image data into indices
+	std::vector<unsigned> indices;
+	for (unsigned i = 0; i < height - 1; i += rez)
+	{
+		for (unsigned j = 0; j < width; j += rez)
+		{
+			for (unsigned k = 0; k < 2; k++)
+			{
+				indices.push_back(j + width * (i + k * rez));
+			}
+		}
+	}
+	std::cout << "Loaded " << indices.size() << " indices" << std::endl;
+
+	numStrips = (height - 1) / rez;
+	numTrisPerStrip = (width / rez) * 2 - 2;
+	std::cout << "Created lattice of " << numStrips << " strips with " << numTrisPerStrip << " triangles each" << std::endl;
+	std::cout << "Created " << numStrips * numTrisPerStrip << " triangles total" << std::endl;
+
+	// configuring VAO
+	glGenVertexArrays(1, &terrainVAO);
+	glBindVertexArray(terrainVAO);
+
+	// configuring VBO
+	glGenBuffers(1, &terrainVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, terrainVBO);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), &vertices[0], GL_STATIC_DRAW);
+
+	// position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+	glGenBuffers(1, &terrainIBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, terrainIBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned), &indices[0], GL_STATIC_DRAW);
+}
+
+void Terrain::RenderHeightMap(glm::mat4 worldProjection, Camera worldCam)
+{
+	//uses the shader
+	terrainShader.useShader();
+
+	// translation identity matrix
+	glm::mat4 model = glm::mat4(1.0f);
+	//center to world origin
+	model = glm::translate(model, glm::vec3(0, 0, 0));
+
+	//scales it to the correct dimensions   
+	model = glm::scale(model, glm::vec3(100.0f, 100.0f, 100.0f));
+
+	terrainShader.setMat4Material("model", model);
+	terrainShader.setMat4Material("projection", worldProjection);
+	terrainShader.setMat4Material("view", worldCam.calculateViewMatrix());
+
+	// render the terrain
+	glBindVertexArray(terrainVAO);
+
+	//drawing elements to the screen
+	for (unsigned strip = 0; strip < numStrips; strip++)
+	{
+		glDrawElements(GL_TRIANGLE_STRIP, numTrisPerStrip + 2, GL_UNSIGNED_INT, (void*)(sizeof(unsigned) * (numTrisPerStrip + 2) * strip)); 
+	}
+}
+
 Terrain::~Terrain()
 {
 
