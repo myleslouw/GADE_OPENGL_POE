@@ -4,6 +4,10 @@
 int rez = 1;
 Mesh* terrainMesh;
 
+
+//Height map tutorial we followed was on LearnOpenGL
+//https://learnopengl.com/Guest-Articles/2021/Tessellation/Height-map
+
 Terrain::Terrain()
 {
 	uniformProj = 0;
@@ -26,6 +30,7 @@ Terrain::Terrain()
 
 void Terrain::GenTerriainData()
 {
+	//store data from image into variable
 	stbi_set_flip_vertically_on_load(true);
 	data = stbi_load("Textures/clouds.png", &width, &height, &nrChannels, 0);
 	//std::cout << data << std::endl;
@@ -101,7 +106,7 @@ void Terrain::GenTerriainData()
 	std::cout << "Loaded " << indices.size() << " indices" << std::endl;
 #pragma endregion
 
-
+	//creates a terrain mesh 
 	terrainMesh = new Mesh();
 	terrainMesh->createMesh(VertexArr, IndicesArr, sizeof(VertexArr), sizeof(IndicesArr));
 	meshList.push_back(terrainMesh);
@@ -117,6 +122,7 @@ void Terrain::GenTerriainData()
 
 void Terrain::LoadShaderData()
 {
+	//creates a shader with the shader data
 	Shader* terrainShader = new Shader();
 	terrainShader->CreateFromFiles(vTerrainShader, fTerrainShader);
 	shaderList.push_back(terrainShader);
@@ -131,13 +137,13 @@ void Terrain::RenderTerrain(glm::mat4 worldProjection, Camera worldCam)
 	const int numStrips = height - 1;
 	const int numTrisPerStrip = width * 2;
 
-
+	//uses the shader from the shader list
 	shaderList[0]->useShader();
 
+	//sets uniform variables
 	uniformMod = shaderList[0]->getModelLocation();//Gets the model projection from the shader
 	uniformProj = shaderList[0]->getProjectionLocation(); //Gets the model projection from the shader
 	uniformV = shaderList[0]->getViewLocation(); //Gets the view from  shader
-
 
 
 	//Matrix  view
@@ -148,6 +154,9 @@ void Terrain::RenderTerrain(glm::mat4 worldProjection, Camera worldCam)
 	glUniformMatrix4fv(uniformMod, 1, GL_FALSE, glm::value_ptr(Tmodel));
 	glUniformMatrix4fv(uniformProj, 1, GL_FALSE, glm::value_ptr(worldProjection));
 	glUniformMatrix4fv(uniformV, 1, GL_FALSE, glm::value_ptr(worldCam.calculateViewMatrix()));
+
+
+	//render mesh
 
 	//meshList[0]->renderMesh();
 	meshList[0]->renderTerrainMesh(numStrips, numTrisPerStrip);
