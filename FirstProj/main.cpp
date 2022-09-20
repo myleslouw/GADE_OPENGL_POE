@@ -18,7 +18,7 @@
 #include "Window.h"
 #include "CamManager.h"		//used for storing global instance of the camera 
 #include "ChessBoard.h"
-#include "Terrain.h"
+#include "Terrain.h"	//Generates the heightmap data
 
 const float degreeToRadians = 3.14159265 / 100.0f;
 
