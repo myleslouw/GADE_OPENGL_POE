@@ -12,6 +12,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <ctime>
+
 #include "stb_image.h"
 
 #include "Mesh.h"
@@ -22,7 +23,7 @@ class Terrain
 public:
 	Terrain();
 	std::vector<Mesh*> meshList;		//0 - T
-	std::vector<Shader*> shaderList; 
+	std::vector<Shader*> shaderList;
 
 	void LoadMeshData();
 	void LoadShaderData();
@@ -35,8 +36,13 @@ private:
 	const char* vTerrainShader;
 	const char* fTerrainShader;
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0;
+
 	GLfloat* VertArr;
 	unsigned int* IndicesArr;
+
+	int numStrips;
+	int numTriPerStrip;
+	glm::mat4 model;
 };
 
 Terrain::Terrain()
@@ -46,6 +52,7 @@ Terrain::Terrain()
 	uniformView = 0;
 	vTerrainShader = "Shaders/vTerrainShader.vert";
 	fTerrainShader = "Shaders/fTerrainShader.frag";
+
 }
 
 inline void Terrain::LoadMeshData()
@@ -79,7 +86,7 @@ inline void Terrain::LoadMeshData()
 			vertices.push_back(-Twidth / 2.0f + Twidth * j / (float)Twidth);   // vz
 		}
 	}
-	std::cout << "Loaded " << vertices.size() / 3 << " vertices" << std::endl;
+	//std::cout << "Loaded " << vertices.size() / 3 << " vertices" << std::endl;
 	stbi_image_free(data);
 
 	VertArr = vertices.data();	//Assigns the data from the vector into a pointer GLfloat for the Mesh class
@@ -95,23 +102,69 @@ inline void Terrain::LoadMeshData()
 			}
 		}
 	}
-	std::cout << "Loaded " << indices.size() << " indices" << std::endl;
+	//std::cout << "Loaded " << indices.size() << " indices" << std::endl;
 	IndicesArr = indices.data();
 
 
 	//Creating a mesh based on the data provided
 	Mesh *terrain = new Mesh();
-	terrain->createMesh(VertArr, IndicesArr, sizeof(VertArr), sizeof(IndicesArr));
+	terrain->createTerrain(vertices,indices);
 	//sends Terrain to the back of the list of meshes
 	meshList.push_back(terrain);
+
+	numStrips = (Theight - 1) / rez;
+	numTriPerStrip = (Twidth / rez) * 2 - 2;
+
+	//	std::cout << "Created lattice of " << numStrips << " strips with " << numTriPerStrip << " triangles each" << std::endl;
+		//std::cout << "Created " << numStrips * numTriPerStrip << " triangles total" << std::endl;
+
+	//std::cout << "Raw data: " << vertices.data() << std::endl;
+	//std::cout << "Converted Data: " << VertArr << std::endl;
 }
 
 inline void Terrain::LoadShaderData()
 {
 	//loads in the shader data for the Terrain
 	Shader *Tshader = new Shader();
-	Tshader->CreateFromFiles(vTerrainShader,fTerrainShader);
+	Tshader->CreateFromFiles(vTerrainShader, fTerrainShader);
 	shaderList.push_back(Tshader);
+}
+
+inline void Terrain::CreateTerrain(glm::mat4 worldProjection, Camera worldCam, int shaderIndex)
+{
+	//STRIPS FOR DRAWING THE MESH
+	const int NumStrips = numStrips;
+	const int NumTriPerStrip = numTriPerStrip;
+
+	//USE FOR TERRIAN SHADER
+	shaderList[shaderIndex]->useShader(); //glUseProgram
+	uniformModel = shaderList[shaderIndex]->getModelLocation();
+	uniformProjection = shaderList[shaderIndex]->getProjectionLocation();
+	uniformView = shaderList[shaderIndex]->getViewLocation();
+
+	//translation on identty matrix
+	model = glm::mat4(1.0f);
+
+	//center terrain to world origin
+	model = glm::translate(model, glm::vec3(0, -10.0f, 0));
+
+	//scales for the Terrain
+	model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
+
+	glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+	glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(worldProjection));
+	glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(worldCam.calculateViewMatrix()));
+
+
+	//render the first element which is the Terrain
+	meshList[0]->renderTerrainMesh(numStrips, numTriPerStrip);
+	//meshList[0]->renderMesh();
+}
+
+inline void Terrain::GenerateTerrain(glm::mat4 worldProjection, Camera worldCam)
+{
+	//RENDER ALL THE ITEMS IN THE LIST
+	CreateTerrain(worldProjection, worldCam, 0);
 }
 
 Terrain::~Terrain()

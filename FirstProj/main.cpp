@@ -5,7 +5,6 @@
 #define GLEW_STATIC
 #include <GL/glew.h>
 #define STB_IMAGE_IMPLEMENTATION
-
 // GLFW
 #include <GLFW/glfw3.h>
 
@@ -17,7 +16,7 @@
 //created files
 #include "Window.h"
 #include "CamManager.h"		//used for storing global instance of the camera 
-#include "ChessBoard.h"
+#include "ChessBoard.h"	//Generate the chessboard 
 #include "Terrain.h"	//Generates the heightmap data
 
 const float degreeToRadians = 3.14159265 / 100.0f;
@@ -26,7 +25,7 @@ Window mainWindow;
 
 //Terrain terrain;
 ChessBoard chessboard;
-
+Terrain heightmap;
 
 GLfloat deltaTime = 0.0f;
 GLfloat lastTime = 0.0f;
@@ -43,18 +42,17 @@ int main()
 
 	glm::mat4 projection = glm::perspective(glm::radians(45.0f), mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 100.0f);
 
-	//create terrain obj
-	//terrain = Terrain();
+	heightmap = Terrain();
 
 	//create chessboard obj
-	chessboard = ChessBoard();		
-	
-	//terrain.LoadImage();			//loads image data
-	//terrain.LoadMesh();				//creates a mesh out of data ^
+	chessboard = ChessBoard();
+
+	heightmap.LoadMeshData();	//loads mesh data and creates the mesh object
+	heightmap.LoadShaderData();	//loads the shader data from our shader file
 
 	chessboard.LoadMeshes();		//createobjects
 	chessboard.LoadShaders();		//createShaders
-	
+
 
 
 	//loop until window closed
@@ -80,7 +78,7 @@ int main()
 
 		//-------------------------------------------------------------
 		//generate heightmap/terrain
-		//terrain.RenderHeightMap(projection, globalCamera);
+		heightmap.GenerateTerrain(projection, globalCamera);
 
 		//generates the chessboard
 		chessboard.GenerateChessBoard(projection, globalCamera);
