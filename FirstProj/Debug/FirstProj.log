@@ -1,3 +1,10 @@
-﻿  Mesh.cpp
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\mesh.cpp(108): warning C4018: '<': signed/unsigned mismatch
+﻿  Shader.cpp
+  main.cpp
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.h(17): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.h(18): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\terrain.h(95): warning C4018: '<': signed/unsigned mismatch
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\terrain.h(97): warning C4018: '<': signed/unsigned mismatch
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\main.cpp(22): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\main.cpp(62): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+  Generating Code...
   FirstProj.vcxproj -> D:\GADE7312_Project_repo\GADE_OpenGL_POE\Debug\FirstProj.exe

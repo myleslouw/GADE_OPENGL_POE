@@ -70,7 +70,7 @@ inline void Terrain::LoadMeshData()
 	}
 
 	std::vector<float> vertices;
-	float yScale = 64.0f / 256.0f, yShift = 16.0f; //clamps the y values between 0.0 and 1.0, shifts the points by 16.0f units
+	float yScale = 64.0f / 256.0f, yShift = 10.0f; //clamps the y values between 0.0 and 1.0, shifts the points by 16.0f units
 	int rez = 1;
 	unsigned bytePerPixel = nChannels;
 	for (int i = 0; i < Theight; i++)
@@ -84,6 +84,9 @@ inline void Terrain::LoadMeshData()
 			vertices.push_back(-Theight / 2.0f + Theight * i / (float)Theight);   // vx
 			vertices.push_back((int)y * yScale - yShift);   // vy
 			vertices.push_back(-Twidth / 2.0f + Twidth * j / (float)Twidth);   // vz
+
+			//texture Cords
+
 		}
 	}
 	//std::cout << "Loaded " << vertices.size() / 3 << " vertices" << std::endl;
@@ -146,10 +149,10 @@ inline void Terrain::CreateTerrain(glm::mat4 worldProjection, Camera worldCam, i
 	model = glm::mat4(1.0f);
 
 	//center terrain to world origin
-	model = glm::translate(model, glm::vec3(0, -10.0f, 0));
+	model = glm::translate(model, glm::vec3(0, -5.0f, 0));
 
 	//scales for the Terrain
-	model = glm::scale(model, glm::vec3(0.5f, 0.5f, 0.5f));
+	model = glm::scale(model, glm::vec3(0.2f, 0.1f, 0.2f));
 
 	glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 	glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(worldProjection));

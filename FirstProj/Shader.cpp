@@ -122,6 +122,11 @@ GLuint Shader::getViewLocation()
 	return uniformView;
 }
 
+void Shader::ApplyTexture()
+{
+
+}
+
 void Shader::useShader()
 {
 	if (!shaderID)
