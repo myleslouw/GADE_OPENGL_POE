@@ -4,11 +4,13 @@
 #include <iostream>
 #include <fstream>
 #include <GL/glew.h>
+#include "stb_image.h"
 
 
 class Shader
 {
 public:
+	unsigned int texture;
 	Shader();
 
 	void CreateFromFiles(const char* vertexLocation, const char* fragmentLocation);
@@ -19,7 +21,7 @@ public:
 	GLuint getModelLocation();
 	GLuint getViewLocation();
 
-	void ApplyTexture();
+	void LoadTexture(std::string FilePath);
 	void useShader();
 	void clearShader();
 

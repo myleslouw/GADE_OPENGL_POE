@@ -77,6 +77,10 @@ void Mesh::createTerrain(std::vector<float> Verts, std::vector<unsigned> Inds)
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
+	//texture attribute
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6*sizeof(float)));
+	glEnableVertexAttribArray(1);
+
 	//BufferData for the Indices
 	glGenBuffers(1,&IBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
@@ -99,11 +103,12 @@ void Mesh::renderMesh()
 	glBindVertexArray(0);
 }
 
-void Mesh::renderTerrainMesh(const int numStrips, const int numTrisPerStrip)
+void Mesh::renderTerrainMesh(const int numStrips, const int numTrisPerStrip, unsigned int texture)
 {
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
-
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D,texture);
 
 	for (unsigned strip = 0; strip < numStrips; strip++)
 	{

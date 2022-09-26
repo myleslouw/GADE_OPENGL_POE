@@ -77,6 +77,7 @@ inline void Terrain::LoadMeshData()
 	{
 		for (int j = 0; j < Twidth; j++)
 		{
+			//retrieve texel for (i,j) tex coord
 			unsigned char* pixelOffset = data + (j + Twidth * i) * bytePerPixel;
 			unsigned char y = pixelOffset[0];
 
@@ -140,7 +141,8 @@ inline void Terrain::CreateTerrain(glm::mat4 worldProjection, Camera worldCam, i
 	const int NumTriPerStrip = numTriPerStrip;
 
 	//USE FOR TERRIAN SHADER
-	shaderList[shaderIndex]->useShader(); //glUseProgram
+	shaderList[shaderIndex]->LoadTexture("Textures/Grass_Texture.png");
+	shaderList[shaderIndex]->useShader(); //glUseProgram before the uniforms
 	uniformModel = shaderList[shaderIndex]->getModelLocation();
 	uniformProjection = shaderList[shaderIndex]->getProjectionLocation();
 	uniformView = shaderList[shaderIndex]->getViewLocation();

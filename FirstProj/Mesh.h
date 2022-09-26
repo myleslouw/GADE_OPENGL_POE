@@ -10,7 +10,8 @@ public:
 	void createMesh(GLfloat *vertices, unsigned int *indices, unsigned int numVertices, unsigned int numIndices);
 	void createTerrain(std::vector<float> Verts, std::vector<unsigned>Inds);
 	void renderMesh();
-	void renderTerrainMesh(const int numStrips, const int numTrisPerStrip);
+	void renderTerrainMesh(const int numStrips, const int numTrisPerStrip, unsigned int texture);
+	void renderTerrainMesh(const int numStrips, const int numTrisPerStrip, unsigned int texture);
 	void clearMesh();
 
 
