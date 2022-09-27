@@ -1,178 +1,47 @@
-﻿  ChessBoard.cpp
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\chessboard.cpp(16): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\chessboard.cpp(189): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-  Mesh.cpp
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\mesh.cpp(112): warning C4018: '<': signed/unsigned mismatch
-  Shader.cpp
-  main.cpp
+﻿  main.cpp
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.h(17): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.h(18): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(730): error C2084: function 'int stbi__cpuid3(void)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(729): note: see previous definition of 'stbi__cpuid3'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(752): error C2084: function 'int stbi__sse2_available(void)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(751): note: see previous definition of 'stbi__sse2_available'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(753): error C2065: 'stbi__cpuid3': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(753): error C2440: 'initializing': cannot convert from 'int (__cdecl *)(void)' to 'int'
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(753): note: There is no context in which this conversion is possible
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(817): error C2371: 'stbi__context': redefinition; different basic types
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(817): note: see declaration of 'stbi__context'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(824): error C2084: function 'void stbi__start_mem(stbi__context *,const stbi_uc *,int)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(823): note: see previous definition of 'stbi__start_mem'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(834): error C2084: function 'void stbi__start_callbacks(stbi__context *,stbi_io_callbacks *,void *)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(833): note: see previous definition of 'stbi__start_callbacks'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(848): error C2084: function 'int stbi__stdio_read(void *,char *,int)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(847): note: see previous definition of 'stbi__stdio_read'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(853): error C2084: function 'void stbi__stdio_skip(void *,int)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(852): note: see previous definition of 'stbi__stdio_skip'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(863): error C2084: function 'int stbi__stdio_eof(void *)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(862): note: see previous definition of 'stbi__stdio_eof'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(867): error C2374: 'stbi__stdio_callbacks': redefinition; multiple initialization
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(867): note: see declaration of 'stbi__stdio_callbacks'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(875): error C2084: function 'void stbi__start_file(stbi__context *,FILE *)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(874): note: see previous definition of 'stbi__start_file'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(876): error C2065: 'stbi__start_callbacks': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(884): error C2084: function 'void stbi__rewind(stbi__context *)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(883): note: see previous definition of 'stbi__rewind'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(894): error C2365: 'STBI_ORDER_RGB': redefinition; previous definition was 'enumerator'
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(894): note: see declaration of 'STBI_ORDER_RGB'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(896): error C2365: 'STBI_ORDER_BGR': redefinition; previous definition was 'enumerator'
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(895): note: see declaration of 'STBI_ORDER_BGR'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(903): error C2371: 'stbi__result_info': redefinition; different basic types
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(903): note: see declaration of 'stbi__result_info'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(967): error C2086: 'const char *stbi__g_failure_reason': redefinition
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(967): note: see declaration of 'stbi__g_failure_reason'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(970): error C2084: function 'const char *stbi_failure_reason(void)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(969): note: see previous definition of 'stbi_failure_reason'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(975): warning C4003: not enough arguments for function-like macro invocation 'stbi__err'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(976): error C2084: function 'int stbi__err(const char *)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(975): note: see previous definition of 'stbi__err'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(983): error C2084: function 'void *stbi__malloc(size_t)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(982): note: see previous definition of 'stbi__malloc'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1000): error C2084: function 'int stbi__addsizes_valid(int,int)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(999): note: see previous definition of 'stbi__addsizes_valid'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1012): error C2084: function 'int stbi__mul2sizes_valid(int,int)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1011): note: see previous definition of 'stbi__mul2sizes_valid'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1022): error C2084: function 'int stbi__mad2sizes_valid(int,int,int)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1021): note: see previous definition of 'stbi__mad2sizes_valid'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1023): error C2065: 'stbi__mul2sizes_valid': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1023): error C2065: 'stbi__addsizes_valid': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1023): warning C4551: function call missing argument list
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1023): error C2568: '&&': unable to resolve function overload
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1023): note: could be 'int stbi__addsizes_valid(int,int)'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1029): error C2084: function 'int stbi__mad3sizes_valid(int,int,int,int)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1028): note: see previous definition of 'stbi__mad3sizes_valid'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1030): error C2065: 'stbi__mul2sizes_valid': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1030): warning C4551: function call missing argument list
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1030): error C2568: '&&': unable to resolve function overload
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1030): note: could be 'int stbi__mul2sizes_valid(int,int)'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1031): error C2065: 'stbi__addsizes_valid': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1037): error C2084: function 'int stbi__mad4sizes_valid(int,int,int,int,int)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1036): note: see previous definition of 'stbi__mad4sizes_valid'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1038): error C2065: 'stbi__mul2sizes_valid': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1038): warning C4551: function call missing argument list
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1038): error C2568: '&&': unable to resolve function overload
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1038): note: could be 'int stbi__mul2sizes_valid(int,int)'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1039): error C2065: 'stbi__mul2sizes_valid': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1039): error C2065: 'stbi__addsizes_valid': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1046): error C2084: function 'void *stbi__malloc_mad2(int,int,int)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1045): note: see previous definition of 'stbi__malloc_mad2'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1047): error C2065: 'stbi__mad2sizes_valid': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1047): warning C4551: function call missing argument list
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1048): error C2065: 'stbi__malloc': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1053): error C2084: function 'void *stbi__malloc_mad3(int,int,int,int)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1052): note: see previous definition of 'stbi__malloc_mad3'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1054): error C2065: 'stbi__mad3sizes_valid': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1054): warning C4551: function call missing argument list
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1055): error C2065: 'stbi__malloc': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1060): error C2084: function 'void *stbi__malloc_mad4(int,int,int,int,int)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1059): note: see previous definition of 'stbi__malloc_mad4'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1061): error C2065: 'stbi__mad4sizes_valid': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1061): warning C4551: function call missing argument list
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1062): error C2065: 'stbi__malloc': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1082): error C2084: function 'void stbi_image_free(void *)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1081): note: see previous definition of 'stbi_image_free'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1094): error C2374: 'stbi__vertically_flip_on_load_global': redefinition; multiple initialization
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1094): note: see declaration of 'stbi__vertically_flip_on_load_global'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1097): error C2084: function 'void stbi_set_flip_vertically_on_load(int)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1096): note: see previous definition of 'stbi_set_flip_vertically_on_load'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1104): error C2086: 'int stbi__vertically_flip_on_load_local': redefinition
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1104): note: see declaration of 'stbi__vertically_flip_on_load_local'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1104): error C2086: 'int stbi__vertically_flip_on_load_set': redefinition
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1104): note: see declaration of 'stbi__vertically_flip_on_load_set'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1107): error C2084: function 'void stbi_set_flip_vertically_on_load_thread(int)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1106): note: see previous definition of 'stbi_set_flip_vertically_on_load_thread'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1118): error C2084: function 'void *stbi__load_main(stbi__context *,int *,int *,int *,int,stbi__result_info *,int)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1117): note: see previous definition of 'stbi__load_main'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1167): error C2065: 'stbi__err': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1171): error C2084: function 'stbi_uc *stbi__convert_16_to_8(stbi__uint16 *,int,int,int)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1170): note: see previous definition of 'stbi__convert_16_to_8'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1176): error C2065: 'stbi__malloc': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1177): error C2065: 'stbi__err': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1187): error C2084: function 'stbi__uint16 *stbi__convert_8_to_16(stbi_uc *,int,int,int)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1186): note: see previous definition of 'stbi__convert_8_to_16'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1192): error C2065: 'stbi__malloc': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1193): error C2065: 'stbi__err': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1203): error C2084: function 'void stbi__vertical_flip(void *,int,int,int)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1202): note: see previous definition of 'stbi__vertical_flip'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1228): error C2084: function 'void stbi__vertical_flip_slices(void *,int,int,int,int)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1227): note: see previous definition of 'stbi__vertical_flip_slices'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1234): error C2065: 'stbi__vertical_flip': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1241): error C2084: function 'unsigned char *stbi__load_and_postprocess_8bit(stbi__context *,int *,int *,int *,int)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1240): note: see previous definition of 'stbi__load_and_postprocess_8bit'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1243): error C2065: 'stbi__load_main': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1252): error C2065: 'stbi__convert_16_to_8': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1252): error C2568: '=': unable to resolve function overload
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1252): note: could be 'stbi_uc *stbi__convert_16_to_8(stbi__uint16 *,int,int,int)'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1260): error C2065: 'stbi__vertical_flip': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1267): error C2084: function 'stbi__uint16 *stbi__load_and_postprocess_16bit(stbi__context *,int *,int *,int *,int)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1266): note: see previous definition of 'stbi__load_and_postprocess_16bit'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1269): error C2065: 'stbi__load_main': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1278): error C2065: 'stbi__convert_8_to_16': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1278): error C2568: '=': unable to resolve function overload
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1278): note: could be 'stbi__uint16 *stbi__convert_8_to_16(stbi_uc *,int,int,int)'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1287): error C2065: 'stbi__vertical_flip': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1295): error C2084: function 'void stbi__float_postprocess(float *,int *,int *,int *,int)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1294): note: see previous definition of 'stbi__float_postprocess'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1298): error C2065: 'stbi__vertical_flip': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1318): error C2084: function 'FILE *stbi__fopen(const char *,const char *)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1317): note: see previous definition of 'stbi__fopen'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1347): error C2084: function 'stbi_uc *stbi_load(const char *,int *,int *,int *,int)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1346): note: see previous definition of 'stbi_load'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1348): error C2065: 'stbi__fopen': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1348): error C2440: 'initializing': cannot convert from 'FILE *(__cdecl *)(const char *,const char *)' to 'FILE *'
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1348): note: There is no context in which this conversion is possible
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1350): error C2065: 'stbi__err': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1357): error C2084: function 'stbi_uc *stbi_load_from_file(FILE *,int *,int *,int *,int)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1356): note: see previous definition of 'stbi_load_from_file'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1360): error C2065: 'stbi__start_file': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1361): error C2065: 'stbi__load_and_postprocess_8bit': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1361): error C2568: '=': unable to resolve function overload
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1361): note: could be 'unsigned char *stbi__load_and_postprocess_8bit(stbi__context *,int *,int *,int *,int)'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1370): error C2084: function 'stbi_us *stbi_load_from_file_16(FILE *,int *,int *,int *,int)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1369): note: see previous definition of 'stbi_load_from_file_16'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1373): error C2065: 'stbi__start_file': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1374): error C2065: 'stbi__load_and_postprocess_16bit': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1374): error C2568: '=': unable to resolve function overload
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1374): note: could be 'stbi__uint16 *stbi__load_and_postprocess_16bit(stbi__context *,int *,int *,int *,int)'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1383): error C2084: function 'stbi_us *stbi_load_16(const char *,int *,int *,int *,int)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1382): note: see previous definition of 'stbi_load_16'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1384): error C2065: 'stbi__fopen': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1384): error C2440: 'initializing': cannot convert from 'FILE *(__cdecl *)(const char *,const char *)' to 'FILE *'
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1384): note: There is no context in which this conversion is possible
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1386): error C2065: 'stbi__err': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1387): error C2065: 'stbi_load_from_file_16': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1387): error C2568: '=': unable to resolve function overload
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1387): note: could be 'stbi_us *stbi_load_from_file_16(FILE *,int *,int *,int *,int)'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1396): error C2084: function 'stbi_us *stbi_load_16_from_memory(const stbi_uc *,int,int *,int *,int *,int)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1395): note: see previous definition of 'stbi_load_16_from_memory'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1398): error C2065: 'stbi__start_mem': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1399): error C2065: 'stbi__load_and_postprocess_16bit': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1403): error C2084: function 'stbi_us *stbi_load_16_from_callbacks(const stbi_io_callbacks *,void *,int *,int *,int *,int)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1402): note: see previous definition of 'stbi_load_16_from_callbacks'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1405): error C2065: 'stbi__start_callbacks': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1406): error C2065: 'stbi__load_and_postprocess_16bit': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1410): error C2084: function 'stbi_uc *stbi_load_from_memory(const stbi_uc *,int,int *,int *,int *,int)' already has a body
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1409): note: see previous definition of 'stbi_load_from_memory'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1412): error C2065: 'stbi__start_mem': undeclared identifier
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\stb_image.h(1412): fatal error C1003: error count exceeds 100; stopping compilation
-  Generating Code...
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\terrain.h(104): warning C4018: '<': signed/unsigned mismatch
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\terrain.h(106): warning C4018: '<': signed/unsigned mismatch
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\terrain.h(124): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\terrain.h(125): warning C4244: 'argument': conversion from 'int' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\main.cpp(22): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\main.cpp(62): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+Mesh.obj : warning LNK4049: locally defined symbol ___glewActiveTexture imported
+Mesh.obj : warning LNK4049: locally defined symbol ___glewBindBuffer imported
+Mesh.obj : warning LNK4049: locally defined symbol ___glewBufferData imported
+Mesh.obj : warning LNK4049: locally defined symbol ___glewDeleteBuffers imported
+Mesh.obj : warning LNK4049: locally defined symbol ___glewGenBuffers imported
+Mesh.obj : warning LNK4049: locally defined symbol ___glewEnableVertexAttribArray imported
+Mesh.obj : warning LNK4049: locally defined symbol ___glewVertexAttribPointer imported
+Mesh.obj : warning LNK4049: locally defined symbol ___glewBindVertexArray imported
+Mesh.obj : warning LNK4049: locally defined symbol ___glewDeleteVertexArrays imported
+Mesh.obj : warning LNK4049: locally defined symbol ___glewGenVertexArrays imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewAttachShader imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewCompileShader imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewCreateProgram imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewCreateShader imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewDeleteProgram imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewGetProgramInfoLog imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewGetProgramiv imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewGetShaderInfoLog imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewGetShaderiv imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewGetUniformLocation imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewLinkProgram imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewShaderSource imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewUseProgram imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewValidateProgram imported
+Window.obj : warning LNK4217: locally defined symbol _glewInit@0 imported in function "public: int __thiscall Window::Initialise(void)" (?Initialise@Window@@QAEHXZ)
+Window.obj : warning LNK4217: locally defined symbol _glewGetErrorString@4 imported in function "public: int __thiscall Window::Initialise(void)" (?Initialise@Window@@QAEHXZ)
+glew32s.lib(glew.obj) : warning LNK4099: PDB 'glew_static.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'D:\GADE7312_Project_repo\GADE_OpenGL_POE\Debug\glew_static.pdb'; linking object as if no debug info
+  FirstProj.vcxproj -> D:\GADE7312_Project_repo\GADE_OpenGL_POE\Debug\FirstProj.exe

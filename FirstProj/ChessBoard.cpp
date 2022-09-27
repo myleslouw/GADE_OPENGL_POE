@@ -71,7 +71,7 @@ void ChessBoard::LoadMeshes()
 	//create obj
 	Mesh *cube = new Mesh();
 	//create obj mesh
-	cube->createMesh(CubeVertices, cubeIndices, sizeof(CubeVertices), sizeof(cubeIndices));
+	cube->CreateMesh(CubeVertices, cubeIndices, sizeof(CubeVertices), sizeof(cubeIndices));
 	//adds it to list of meshes
 	meshList.push_back(cube);
 }

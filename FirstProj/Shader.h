@@ -4,7 +4,6 @@
 #include <iostream>
 #include <fstream>
 #include <GL/glew.h>
-#include "stb_image.h"
 
 
 class Shader
@@ -20,8 +19,6 @@ public:
 	GLuint getProjectionLocation();
 	GLuint getModelLocation();
 	GLuint getViewLocation();
-
-	void LoadTexture(std::string FilePath);
 	void useShader();
 	void clearShader();
 

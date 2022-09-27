@@ -123,38 +123,6 @@ GLuint Shader::getViewLocation()
 	return uniformView;
 }
 
-void Shader::LoadTexture(std::string FilePath)
-{
-	unsigned int tex1 = texture;
-	//Texture 1
-	glGenTextures(1, &tex1);
-	glBindTexture(GL_TEXTURE_2D, tex1);
-
-	//texture wrapping para
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-	//set texture filtering para
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-
-	//load image, create texture and gen mipmaps
-	int width, height, nrChannels;
-	stbi_set_flip_vertically_on_load(true); //tell stbi_image.h to flip loaded textures on the y-axis.
-	unsigned char* TexData = stbi_load((const char*)FilePath.c_str(), &width, &height, &nrChannels, 0);
-	if (TexData)
-	{
-		glTexImage2D(GL_TEXTURE_2D,0,GL_RGB,width,height,0,GL_RGB, GL_UNSIGNED_BYTE,TexData);
-	}
-	else
-	{
-		std::cout << "Failed to load texture" << std::endl;
-	}
-	stbi_image_free(TexData);
-
-}
-
 void Shader::useShader()
 {
 	if (!shaderID)

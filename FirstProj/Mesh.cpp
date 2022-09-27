@@ -4,13 +4,18 @@
 //done in class
 Mesh::Mesh()
 {
+	//VAO = Vertex Array Object
+	//VBO= Vertex Buffer Object
+	//IBO = Indices Buffer Object
+	//TBO = Texture Buffer Object
 	VAO = 0;
 	VBO = 0;
 	IBO = 0;
+	TBO = 0;
 	indexCount = 0;
 }
 
-void Mesh::createMesh(GLfloat* vertices, unsigned int* indices, unsigned int numVertices, unsigned int numIndices)
+void Mesh::CreateMesh(GLfloat* vertices, unsigned int* indices, unsigned int numVertices, unsigned int numIndices)
 {
 	indexCount = numIndices;
 
@@ -61,9 +66,8 @@ void Mesh::createMesh(GLfloat* vertices, unsigned int* indices, unsigned int num
 }
 
 //Custom VAO buffers for the Terrain 
-void Mesh::createTerrain(std::vector<float> Verts, std::vector<unsigned> Inds)
+void Mesh::CreateMesh(std::vector<float> Verts, std::vector<unsigned> Inds, std::vector<float>UVs)
 {
-
 	//setting up VAO
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
@@ -73,19 +77,64 @@ void Mesh::createTerrain(std::vector<float> Verts, std::vector<unsigned> Inds)
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, Verts.size() * sizeof(float), &Verts[0], GL_STATIC_DRAW);
 
+	//Buffer Data for Indices
+	glGenBuffers(1, &IBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, Inds.size() * sizeof(unsigned), &Inds[0], GL_STATIC_DRAW);
+
+	//Buffer Data for UVs
+	glGenBuffers(1, &TBO);
+	glBindBuffer(GL_ARRAY_BUFFER, TBO);
+	glBufferData(GL_ARRAY_BUFFER, UVs.size() * sizeof(float), &UVs[0], GL_STATIC_DRAW);
+
+
 	//position attribute
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
 	//texture attribute
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6*sizeof(float)));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(1);
 
-	//BufferData for the Indices
-	glGenBuffers(1,&IBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, Inds.size() *sizeof(unsigned),&Inds[0], GL_STATIC_DRAW);
 
+
+	//unbind buffers
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+
+}
+
+void Mesh::CreateMesh(std::vector<float> Verts, std::vector<unsigned> Inds)
+{
+	//setting up VAO
+	glGenVertexArrays(1, &VAO);
+	glBindVertexArray(VAO);
+
+	//Buffer Data for the Vertices
+	glGenBuffers(1, &VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, Verts.size() * sizeof(float), &Verts[0], GL_STATIC_DRAW);
+
+	//Buffer Data for Indices
+	glGenBuffers(1, &IBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, Inds.size() * sizeof(unsigned), &Inds[0], GL_STATIC_DRAW);
+
+	//position attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+	//texture attribute
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(1);
+
+
+
+	//unbind buffers
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 void Mesh::renderMesh()
@@ -103,12 +152,13 @@ void Mesh::renderMesh()
 	glBindVertexArray(0);
 }
 
-void Mesh::renderTerrainMesh(const int numStrips, const int numTrisPerStrip, unsigned int texture)
+void Mesh::renderMesh(const int numStrips, const int numTrisPerStrip, unsigned int texture)
 {
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texture);
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D,texture);
+
 
 	for (unsigned strip = 0; strip < numStrips; strip++)
 	{
@@ -123,6 +173,44 @@ void Mesh::renderTerrainMesh(const int numStrips, const int numTrisPerStrip, uns
 	//unbinding the Array after drawing
 	//glBindVertexArray(0);
 	//std::cout << "nS: " << numStrips << "nTri: " << numTrisPerStrip;
+}
+
+void Mesh::renderMesh(const int numStrips, const int numTrisPerStrip)
+{
+	glBindVertexArray(VAO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
+
+
+	for (unsigned strip = 0; strip < numStrips; strip++)
+	{
+		glDrawElements(GL_TRIANGLE_STRIP,	//primitive type
+			numTrisPerStrip + 2,			//number of indices to render
+			GL_UNSIGNED_INT,
+			(void*)(sizeof(unsigned) * (numTrisPerStrip + 2) *strip)); //offset to starting index
+	}
+	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+
+	//unbinding the Array after drawing
+	//glBindVertexArray(0);
+	//std::cout << "nS: " << numStrips << "nTri: " << numTrisPerStrip;
+}
+
+void Mesh::renderMesh(unsigned int texture)
+{
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	//binding VAO
+	glBindVertexArray(VAO);
+	//bind the IBO to buffer
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
+
+	//drawing to screen
+	glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+	//unbinding after drawing
+	glBindVertexArray(0);
 }
 
 
