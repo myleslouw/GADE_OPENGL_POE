@@ -12,7 +12,6 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-
 //created files
 #include "Window.h"
 #include "CamManager.h"		//used for storing global instance of the camera 
