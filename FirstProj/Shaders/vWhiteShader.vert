@@ -1,8 +1,6 @@
 #version 330
-
 layout(location = 0) in vec3 pos;
-
-vec3 cubeColour = new vec3(1.0f, 1.0f, 1.0f);
+vec3 cubeColour = vec3(1.0f, 1.0f, 1.0f);
 
 out vec4 vCol;
 uniform mat4 model;
