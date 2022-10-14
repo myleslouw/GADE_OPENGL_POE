@@ -66,8 +66,6 @@ void Mesh::CreateMesh(GLfloat* vertices, unsigned int* indices, unsigned int num
 }
 
 //Custom VAO buffers for the Terrain 
-
-
 void Mesh::CreateMesh(std::vector<float> Verts, std::vector<unsigned> Inds)
 {
 	//setting up VAO
@@ -85,11 +83,11 @@ void Mesh::CreateMesh(std::vector<float> Verts, std::vector<unsigned> Inds)
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, Inds.size() * sizeof(unsigned), &Inds[0], GL_STATIC_DRAW);
 
 	//position attribute
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
 	//texture attribute
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5*sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
 
@@ -119,8 +117,6 @@ void Mesh::renderMesh(const int numStrips, const int numTrisPerStrip)
 {
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
-
-
 	for (unsigned strip = 0; strip < numStrips; strip++)
 	{
 		glDrawElements(GL_TRIANGLE_STRIP,	//primitive type

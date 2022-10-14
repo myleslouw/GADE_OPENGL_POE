@@ -10,6 +10,7 @@ class Shader
 {
 public:
 	unsigned int texture;
+	GLuint shaderID, uniformProjection, uniformModel, uniformView;
 	Shader();
 
 	void CreateFromFiles(const char* vertexLocation, const char* fragmentLocation);
@@ -25,7 +26,7 @@ public:
 	~Shader();
 
 private:
-	GLuint shaderID, uniformProjection, uniformModel, uniformView;
+	//GLuint shaderID, uniformProjection, uniformModel, uniformView;
 
 	void compileShader(const char* vertexCode, const char* fragmentCode);
 	void addShader(GLuint theProgram, const char* shaderCode, GLenum shaderType);

@@ -13,5 +13,5 @@ void main()
 {
     Height = Pos.y;
     gl_Position = projection * view * model * vec4(Pos, 1.0);
-    UV = VertexUV;
+    UV = vec2(VertexUV.x, VertexUV.y);
 }

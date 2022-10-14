@@ -39,9 +39,6 @@ private:
 	const char* fTerrainShader;
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0;
 
-	GLfloat* VertArr;
-	unsigned int* IndicesArr;
-
 	int numStrips;
 	int numTriPerStrip;
 	glm::mat4 model;
@@ -73,6 +70,8 @@ inline void Terrain::LoadMeshData()
 
 #pragma region Vertices Array
 	std::vector<float> vertices;
+	std::vector<float> UVs;
+	float u, v = 0;
 	float yScale = 64.0f / 256.0f, yShift = 10.0f; //clamps the y values between 0.0 and 1.0, shifts the points by 16.0f units
 	int rez = 1;
 	unsigned bytePerPixel = nChannels;
@@ -90,7 +89,8 @@ inline void Terrain::LoadMeshData()
 			vertices.push_back(-Twidth / 2.0f + Twidth * j / (float)Twidth);   // vz
 
 			//texture Cords
-
+			vertices.push_back((-Theight / 2.0f + Theight * i / (float)Theight) / Twidth); //v.u
+			vertices.push_back((-Twidth / 2.0f + Twidth * j / (float)Twidth) / Theight); //v.v
 		}
 	}
 	//std::cout << "Loaded " << vertices.size() / 3 << " vertices" << std::endl;
@@ -113,20 +113,6 @@ inline void Terrain::LoadMeshData()
 	}
 	//std::cout << "Loaded " << indices.size() << " indices" << std::endl;
 	//IndicesArr = indices.data();
-#pragma endregion
-
-#pragma region UV Array
-	std::vector<float> UVs;
-	for (int i = 0; i < Theight; i++)
-	{
-		for (int j = 0; j < Twidth; j++)
-		{
-			UVs.push_back(j / (Theight - 0)); //UV.x
-			UVs.push_back(i / (Twidth - 0)); //UV.y
-		}
-	}
-
-
 #pragma endregion
 
 	//Creating a mesh based on the data provided
@@ -170,6 +156,7 @@ inline void Terrain::LoadTexture()
 	unsigned char* TexData = stbi_load("Textures/Grass_Tex.png", &width, &height, &nrChannels, 0);
 	if (TexData)
 	{
+		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, TexData);
 	}
 	else
@@ -188,8 +175,9 @@ inline void Terrain::CreateTerrain(glm::mat4 worldProjection, Camera worldCam, i
 	const int NumTriPerStrip = numTriPerStrip;
 
 	//USE FOR TERRIAN SHADER
-	//LoadTexture();
+	LoadTexture();
 	shaderList[shaderIndex]->useShader(); //glUseProgram before the uniforms
+	glUniform1i(glGetUniformLocation(shaderList[shaderIndex]->shaderID,"texture"),0);
 	uniformModel = shaderList[shaderIndex]->getModelLocation();
 	uniformProjection = shaderList[shaderIndex]->getProjectionLocation();
 	uniformView = shaderList[shaderIndex]->getViewLocation();
@@ -207,6 +195,8 @@ inline void Terrain::CreateTerrain(glm::mat4 worldProjection, Camera worldCam, i
 	glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(worldProjection));
 	glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(worldCam.calculateViewMatrix()));
 
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texture);
 
 	//render the first element which is the Terrain with a specified texture
 	meshList[0]->renderMesh(numStrips, numTriPerStrip);
