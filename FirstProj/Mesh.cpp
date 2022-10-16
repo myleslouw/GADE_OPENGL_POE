@@ -50,11 +50,17 @@ void Mesh::CreateMesh(GLfloat* vertices, unsigned int* indices, unsigned int num
    //NormaliseValues,
    //Stride(take a vertex value and skip n amount)
    // Offset(where the data starts))
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5*sizeof(float), (void*)0);
 	//                     \\
  	//                      \\   
 	//enable Attribute 0     \/
 	glEnableVertexAttribArray(0);
+
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5* sizeof(float), (void*)(3 * sizeof(float)));
+	//                     \\
+ 	//                      \\   
+	//enable Attribute 1     \/
+	glEnableVertexAttribArray(1);
 
 
 	//unbinding
