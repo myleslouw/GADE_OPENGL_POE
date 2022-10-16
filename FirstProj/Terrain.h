@@ -28,7 +28,6 @@ public:
 
 	void LoadMeshData();
 	void LoadShaderData();
-	void LoadTexture();
 	void CreateTerrain(glm::mat4 worldProjection, Camera worldCam, int shaderIndex);
 	void GenerateTerrain(glm::mat4 worldProjection, Camera worldCam);
 
@@ -37,6 +36,7 @@ public:
 private:
 	const char* vTerrainShader;
 	const char* fTerrainShader;
+	const char* textureLoc;
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0;
 
 	int numStrips;
@@ -51,6 +51,7 @@ Terrain::Terrain()
 	uniformView = 0;
 	vTerrainShader = "Shaders/vTerrainShader.vert";
 	fTerrainShader = "Shaders/fTerrainShader.frag";
+	textureLoc = "Textures/Grass_Tex.png";
 
 }
 
@@ -135,38 +136,6 @@ inline void Terrain::LoadShaderData()
 	shaderList.push_back(Tshader);
 }
 
-inline void Terrain::LoadTexture()
-{
-	//Texture 
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
-
-	//texture wrapping para
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-	//set texture filtering para
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-
-	//load image, create texture and gen mipmaps
-	int width, height, nrChannels;
-	stbi_set_flip_vertically_on_load(true); //tell stbi_image.h to flip loaded textures on the y-axis.
-	unsigned char* TexData = stbi_load("Textures/Grass_Tex.png", &width, &height, &nrChannels, 0);
-	if (TexData)
-	{
-		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, TexData);
-	}
-	else
-	{
-		std::cout << "Failed to load Image texture" << std::endl;
-	}
-	stbi_image_free(TexData);
-
-
-}
 
 inline void Terrain::CreateTerrain(glm::mat4 worldProjection, Camera worldCam, int shaderIndex)
 {
@@ -174,10 +143,12 @@ inline void Terrain::CreateTerrain(glm::mat4 worldProjection, Camera worldCam, i
 	const int NumStrips = numStrips;
 	const int NumTriPerStrip = numTriPerStrip;
 
-	//USE FOR TERRIAN SHADER
-	LoadTexture();
+	//USE FOR TEXTURE SHADER
+	shaderList[shaderIndex]->LoadTexture(textureLoc); //gets the texture
 	shaderList[shaderIndex]->useShader(); //glUseProgram before the uniforms
-	glUniform1i(glGetUniformLocation(shaderList[shaderIndex]->shaderID,"texture"),0);
+	glUniform1i(glGetUniformLocation(shaderList[shaderIndex]->shaderID, "texture"), 0);
+
+	//uniforms
 	uniformModel = shaderList[shaderIndex]->getModelLocation();
 	uniformProjection = shaderList[shaderIndex]->getProjectionLocation();
 	uniformView = shaderList[shaderIndex]->getViewLocation();
@@ -196,7 +167,7 @@ inline void Terrain::CreateTerrain(glm::mat4 worldProjection, Camera worldCam, i
 	glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(worldCam.calculateViewMatrix()));
 
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texture);
+	glBindTexture(GL_TEXTURE_2D, shaderList[shaderIndex]->texTure);
 
 	//render the first element which is the Terrain with a specified texture
 	meshList[0]->renderMesh(numStrips, numTriPerStrip);

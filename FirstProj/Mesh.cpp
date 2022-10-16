@@ -86,7 +86,7 @@ void Mesh::CreateMesh(std::vector<float> Verts, std::vector<unsigned> Inds)
 	glEnableVertexAttribArray(0);
 
 	//texture attribute
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5*sizeof(float), (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 
 	//unbind buffers

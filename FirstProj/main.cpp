@@ -4,7 +4,7 @@
 // GLEW
 #define GLEW_STATIC
 #include <GL/glew.h>
-#define STB_IMAGE_IMPLEMENTATION
+
 // GLFW
 #include <GLFW/glfw3.h>
 
