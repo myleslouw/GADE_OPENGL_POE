@@ -44,14 +44,18 @@ private:
 	const char* vBorderShader;
 	const char* fShader;
 
+	const char* texture1;
+	const char* texture2;
+	const char* texture3;
+
 	float GetRandomHeight();
 
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0;
 
 	glm::mat4 model;
-	
+
 	//array for a 8 by 8 grid of random heights
 	float lowestHeight, highestHeight;
 	float rndmHeights[8][8];
 };
- 
+

@@ -1,8 +1,9 @@
+#define STB_IMAGE_IMPLEMENTATION
 #include "Shader.h"
-
 //done in class
 Shader::Shader()
 {
+	
 	shaderID = 0;
 	uniformModel = 0;
 	uniformProjection = 0;
@@ -17,6 +18,38 @@ void Shader::CreateFromFiles(const char* vertexLocation, const char* fragmentLoc
 	const char* fragmentCode = fragmentString.c_str();
 
 	compileShader(vertexCode, fragmentCode);
+}
+//Method used to call texture from File
+void Shader::LoadTexture(const char* fileLocation)
+{
+
+	//Texture 
+	glGenTextures(1, &texTure);
+	glBindTexture(GL_TEXTURE_2D, texTure);
+
+	//texture wrapping para
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+	//set texture filtering para
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+
+	//load image, create texture and gen mipmaps
+	int width, height, nrChannels;
+	stbi_set_flip_vertically_on_load(true); //tell stbi_image.h to flip loaded textures on the y-axis.
+	unsigned char* TexData = stbi_load(fileLocation, &width, &height, &nrChannels, 0);
+	if (TexData)
+	{
+		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, TexData);
+	}
+	else
+	{
+		std::cout << "Failed to load Image texture" << std::endl;
+	}
+	stbi_image_free(TexData);
 }
 
 std::string Shader::ReadFile(const char* fileLocation)
@@ -120,11 +153,6 @@ GLuint Shader::getModelLocation()
 GLuint Shader::getViewLocation()
 {
 	return uniformView;
-}
-
-void Shader::ApplyTexture()
-{
-
 }
 
 void Shader::useShader()

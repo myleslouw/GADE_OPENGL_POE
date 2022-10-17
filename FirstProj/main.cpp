@@ -4,14 +4,13 @@
 // GLEW
 #define GLEW_STATIC
 #include <GL/glew.h>
-#define STB_IMAGE_IMPLEMENTATION
+
 // GLFW
 #include <GLFW/glfw3.h>
 
 //GLM
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-
 
 //created files
 #include "Window.h"
@@ -64,7 +63,7 @@ int main()
 		lastTime = now;
 
 		//Get and Handle user input events
-		glfwPollEvents();		//checks if any evetns happened
+			//checks if any evetns happened
 		globalCamera.keyControl(mainWindow.getKeys(), deltaTime);
 		globalCamera.mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
 
@@ -88,5 +87,9 @@ int main()
 		glUseProgram(0);	//unassigning the shader
 
 		mainWindow.SwapBuffers();
+		glfwPollEvents();
 	}
+	// glfw: Terminate, clearing all prev allocated GLFW resources
+	glfwTerminate();
+	return 0;
 }

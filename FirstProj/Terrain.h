@@ -24,6 +24,7 @@ public:
 	Terrain();
 	std::vector<Mesh*> meshList;		//0 - T
 	std::vector<Shader*> shaderList;
+	unsigned int texture;
 
 	void LoadMeshData();
 	void LoadShaderData();
@@ -35,10 +36,8 @@ public:
 private:
 	const char* vTerrainShader;
 	const char* fTerrainShader;
+	const char* textureLoc;
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0;
-
-	GLfloat* VertArr;
-	unsigned int* IndicesArr;
 
 	int numStrips;
 	int numTriPerStrip;
@@ -52,6 +51,7 @@ Terrain::Terrain()
 	uniformView = 0;
 	vTerrainShader = "Shaders/vTerrainShader.vert";
 	fTerrainShader = "Shaders/fTerrainShader.frag";
+	textureLoc = "Textures/Grass_Tex.png";
 
 }
 
@@ -59,17 +59,20 @@ inline void Terrain::LoadMeshData()
 {
 	stbi_set_flip_vertically_on_load(true);
 	int Twidth, Theight, nChannels;
-	unsigned char* data = stbi_load("Textures/Heightmap2.png", &Twidth, &Theight, &nChannels, 0);
+	unsigned char* data = stbi_load("Textures/Grass_Height.png", &Twidth, &Theight, &nChannels, 0);
 	if (data)
 	{
-		std::cout << "Loaded heightmap of size " << Theight << " x " << Twidth << std::endl;
+		//std::cout << "Loaded heightmap of size " << Theight << " x " << Twidth << std::endl;
 	}
 	else
 	{
-		std::cout << "Failed to load texture" << std::endl;
+		std::cout << "Failed to load Height texture" << std::endl;
 	}
 
+#pragma region Vertices Array
 	std::vector<float> vertices;
+	std::vector<float> UVs;
+	float u, v = 0;
 	float yScale = 64.0f / 256.0f, yShift = 10.0f; //clamps the y values between 0.0 and 1.0, shifts the points by 16.0f units
 	int rez = 1;
 	unsigned bytePerPixel = nChannels;
@@ -77,6 +80,7 @@ inline void Terrain::LoadMeshData()
 	{
 		for (int j = 0; j < Twidth; j++)
 		{
+			//retrieve texel for (i,j) tex coord
 			unsigned char* pixelOffset = data + (j + Twidth * i) * bytePerPixel;
 			unsigned char y = pixelOffset[0];
 
@@ -86,14 +90,17 @@ inline void Terrain::LoadMeshData()
 			vertices.push_back(-Twidth / 2.0f + Twidth * j / (float)Twidth);   // vz
 
 			//texture Cords
-
+			vertices.push_back((-Theight / 2.0f + Theight * i / (float)Theight) / Twidth); //v.u
+			vertices.push_back((-Twidth / 2.0f + Twidth * j / (float)Twidth) / Theight); //v.v
 		}
 	}
 	//std::cout << "Loaded " << vertices.size() / 3 << " vertices" << std::endl;
 	stbi_image_free(data);
 
-	VertArr = vertices.data();	//Assigns the data from the vector into a pointer GLfloat for the Mesh class
+	//VertArr = vertices.data();	//Assigns the data from the vector into a pointer GLfloat for the Mesh class
+#pragma endregion
 
+#pragma region Indices Array
 	std::vector<unsigned> indices;
 	for (unsigned i = 0; i < Theight - 1; i += rez)
 	{
@@ -106,23 +113,19 @@ inline void Terrain::LoadMeshData()
 		}
 	}
 	//std::cout << "Loaded " << indices.size() << " indices" << std::endl;
-	IndicesArr = indices.data();
-
+	//IndicesArr = indices.data();
+#pragma endregion
 
 	//Creating a mesh based on the data provided
 	Mesh *terrain = new Mesh();
-	terrain->createTerrain(vertices,indices);
+
+	//terrain->CreateMesh(vertices, indices,UVs);
+	terrain->CreateMesh(vertices, indices);
 	//sends Terrain to the back of the list of meshes
 	meshList.push_back(terrain);
 
 	numStrips = (Theight - 1) / rez;
 	numTriPerStrip = (Twidth / rez) * 2 - 2;
-
-	//	std::cout << "Created lattice of " << numStrips << " strips with " << numTriPerStrip << " triangles each" << std::endl;
-		//std::cout << "Created " << numStrips * numTriPerStrip << " triangles total" << std::endl;
-
-	//std::cout << "Raw data: " << vertices.data() << std::endl;
-	//std::cout << "Converted Data: " << VertArr << std::endl;
 }
 
 inline void Terrain::LoadShaderData()
@@ -133,14 +136,19 @@ inline void Terrain::LoadShaderData()
 	shaderList.push_back(Tshader);
 }
 
+
 inline void Terrain::CreateTerrain(glm::mat4 worldProjection, Camera worldCam, int shaderIndex)
 {
 	//STRIPS FOR DRAWING THE MESH
 	const int NumStrips = numStrips;
 	const int NumTriPerStrip = numTriPerStrip;
 
-	//USE FOR TERRIAN SHADER
-	shaderList[shaderIndex]->useShader(); //glUseProgram
+	//USE FOR TEXTURE SHADER
+	shaderList[shaderIndex]->LoadTexture(textureLoc); //gets the texture
+	shaderList[shaderIndex]->useShader(); //glUseProgram before the uniforms
+	glUniform1i(glGetUniformLocation(shaderList[shaderIndex]->shaderID, "texture"), 0);
+
+	//uniforms
 	uniformModel = shaderList[shaderIndex]->getModelLocation();
 	uniformProjection = shaderList[shaderIndex]->getProjectionLocation();
 	uniformView = shaderList[shaderIndex]->getViewLocation();
@@ -158,9 +166,11 @@ inline void Terrain::CreateTerrain(glm::mat4 worldProjection, Camera worldCam, i
 	glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(worldProjection));
 	glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(worldCam.calculateViewMatrix()));
 
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, shaderList[shaderIndex]->texTure);
 
-	//render the first element which is the Terrain
-	meshList[0]->renderTerrainMesh(numStrips, numTriPerStrip);
+	//render the first element which is the Terrain with a specified texture
+	meshList[0]->renderMesh(numStrips, numTriPerStrip);
 	//meshList[0]->renderMesh();
 }
 

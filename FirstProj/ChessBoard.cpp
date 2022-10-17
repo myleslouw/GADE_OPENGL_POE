@@ -9,7 +9,11 @@ ChessBoard::ChessBoard()
 	vWhiteShader = "Shaders/vWhiteShader.vert";
 	vBorderShader = "Shaders/vBorderShader.vert";
 	fShader = "Shaders/fShader.frag";
-	
+
+	texture1 = "Textures/Pavement_Brick1.png";
+	texture2 = "Textures/Wall_BrickPlain.png";
+	texture3 = "Textures/Wall_BrickSloppy.png";
+
 	lowestHeight = -20;
 	highestHeight = 70;
 
@@ -58,20 +62,21 @@ void ChessBoard::LoadMeshes()
 
 	//equates to 1 unit 
 	GLfloat CubeVertices[] = {
-	   -0.5, -0.5,  0.5, //0
-		 0.5, -0.5,  0.5, //1
-		-0.5,  0.5,  0.5, //2
-		 0.5,  0.5,  0.5, //3
-		-0.5, -0.5, -0.5, //4
-		 0.5, -0.5, -0.5, //5
-		-0.5,  0.5, -0.5, //6
-		 0.5,  0.5, -0.5  //7
+		//Positions			//UVs
+		-0.5, -0.5,  0.5,	0.0f,0.0f,	//0 bottom left
+		 0.5, -0.5,  0.5,	1.0f,0.0f,	//1 bottom right
+		-0.5,  0.5,  0.5,	0.0f,1.0f,	//2 top left
+		 0.5,  0.5,  0.5,	1.0f,1.0f,	//3 top right
+		-0.5, -0.5, -0.5,	-1.0f,0.0f,	//4 bottom left (back)
+		 0.5, -0.5, -0.5,	1.0f,-1.0f,	//5 bottom right (back)
+		-0.5,  0.5, -0.5,	0.0,2.0f,	//6 top left (top back)
+		 0.5,  0.5, -0.5,	1.0f,2.0f	//7 top right ( top back)
 	};
 
 	//create obj
 	Mesh *cube = new Mesh();
 	//create obj mesh
-	cube->createMesh(CubeVertices, cubeIndices, sizeof(CubeVertices), sizeof(cubeIndices));
+	cube->CreateMesh(CubeVertices, cubeIndices, sizeof(CubeVertices), sizeof(cubeIndices));
 	//adds it to list of meshes
 	meshList.push_back(cube);
 }
@@ -94,11 +99,15 @@ void ChessBoard::LoadShaders()
 	shaderList.push_back(shader3);
 }
 
+//Creates the base that the chess board will be on 
 void ChessBoard::CreateBorderBlock(glm::mat4 worldProjection, Camera worldCam, int shaderIndex)
 {
 	//THIS IS ONLY USED FOR BORDER
 	//gets the shader from the param
+	shaderList[shaderIndex]->LoadTexture(texture1);
 	shaderList[shaderIndex]->useShader();		//glUseProgram
+	glUniform1i(glGetUniformLocation(shaderList[shaderIndex]->shaderID, "texture"), 0);
+	//uniforms
 	uniformModel = shaderList[shaderIndex]->getModelLocation();
 	uniformProjection = shaderList[shaderIndex]->getProjectionLocation();
 	uniformView = shaderList[shaderIndex]->getViewLocation();
@@ -112,9 +121,14 @@ void ChessBoard::CreateBorderBlock(glm::mat4 worldProjection, Camera worldCam, i
 	//scales it to the correct dimensions   
 	model = glm::scale(model, glm::vec3(9.0f, 0.5f, 9.0f));
 
+	//uniforms
 	glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 	glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(worldProjection));
 	glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(worldCam.calculateViewMatrix()));
+
+	//Textures
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, shaderList[shaderIndex]->texTure);
 
 	//renders the first element which is the border
 	meshList[0]->renderMesh();
@@ -124,7 +138,18 @@ void ChessBoard::CreateCellBlock(glm::mat4 worldProjection, Camera worldCam, int
 {
 	////USED FOR CREATING ALL THE BLOCKS ON THE CHESSBOARD
 	//uses the shader given via params
+	if (shaderIndex == 0)
+	{
+		shaderList[shaderIndex]->LoadTexture(texture2);
+	}
+	else
+	{
+		shaderList[shaderIndex]->LoadTexture(texture3);
+	}
+
 	shaderList[shaderIndex]->useShader();		//glUseProgram
+	glUniform1i(glGetUniformLocation(shaderList[shaderIndex]->shaderID, "texture"), 0);
+	//uniform stuff
 	uniformModel = shaderList[shaderIndex]->getModelLocation();
 	uniformProjection = shaderList[shaderIndex]->getProjectionLocation();
 	uniformView = shaderList[shaderIndex]->getViewLocation();
@@ -143,11 +168,14 @@ void ChessBoard::CreateCellBlock(glm::mat4 worldProjection, Camera worldCam, int
 	glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(worldProjection));
 	glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(worldCam.calculateViewMatrix()));
 
+	//Textures
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, shaderList[shaderIndex]->texTure);
 	//render the obj
 	meshList[0]->renderMesh();
 }
 
-void ChessBoard::GenerateChessBoard(glm::mat4 worldProjection, Camera worldCam )
+void ChessBoard::GenerateChessBoard(glm::mat4 worldProjection, Camera worldCam)
 {
 	//THIS RENDERS ALL THE ITEMS FOR THE CHESS BOARD
 
@@ -188,7 +216,7 @@ float ChessBoard::GetRandomHeight()
 	float rndm;
 	int range = (highestHeight - lowestHeight) + 1;
 	rndm = lowestHeight + rand() % range;
-	return rndm/100; //to get a float between 0 and 1
+	return rndm / 100; //to get a float between 0 and 1
 }
 
 ChessBoard::~ChessBoard()
