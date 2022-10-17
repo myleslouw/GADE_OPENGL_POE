@@ -10,8 +10,8 @@ ChessBoard::ChessBoard()
 	vBorderShader = "Shaders/vBorderShader.vert";
 	fShader = "Shaders/fShader.frag";
 
-	texture1 = "Textures/TexturesCom_Pavement_Brick1.png";
-	texture2 = "Textures/Wall_BrickPlain1.png";
+	texture1 = "Textures/Pavement_Brick1.png";
+	texture2 = "Textures/Wall_BrickPlain.png";
 	texture3 = "Textures/Wall_BrickSloppy.png";
 
 	lowestHeight = -20;
@@ -106,6 +106,8 @@ void ChessBoard::CreateBorderBlock(glm::mat4 worldProjection, Camera worldCam, i
 	//gets the shader from the param
 	shaderList[shaderIndex]->LoadTexture(texture1);
 	shaderList[shaderIndex]->useShader();		//glUseProgram
+	glUniform1i(glGetUniformLocation(shaderList[shaderIndex]->shaderID, "texture"), 0);
+	//uniforms
 	uniformModel = shaderList[shaderIndex]->getModelLocation();
 	uniformProjection = shaderList[shaderIndex]->getProjectionLocation();
 	uniformView = shaderList[shaderIndex]->getViewLocation();
@@ -136,7 +138,7 @@ void ChessBoard::CreateCellBlock(glm::mat4 worldProjection, Camera worldCam, int
 {
 	////USED FOR CREATING ALL THE BLOCKS ON THE CHESSBOARD
 	//uses the shader given via params
-	if (shaderIndex % 2)
+	if (shaderIndex == 0)
 	{
 		shaderList[shaderIndex]->LoadTexture(texture2);
 	}
@@ -146,6 +148,8 @@ void ChessBoard::CreateCellBlock(glm::mat4 worldProjection, Camera worldCam, int
 	}
 
 	shaderList[shaderIndex]->useShader();		//glUseProgram
+	glUniform1i(glGetUniformLocation(shaderList[shaderIndex]->shaderID, "texture"), 0);
+	//uniform stuff
 	uniformModel = shaderList[shaderIndex]->getModelLocation();
 	uniformProjection = shaderList[shaderIndex]->getProjectionLocation();
 	uniformView = shaderList[shaderIndex]->getViewLocation();
@@ -165,7 +169,8 @@ void ChessBoard::CreateCellBlock(glm::mat4 worldProjection, Camera worldCam, int
 	glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(worldCam.calculateViewMatrix()));
 
 	//Textures
-
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, shaderList[shaderIndex]->texTure);
 	//render the obj
 	meshList[0]->renderMesh();
 }

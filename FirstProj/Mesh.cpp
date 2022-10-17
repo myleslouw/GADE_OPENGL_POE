@@ -56,6 +56,7 @@ void Mesh::CreateMesh(GLfloat* vertices, unsigned int* indices, unsigned int num
 	//enable Attribute 0     \/
 	glEnableVertexAttribArray(0);
 
+	//texture Attributes
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5* sizeof(float), (void*)(3 * sizeof(float)));
 	//                     \\
  	//                      \\   
@@ -129,6 +130,8 @@ void Mesh::renderMesh(const int numStrips, const int numTrisPerStrip)
 	}
 	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
+	//unbind after drawing
+	glBindVertexArray(0);
 
 	//unbinding the Array after drawing
 	//glBindVertexArray(0);
