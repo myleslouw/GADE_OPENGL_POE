@@ -37,6 +37,7 @@ private:
 	const char* vTerrainShader;
 	const char* fTerrainShader;
 	const char* textureLoc;
+	bool USE_TEXTURE;
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0;
 
 	int numStrips;
@@ -49,6 +50,7 @@ Terrain::Terrain()
 	uniformProjection = 0;
 	uniformModel = 0;
 	uniformView = 0;
+	USE_TEXTURE = true;
 	vTerrainShader = "Shaders/vTerrainShader.vert";
 	fTerrainShader = "Shaders/fTerrainShader.frag";
 	textureLoc = "Textures/Grass_Tex.png";
@@ -143,6 +145,7 @@ inline void Terrain::CreateTerrain(glm::mat4 worldProjection, Camera worldCam, i
 	const int NumStrips = numStrips;
 	const int NumTriPerStrip = numTriPerStrip;
 
+	//is true: use texture, if not, use normal colours
 	//USE FOR TEXTURE SHADER
 	shaderList[shaderIndex]->LoadTexture(textureLoc); //gets the texture
 	shaderList[shaderIndex]->useShader(); //glUseProgram before the uniforms
@@ -165,6 +168,7 @@ inline void Terrain::CreateTerrain(glm::mat4 worldProjection, Camera worldCam, i
 	glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 	glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(worldProjection));
 	glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(worldCam.calculateViewMatrix()));
+
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, shaderList[shaderIndex]->texTure);

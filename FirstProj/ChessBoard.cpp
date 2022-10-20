@@ -138,14 +138,15 @@ void ChessBoard::CreateCellBlock(glm::mat4 worldProjection, Camera worldCam, int
 {
 	////USED FOR CREATING ALL THE BLOCKS ON THE CHESSBOARD
 	//uses the shader given via params
-	if (shaderIndex == 0)
+
+	/*if (shaderIndex == 0)
 	{
 		shaderList[shaderIndex]->LoadTexture(texture2);
 	}
 	else
 	{
 		shaderList[shaderIndex]->LoadTexture(texture3);
-	}
+	}*/
 
 	shaderList[shaderIndex]->useShader();		//glUseProgram
 	glUniform1i(glGetUniformLocation(shaderList[shaderIndex]->shaderID, "texture"), 0);
