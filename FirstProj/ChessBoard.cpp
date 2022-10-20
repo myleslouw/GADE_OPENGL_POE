@@ -28,6 +28,8 @@ ChessBoard::ChessBoard()
 			rndmHeights[i][j] = GetRandomHeight();;
 		}
 	}
+
+	chessAnimation = ChessAnimation();
 }
 
 void ChessBoard::LoadMeshes()
@@ -200,13 +202,25 @@ void ChessBoard::GenerateChessBoard(glm::mat4 worldProjection, Camera worldCam)
 			shaderNum = ((i + j) % 2) ? 0 : 1;	//if there is a remainder after adding I and J, it will be black
 
 			//get height from array of random heights based on the index (the heights are randomed on start so each run is differnet)
-			float height = rndmHeights[i][j];
+			float height = 0; //rndmHeights[i][j];
 
 			//renders the block with the correct info										//1 by 1 by 1 block 
 			CreateCellBlock(worldProjection, worldCam, shaderNum, glm::vec3(x, height, z), glm::vec3(1, 1, 1));
 		}
 	}
+}
 
+void ChessBoard::AnimateChessPieces(glm::mat4 worldProjection, Camera worldCam, GLfloat deltaTime)
+{
+	//draws the pieces
+	//the position param is taken from the vec3 array and those are changed to move the pieces
+	for (size_t i = 0; i < 8; i++)
+	{
+		CreateCellBlock(worldProjection, worldCam, 2, glm::vec3(chessAnimation.chessPieces[i].x, chessAnimation.chessPieces[i].y, chessAnimation.chessPieces[i].z), glm::vec3(0.5, 1, 0.5));
+	}
+
+	//animation cycle
+	chessAnimation.MovePiece(deltaTime);
 }
 
 float ChessBoard::GetRandomHeight()
