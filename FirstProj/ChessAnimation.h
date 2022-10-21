@@ -16,17 +16,27 @@ public:
 	ChessAnimation();
 
 	//array of the piecs positions
-	glm::vec3 chessPieces[8] = {
-		{ glm::vec3(-7, 1, 7) },
-		{ glm::vec3(-5, 1, 5) },
-		{ glm::vec3(-3, 1, 7) },
-		{ glm::vec3(-1, 1, 5) },
-		{ glm::vec3(1, 1, 5) },
-		{ glm::vec3(3, 1, 7) },
-		{ glm::vec3(5, 1, 5) },
-		{ glm::vec3(7, 1, 7) },
-	};
+	glm::vec3 chessPieces[16] = {
+		//
+			{ glm::vec3(-7, 1, 7) },
+			{ glm::vec3(-7, 1, 5) },
+			{ glm::vec3(-5, 1, 7) },
+			{ glm::vec3(-5, 1, 5) },
+			{ glm::vec3(-3, 1, 7) },
+			{ glm::vec3(-3, 1, 5) },
+			{ glm::vec3(-1, 1, 7) },
+			{ glm::vec3(-1, 1, 5) },
 
+
+			{ glm::vec3(1, 1, 7) },
+			{ glm::vec3(1, 1, 5) },
+			{ glm::vec3(3, 1, 7) },
+			{ glm::vec3(3, 1, 5) },
+			{ glm::vec3(5, 1, 5) },
+			{ glm::vec3(5, 1, 7) },
+			{ glm::vec3(7, 1, 7) },
+			{ glm::vec3(7, 1, 5) },
+	};
 
 	glm::vec3 testPiece;
 
