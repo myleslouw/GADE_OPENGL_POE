@@ -131,11 +131,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AnimationManager.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraPosition.cpp" />
     <ClCompile Include="CamManager.cpp" />
-    <ClCompile Include="ChessAnimation.cpp" />
     <ClCompile Include="ChessBoard.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -143,11 +141,9 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AnimationManager.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraPosition.h" />
     <ClInclude Include="CamManager.h" />
-    <ClInclude Include="ChessAnimation.h" />
     <ClInclude Include="ChessBoard.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Shader.h" />
