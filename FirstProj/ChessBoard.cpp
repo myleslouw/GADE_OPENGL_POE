@@ -214,7 +214,7 @@ void ChessBoard::AnimateChessPieces(glm::mat4 worldProjection, Camera worldCam, 
 {
 	//draws the pieces
 	//the position param is taken from the vec3 array and those are changed to move the pieces
-	for (size_t i = 0; i < 8; i++)
+	for (size_t i = 0; i < 16; i++)
 	{
 		CreateCellBlock(worldProjection, worldCam, 2, glm::vec3(chessAnimation.chessPieces[i].x, chessAnimation.chessPieces[i].y, chessAnimation.chessPieces[i].z), glm::vec3(0.5, 1, 0.5));
 	}
