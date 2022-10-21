@@ -16,6 +16,7 @@
 #include "Mesh.h"
 #include "Shader.h"
 #include "Camera.h"
+#include "ChessAnimation.h"
 
 class ChessBoard
 {
@@ -23,6 +24,8 @@ public:
 	//list of obj meshes and list of shaders available
 	std::vector<Mesh*> meshList;		//0 - cube
 	std::vector<Shader*> shaderList;	//0 - white, 1 - black,  2 - grey for border
+
+	ChessAnimation chessAnimation;
 
 	ChessBoard();
 
@@ -35,6 +38,9 @@ public:
 	void CreateCellBlock(glm::mat4 worldProjection, Camera worldCam, int shaderIndex, glm::vec3 pos, glm::vec3 scale);
 
 	void GenerateChessBoard(glm::mat4 worldProjection, Camera worldCam);
+
+	void AnimateChessPieces(glm::mat4 worldProjection, Camera worldCam, GLfloat deltaTime);
+
 
 	~ChessBoard();
 
