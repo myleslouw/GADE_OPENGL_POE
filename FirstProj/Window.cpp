@@ -1,5 +1,6 @@
 #include "Window.h"
 #include "CamManager.h"
+#include "AnimationManager.h"
 
 Window::Window()
 {
@@ -136,6 +137,14 @@ void Window::handleKeys(GLFWwindow* window, int key, int code, int action, int m
 	}
 
 	//-------------------------------------------------------
+
+	//ANIMATION
+
+	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
+	{
+		//if space is pressed start/stop the animation
+		animationActive = !animationActive;
+	}
 
 	if (key >= 0 && key < 1024)
 	{
