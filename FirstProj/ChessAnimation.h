@@ -38,7 +38,7 @@ public:
 		{ glm::vec3(7, 1, 5) },
 	};
 
-};
+
 
 glm::vec3 testPiece;
 

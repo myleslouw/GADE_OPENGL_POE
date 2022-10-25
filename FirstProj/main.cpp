@@ -24,7 +24,7 @@ Window mainWindow;
 
 //Terrain terrain;
 ChessBoard chessboard;
-Terrain heightmap;
+//Terrain heightmap;
 
 GLfloat deltaTime = 0.0f;
 GLfloat lastTime = 0.0f;
@@ -41,13 +41,13 @@ int main()
 
 	glm::mat4 projection = glm::perspective(glm::radians(45.0f), mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 100.0f);
 
-	heightmap = Terrain();
+	//heightmap = Terrain();
 
 	//create chessboard obj
 	chessboard = ChessBoard();
 
-	heightmap.LoadMeshData();	//loads mesh data and creates the mesh object
-	heightmap.LoadShaderData();	//loads the shader data from our shader file
+	//heightmap.LoadMeshData();	//loads mesh data and creates the mesh object
+	//heightmap.LoadShaderData();	//loads the shader data from our shader file
 
 	chessboard.LoadMeshes();		//createobjects
 	chessboard.LoadShaders();		//createShaders
@@ -77,7 +77,7 @@ int main()
 
 		//-------------------------------------------------------------
 		//generate heightmap/terrain
-		heightmap.GenerateTerrain(projection, globalCamera);
+		//heightmap.GenerateTerrain(projection, globalCamera);
 
 		//generates the chessboard
 		chessboard.GenerateChessBoard(projection, globalCamera);
