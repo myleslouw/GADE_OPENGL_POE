@@ -21,7 +21,6 @@ void Shader::CreateFromFiles(const char* vertexLocation, const char* fragmentLoc
 //Method used to call texture from File
 void Shader::LoadTexture(const char* fileLocation)
 {
-
 	//Texture 
 	glGenTextures(1, &texTure);
 	glBindTexture(GL_TEXTURE_2D, texTure);
@@ -41,8 +40,9 @@ void Shader::LoadTexture(const char* fileLocation)
 	unsigned char* TexData = stbi_load(fileLocation, &width, &height, &nrChannels, 0);
 	if (TexData)
 	{
-		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+		//glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, TexData);
+		//glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	else
 	{

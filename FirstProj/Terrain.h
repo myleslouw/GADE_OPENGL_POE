@@ -37,6 +37,7 @@ private:
 	const char* vTerrainShader;
 	const char* fTerrainShader;
 	const char* textureLoc;
+	const char* HeightMap;
 	bool USE_TEXTURE;
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0;
 
@@ -53,7 +54,8 @@ Terrain::Terrain()
 	USE_TEXTURE = true;
 	vTerrainShader = "Shaders/vTerrainShader.vert";
 	fTerrainShader = "Shaders/fTerrainShader.frag";
-	textureLoc = "Textures/Grass_Tex.png";
+	textureLoc = "Textures/Grass_albedo_OG.png";
+	HeightMap = "Textures/Grass_height_50x.png";
 
 }
 
@@ -61,10 +63,10 @@ inline void Terrain::LoadMeshData()
 {
 	stbi_set_flip_vertically_on_load(true);
 	int Twidth, Theight, nChannels;
-	unsigned char* data = stbi_load("Textures/Grass_Height.png", &Twidth, &Theight, &nChannels, 0);
+	unsigned char* data = stbi_load(HeightMap, &Twidth, &Theight, &nChannels, 0);
 	if (data)
 	{
-		//std::cout << "Loaded heightmap of size " << Theight << " x " << Twidth << std::endl;
+		std::cout << "Loaded heightmap of size " << Theight << " x " << Twidth << std::endl;
 	}
 	else
 	{
@@ -149,7 +151,7 @@ inline void Terrain::CreateTerrain(glm::mat4 worldProjection, Camera worldCam, i
 	//USE FOR TEXTURE SHADER
 	shaderList[shaderIndex]->LoadTexture(textureLoc); //gets the texture
 	shaderList[shaderIndex]->useShader(); //glUseProgram before the uniforms
-	glUniform1i(glGetUniformLocation(shaderList[shaderIndex]->shaderID, "texture"), 0);
+	glUniform1i(glGetUniformLocation(shaderList[shaderIndex]->shaderID, "texture1"), 0);
 
 	//uniforms
 	uniformModel = shaderList[shaderIndex]->getModelLocation();
@@ -160,7 +162,7 @@ inline void Terrain::CreateTerrain(glm::mat4 worldProjection, Camera worldCam, i
 	model = glm::mat4(1.0f);
 
 	//center terrain to world origin
-	model = glm::translate(model, glm::vec3(0, -5.0f, 0));
+	model = glm::translate(model, glm::vec3(0, -0.5f, 0));
 
 	//scales for the Terrain
 	model = glm::scale(model, glm::vec3(0.2f, 0.1f, 0.2f));

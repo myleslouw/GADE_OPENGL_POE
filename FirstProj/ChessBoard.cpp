@@ -10,9 +10,9 @@ ChessBoard::ChessBoard()
 	vBorderShader = "Shaders/vBorderShader.vert";
 	fShader = "Shaders/fShader.frag";
 
-	texture1 = "Textures/Pavement_Brick1.png";
-	texture2 = "Textures/Wall_BrickPlain.png";
-	texture3 = "Textures/Wall_BrickSloppy.png";
+	texture1 = "Textures/BrickSoviet_OG.png";
+	texture2 = "Textures/BrickSloppy_OG.png";
+	texture3 = "Textures/Pavement_OG.png";
 
 	lowestHeight = -20;
 	highestHeight = 70;
@@ -106,7 +106,7 @@ void ChessBoard::CreateBorderBlock(glm::mat4 worldProjection, Camera worldCam, i
 {
 	//THIS IS ONLY USED FOR BORDER
 	//gets the shader from the param
-	shaderList[shaderIndex]->LoadTexture(texture1);
+	shaderList[shaderIndex]->LoadTexture(texture3);
 	shaderList[shaderIndex]->useShader();		//glUseProgram
 	glUniform1i(glGetUniformLocation(shaderList[shaderIndex]->shaderID, "texture"), 0);
 	//uniforms
