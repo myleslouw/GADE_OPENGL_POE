@@ -50,20 +50,18 @@ void Mesh::CreateMesh(GLfloat* vertices, unsigned int* indices, unsigned int num
    //NormaliseValues,
    //Stride(take a vertex value and skip n amount)
    // Offset(where the data starts))
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5*sizeof(float), (void*)0);
+	//Vertex attributes
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 	//                     \\
  	//                      \\   
 	//enable Attribute 0     \/
 	glEnableVertexAttribArray(0);
-
 	//texture Attributes
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5* sizeof(float), (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 	//                     \\
  	//                      \\   
 	//enable Attribute 1     \/
 	glEnableVertexAttribArray(1);
-
-
 	//unbinding
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);

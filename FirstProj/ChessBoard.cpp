@@ -12,7 +12,7 @@ ChessBoard::ChessBoard()
 
 	texture1 = "Textures/BrickSoviet_OG.png";
 	texture2 = "Textures/BrickSloppy_OG.png";
-	texture3 = "Textures/Pavement_OG.png";
+	texture3 = "Textures/Pavement_256x.png";
 
 	lowestHeight = -20;
 	highestHeight = 70;

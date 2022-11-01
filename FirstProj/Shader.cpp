@@ -33,6 +33,10 @@ void Shader::LoadTexture(const char* fileLocation)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
+	//mipmaps
+//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
 
 	//load image, create texture and gen mipmaps
 	int width, height, nrChannels;
@@ -40,9 +44,10 @@ void Shader::LoadTexture(const char* fileLocation)
 	unsigned char* TexData = stbi_load(fileLocation, &width, &height, &nrChannels, 0);
 	if (TexData)
 	{
-		//glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, TexData);
-		//glGenerateMipmap(GL_TEXTURE_2D);
+		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	else
 	{
