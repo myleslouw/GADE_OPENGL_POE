@@ -10,9 +10,9 @@ ChessBoard::ChessBoard()
 	vBorderShader = "Shaders/vBorderShader.vert";
 	fShader = "Shaders/fShader.frag";
 
-	texture1 = "Textures/Pavement_Brick1.png";
-	texture2 = "Textures/Wall_BrickPlain.png";
-	texture3 = "Textures/Wall_BrickSloppy.png";
+	texture1 = "Textures/BrickSoviet_OG.png";
+	texture2 = "Textures/BrickSloppy_OG.png";
+	texture3 = "Textures/Pavement_OG.png";
 
 	lowestHeight = -20;
 	highestHeight = 70;
@@ -99,6 +99,10 @@ void ChessBoard::LoadShaders()
 	Shader *shader3 = new Shader();
 	shader3->CreateFromFiles(vBorderShader, fShader);
 	shaderList.push_back(shader3);
+
+	shaderList[0]->LoadTexture(texture1);
+	shaderList[1]->LoadTexture(texture2);
+	shaderList[2]->LoadTexture(texture3);
 }
 
 //Creates the base that the chess board will be on 
@@ -106,9 +110,9 @@ void ChessBoard::CreateBorderBlock(glm::mat4 worldProjection, Camera worldCam, i
 {
 	//THIS IS ONLY USED FOR BORDER
 	//gets the shader from the param
-	shaderList[shaderIndex]->LoadTexture(texture1);
+	//shaderList[shaderIndex]->LoadTexture(texture3);
 	shaderList[shaderIndex]->useShader();		//glUseProgram
-	glUniform1i(glGetUniformLocation(shaderList[shaderIndex]->shaderID, "texture"), 0);
+	//glUniform1i(glGetUniformLocation(shaderList[shaderIndex]->shaderID, "texture"), 0);
 	//uniforms
 	uniformModel = shaderList[shaderIndex]->getModelLocation();
 	uniformProjection = shaderList[shaderIndex]->getProjectionLocation();
@@ -129,8 +133,7 @@ void ChessBoard::CreateBorderBlock(glm::mat4 worldProjection, Camera worldCam, i
 	glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(worldCam.calculateViewMatrix()));
 
 	//Textures
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, shaderList[shaderIndex]->texTure);
+	shaderList[shaderIndex]->UseTexture();
 
 	//renders the first element which is the border
 	meshList[0]->renderMesh();
@@ -141,17 +144,9 @@ void ChessBoard::CreateCellBlock(glm::mat4 worldProjection, Camera worldCam, int
 	////USED FOR CREATING ALL THE BLOCKS ON THE CHESSBOARD
 	//uses the shader given via params
 
-	/*if (shaderIndex == 0)
-	{
-		shaderList[shaderIndex]->LoadTexture(texture2);
-	}
-	else
-	{
-		shaderList[shaderIndex]->LoadTexture(texture3);
-	}*/
-
+	
 	shaderList[shaderIndex]->useShader();		//glUseProgram
-	glUniform1i(glGetUniformLocation(shaderList[shaderIndex]->shaderID, "texture"), 0);
+	//glUniform1i(glGetUniformLocation(shaderList[shaderIndex]->shaderID, "texture"), 0);
 	//uniform stuff
 	uniformModel = shaderList[shaderIndex]->getModelLocation();
 	uniformProjection = shaderList[shaderIndex]->getProjectionLocation();
@@ -172,8 +167,7 @@ void ChessBoard::CreateCellBlock(glm::mat4 worldProjection, Camera worldCam, int
 	glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(worldCam.calculateViewMatrix()));
 
 	//Textures
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, shaderList[shaderIndex]->texTure);
+	shaderList[shaderIndex]->UseTexture();
 	//render the obj
 	meshList[0]->renderMesh();
 }
@@ -214,7 +208,7 @@ void ChessBoard::AnimateChessPieces(glm::mat4 worldProjection, Camera worldCam, 
 {
 	//draws the pieces
 	//the position param is taken from the vec3 array and those are changed to move the pieces
-	for (size_t i = 0; i < 8; i++)
+	for (size_t i = 0; i < 16; i++)
 	{
 		CreateCellBlock(worldProjection, worldCam, 2, glm::vec3(chessAnimation.chessPieces[i].x, chessAnimation.chessPieces[i].y, chessAnimation.chessPieces[i].z), glm::vec3(0.5, 1, 0.5));
 	}

@@ -41,6 +41,7 @@ public:
 
 	void AnimateChessPieces(glm::mat4 worldProjection, Camera worldCam, GLfloat deltaTime);
 
+
 	~ChessBoard();
 
 private:

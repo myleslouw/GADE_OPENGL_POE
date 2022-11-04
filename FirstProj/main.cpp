@@ -82,8 +82,6 @@ int main()
 		//generates the chessboard
 		chessboard.GenerateChessBoard(projection, globalCamera);
 
-
-		//Animates the pieces
 		chessboard.AnimateChessPieces(projection, globalCamera, deltaTime);
 		//------------------------------------------------------------------
 

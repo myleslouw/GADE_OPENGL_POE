@@ -222,3 +222,5 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+.vs/FirstProj/v15/Browse.VC.db
+.vs/FirstProj/v15/Browse.VC.opendb

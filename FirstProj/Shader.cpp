@@ -21,7 +21,6 @@ void Shader::CreateFromFiles(const char* vertexLocation, const char* fragmentLoc
 //Method used to call texture from File
 void Shader::LoadTexture(const char* fileLocation)
 {
-
 	//Texture 
 	glGenTextures(1, &texTure);
 	glBindTexture(GL_TEXTURE_2D, texTure);
@@ -34,6 +33,10 @@ void Shader::LoadTexture(const char* fileLocation)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
+	//mipmaps
+//	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
 
 	//load image, create texture and gen mipmaps
 	int width, height, nrChannels;
@@ -42,13 +45,21 @@ void Shader::LoadTexture(const char* fileLocation)
 	if (TexData)
 	{
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, TexData);
+		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	else
 	{
 		std::cout << "Failed to load Image texture" << std::endl;
 	}
 	stbi_image_free(TexData);
+}
+
+void Shader::UseTexture()
+{
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texTure);
 }
 
 std::string Shader::ReadFile(const char* fileLocation)
