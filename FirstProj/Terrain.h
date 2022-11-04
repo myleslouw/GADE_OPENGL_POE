@@ -138,6 +138,7 @@ inline void Terrain::LoadShaderData()
 	Shader *Tshader = new Shader();
 	Tshader->CreateFromFiles(vTerrainShader, fTerrainShader);
 	shaderList.push_back(Tshader);
+	shaderList[0]->LoadTexture(textureLoc);
 }
 
 
@@ -149,9 +150,9 @@ inline void Terrain::CreateTerrain(glm::mat4 worldProjection, Camera worldCam, i
 
 	//is true: use texture, if not, use normal colours
 	//USE FOR TEXTURE SHADER
-	shaderList[shaderIndex]->LoadTexture(textureLoc); //gets the texture
+	//shaderList[shaderIndex]->LoadTexture(textureLoc); //gets the texture
 	shaderList[shaderIndex]->useShader(); //glUseProgram before the uniforms
-	glUniform1i(glGetUniformLocation(shaderList[shaderIndex]->shaderID, "texture1"), 0);
+	//glUniform1i(glGetUniformLocation(shaderList[shaderIndex]->shaderID, "texture1"), 0);
 
 	//uniforms
 	uniformModel = shaderList[shaderIndex]->getModelLocation();
@@ -162,18 +163,17 @@ inline void Terrain::CreateTerrain(glm::mat4 worldProjection, Camera worldCam, i
 	model = glm::mat4(1.0f);
 
 	//center terrain to world origin
-	model = glm::translate(model, glm::vec3(0, -0.5f, 0));
+	model = glm::translate(model, glm::vec3(0, -2, 0));
 
 	//scales for the Terrain
-	model = glm::scale(model, glm::vec3(0.2f, 0.1f, 0.2f));
+	model = glm::scale(model, glm::vec3(1.0f, 0.1f, 1.0f));
 
 	glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 	glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(worldProjection));
 	glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(worldCam.calculateViewMatrix()));
 
-
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, shaderList[shaderIndex]->texTure);
+	shaderList[shaderIndex]->UseTexture();
+	
 
 	//render the first element which is the Terrain with a specified texture
 	meshList[0]->renderMesh(numStrips, numTriPerStrip);

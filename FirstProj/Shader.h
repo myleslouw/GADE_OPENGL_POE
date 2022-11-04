@@ -15,7 +15,9 @@ public:
 	Shader();
 
 	void CreateFromFiles(const char* vertexLocation, const char* fragmentLocation);
+
 	void LoadTexture(const char* fileLocation);
+	void UseTexture();
 	std::string ReadFile(const char* fileLocation);
 
 	GLuint getProjectionLocation();

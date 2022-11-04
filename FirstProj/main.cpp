@@ -77,7 +77,7 @@ int main()
 
 		//-------------------------------------------------------------
 		//generate heightmap/terrain
-		//heightmap.GenerateTerrain(projection, globalCamera);
+		heightmap.GenerateTerrain(projection, globalCamera);
 
 		//generates the chessboard
 		chessboard.GenerateChessBoard(projection, globalCamera);

@@ -56,6 +56,12 @@ void Shader::LoadTexture(const char* fileLocation)
 	stbi_image_free(TexData);
 }
 
+void Shader::UseTexture()
+{
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texTure);
+}
+
 std::string Shader::ReadFile(const char* fileLocation)
 {
 	std::string content;
