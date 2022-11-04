@@ -49,7 +49,6 @@ dlldata.c
 *.svclog
 *.scc
 *.idb
-*.tlog
 *.exe
 
 # Chutzpah Test files
