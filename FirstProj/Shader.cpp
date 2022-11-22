@@ -8,6 +8,10 @@ Shader::Shader()
 	uniformProjection = 0;
 	uniformView = 0;
 }
+void Shader::CreateFromString(const char* vertexCode, const char* fragmentCode)
+{
+	compileShader(vertexCode, fragmentCode);
+}
 
 void Shader::CreateFromFiles(const char* vertexLocation, const char* fragmentLocation)
 {
@@ -21,6 +25,7 @@ void Shader::CreateFromFiles(const char* vertexLocation, const char* fragmentLoc
 //Method used to call texture from File
 void Shader::LoadTexture(const char* fileLocation)
 {
+	
 	//Texture 
 	glGenTextures(1, &texTure);
 	glBindTexture(GL_TEXTURE_2D, texTure);
@@ -83,6 +88,8 @@ std::string Shader::ReadFile(const char* fileLocation)
 	return content;
 }
 
+//Method that compiles that shader,
+//Also used for creating the directional, point, and spot light
 void Shader::compileShader(const char* vertexCode, const char* fragmentCode)
 {
 	//creating the prog
@@ -144,10 +151,20 @@ void Shader::compileShader(const char* vertexCode, const char* fragmentCode)
 	}
 #pragma endregion
 
-	//uniformModel = glGetUniformLocation(shader, "xMove");
+#pragma region Uniforms
 	uniformModel = glGetUniformLocation(shaderID, "model");
 	uniformProjection = glGetUniformLocation(shaderID, "projection");
 	uniformView = glGetUniformLocation(shaderID, "view");
+	unifomDirectionalLight.uniformAmbient_Int = glGetUniformLocation(shaderID, "diretionalLight.base.ambient_Intensity");	//update start
+	unifomDirectionalLight.uniformColour = glGetUniformLocation(shaderID, "diretionalLight.base.colour");
+	unifomDirectionalLight.uniformDirection = glGetUniformLocation(shaderID, "diretionalLight.direction");
+	unifomDirectionalLight.uniformDiffuse_int = glGetUniformLocation(shaderID, "directionalLight.base.diffuse_Intensity");	//update end
+	uniformSpecular_Int = glGetUniformLocation(shaderID, "material.specular_Intensity");
+	uniformShininess = glGetUniformLocation(shaderID, "material.shininess");
+
+
+
+#pragma endregion
 
 }
 
@@ -159,10 +176,17 @@ GLuint Shader::getModelLocation()
 {
 	return uniformModel;
 }
-
 GLuint Shader::getViewLocation()
 {
 	return uniformView;
+}
+GLuint Shader::getAmbientIntensityLocation()
+{
+	return unifomDirectionalLight.uniformAmbient_Int;
+}
+GLuint Shader::getAmbientColourLocation()
+{
+	return unifomDirectionalLight.uniformColour;
 }
 
 void Shader::useShader()

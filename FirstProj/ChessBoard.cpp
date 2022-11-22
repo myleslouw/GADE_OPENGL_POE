@@ -100,6 +100,7 @@ void ChessBoard::LoadShaders()
 	shader3->CreateFromFiles(vBorderShader, fShader);
 	shaderList.push_back(shader3);
 
+	//Calls the method to load in the textures for the specfic object
 	shaderList[0]->LoadTexture(texture1);
 	shaderList[1]->LoadTexture(texture2);
 	shaderList[2]->LoadTexture(texture3);
