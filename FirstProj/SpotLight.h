@@ -60,7 +60,7 @@ inline void SpotLight::UseLight(GLuint ambient_IntensityLoc, GLuint ambient_Colo
 
 	//direction that the light is pointing to 
 	glUniform3f(direction_Loc, direction.x, direction.y, direction.z);
-	glUniform1f(edge_Loc, edge);
+	glUniform1f(edge_Loc, procEdge);
 }
 
 inline void SpotLight::setFlash(glm::vec3 pos, glm::vec3 dir)

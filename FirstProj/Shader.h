@@ -20,7 +20,7 @@ public:
 	GLuint shaderID, uniformProjection, uniformModel, uniformView, uniformEyePos, uniformSpecular_Int, uniformShininess;
 	Shader();
 
-	
+
 	void CreateFromString(const char* vertexCode, const char* fragmentCode);
 	void CreateFromFiles(const char* vertexLocation, const char* fragmentLocation);
 
@@ -39,8 +39,6 @@ public:
 	GLuint getSpecularIntensityLocation();
 	GLuint getShininessLocation();
 	GLuint getEyePosition();
-
-	void GetALL_Locations();
 #pragma endregion
 
 	void setDirectional_Light(DirectionalLight* dLight);
@@ -53,8 +51,10 @@ public:
 	~Shader();
 
 private:
-	//GLuint shaderID, uniformProjection, uniformModel, uniformView;
-#pragma region Shader Structs
+
+	int pointLightCount;
+	int spotLightCount;
+#pragma region Light Structs
 
 	//Info for directional light
 	struct directional_Light_str
@@ -66,6 +66,7 @@ private:
 
 	} unifomDirectionalLight;
 
+	GLuint uniformPointLightCount;
 	//Info for Point Light 
 	struct point_Light_str
 	{
@@ -79,6 +80,7 @@ private:
 		GLuint uniformExponent;
 	} uniformPointLight[MAX_POINT_LIGHTS];
 
+	GLuint uniformSpotLightCount;
 	//Info for SpotLights
 	struct spot_Light_str
 	{

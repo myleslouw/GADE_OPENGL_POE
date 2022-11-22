@@ -13,7 +13,7 @@ public:
 
 	DirectionalLight();
 	DirectionalLight(GLfloat red, GLfloat green, GLfloat blue, GLfloat aIntensity, GLfloat dIntensity, 
-					GLfloat xDirection, GLfloat yDirection, GLfloat zDirection);
+					 GLfloat xDirection, GLfloat yDirection, GLfloat zDirection);
 	void UseLight(GLfloat ambient_IntensityLoc, GLfloat ambient_ColourLoc, GLfloat diffuse_IntensityLoc, GLfloat direction_Loc);
 	~DirectionalLight();
 
