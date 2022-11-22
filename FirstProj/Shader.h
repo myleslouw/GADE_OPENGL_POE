@@ -6,6 +6,9 @@
 #include <GL/glew.h>
 #include "stb_image.h"
 
+#include "DirectionalLight.h"
+#include "PointLight.h"
+#include "SpotLight.h"
 
 class Shader
 {

@@ -38,12 +38,12 @@ inline PointLight::PointLight(GLfloat red, GLfloat green, GLfloat blue, GLfloat 
 
 inline void PointLight::UseLight(GLfloat ambient_IntensityLoc, GLfloat ambient_ColourLoc, GLfloat diffuse_IntensityLoc, GLfloat position_Loc, GLfloat constant_Loc, GLfloat linear_Loc, GLfloat exponent_Loc)
 {
-	//colour, ambient and diffuse
+	//colour, ambient and diffuse for the light 
 	glUniform3f(ambient_ColourLoc,colour.x, colour.y, colour.z);
 	glUniform1f(ambient_IntensityLoc,ambient_Intensity);
 	glUniform1f(diffuse_IntensityLoc,diffuse_Intensity);
 
-	//positions of pointLight
+	//positions of point light in the engine
 	glUniform3f(position_Loc,position.x, position.y, position.z);
 	glUniform1f(constant_Loc, constant);
 	glUniform1f(linear_Loc, linear);
