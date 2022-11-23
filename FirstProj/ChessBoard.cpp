@@ -14,6 +14,9 @@ ChessBoard::ChessBoard()
 	texture2 = "Textures/BrickSloppy_OG.png";
 	texture3 = "Textures/Pavement_OG.png";
 
+	shinyMaterial = Material(1.0f, 32);
+	dullMaterial = Material(0.3f, 4);
+
 	lowestHeight = -20;
 	highestHeight = 70;
 
@@ -64,15 +67,15 @@ void ChessBoard::LoadMeshes()
 
 	//equates to 1 unit 
 	GLfloat CubeVertices[] = {
-		//Positions			//UVs
-		-0.5, -0.5,  0.5,	0.0f,0.0f,	//0 bottom left
-		 0.5, -0.5,  0.5,	1.0f,0.0f,	//1 bottom right
-		-0.5,  0.5,  0.5,	0.0f,1.0f,	//2 top left
-		 0.5,  0.5,  0.5,	1.0f,1.0f,	//3 top right
-		-0.5, -0.5, -0.5,	-1.0f,0.0f,	//4 bottom left (back)
-		 0.5, -0.5, -0.5,	1.0f,-1.0f,	//5 bottom right (back)
-		-0.5,  0.5, -0.5,	0.0,2.0f,	//6 top left (top back)
-		 0.5,  0.5, -0.5,	1.0f,2.0f	//7 top right ( top back)
+		//Positions				UVs		Nx	  Ny   Nz
+		-0.5, -0.5,  0.5,	0.0f,0.0f,	0.0f,0.0f,0.0f,		//0 bottom left
+		 0.5, -0.5,  0.5,	1.0f,0.0f,	0.0f,0.0f,0.0f,		//1 bottom right
+		-0.5,  0.5,  0.5,	0.0f,1.0f,	0.0f,0.0f,0.0f,		//2 top left
+		 0.5,  0.5,  0.5,	1.0f,1.0f,	0.0f,0.0f,0.0f,		//3 top right
+		-0.5, -0.5, -0.5,	-1.0f,0.0f,	0.0f,0.0f,0.0f,		//4 bottom left (back)
+		 0.5, -0.5, -0.5,	1.0f,-1.0f,	0.0f,0.0f,0.0f,		//5 bottom right (back)
+		-0.5,  0.5, -0.5,	0.0,2.0f,	0.0f,0.0f,0.0f,		//6 top left (top back)
+		 0.5,  0.5, -0.5,	1.0f,2.0f,	0.0f,0.0f,0.0f		//7 top right ( top back)
 	};
 
 	//create obj
@@ -118,6 +121,8 @@ void ChessBoard::CreateBorderBlock(glm::mat4 worldProjection, Camera worldCam, i
 	uniformModel = shaderList[shaderIndex]->getModelLocation();
 	uniformProjection = shaderList[shaderIndex]->getProjectionLocation();
 	uniformView = shaderList[shaderIndex]->getViewLocation();
+	uniformEyePos = shaderList[shaderIndex]->getEyePosition();
+	uniformSpecular_Int = shaderList[shaderIndex]->getSpecularIntensityLocation();
 
 	//translation on identity matrix
 	model = glm::mat4(1.0f);
@@ -128,11 +133,14 @@ void ChessBoard::CreateBorderBlock(glm::mat4 worldProjection, Camera worldCam, i
 	//scales it to the correct dimensions   
 	model = glm::scale(model, glm::vec3(9.0f, 0.5f, 9.0f));
 
-	//uniforms
+	//uniforms for GL
 	glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 	glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(worldProjection));
 	glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(worldCam.calculateViewMatrix()));
 
+	//Applying shiny specular
+	glUniform3f(uniformEyePos, worldCam.getCameraPosition().x, worldCam.getCameraPosition().y, worldCam.getCameraPosition().z);
+	shinyMaterial.UseMaterial(uniformSpecular_Int, uniformShininess);
 	//Textures
 	shaderList[shaderIndex]->UseTexture();
 

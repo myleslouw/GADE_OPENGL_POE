@@ -17,6 +17,7 @@
 #include "Shader.h"
 #include "Camera.h"
 #include "ChessAnimation.h"
+#include "Material.h"
 
 class ChessBoard
 {
@@ -24,6 +25,9 @@ public:
 	//list of obj meshes and list of shaders available
 	std::vector<Mesh*> meshList;		//0 - cube
 	std::vector<Shader*> shaderList;	//0 - white, 1 - black,  2 - grey for border
+
+	Material shinyMaterial;
+	Material dullMaterial;
 
 	ChessAnimation chessAnimation;
 
@@ -56,7 +60,8 @@ private:
 
 	float GetRandomHeight();
 
-	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0;
+	GLuint	uniformProjection = 0, uniformModel = 0, uniformView = 0, 
+			uniformEyePos = 0, uniformSpecular_Int = 0, uniformShininess = 0;
 
 	glm::mat4 model;
 
