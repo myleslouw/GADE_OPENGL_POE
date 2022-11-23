@@ -84,6 +84,8 @@ void ChessBoard::LoadMeshes()
 	cube->CreateMesh(CubeVertices, cubeIndices, sizeof(CubeVertices), sizeof(cubeIndices));
 	//adds it to list of meshes
 	meshList.push_back(cube);
+
+	meshList[0]->CalcualteAVG_Normals(CubeVertices, cubeIndices, 64, 36, 8, 5);
 }
 
 void ChessBoard::LoadShaders()

@@ -17,6 +17,9 @@
 #include "CamManager.h"		//used for storing global instance of the camera 
 #include "ChessBoard.h"	//Generate the chessboard 
 #include "Terrain.h"	//Generates the heightmap data
+#include "DirectionalLight.h" //Generates the mainlight in the scene
+#include "PointLight.h" //Generates the PointLight for the scene
+#include "SpotLight.h"	//Generate the SpotLight for the scene
 
 const float degreeToRadians = 3.14159265 / 100.0f;
 
@@ -25,6 +28,9 @@ Window mainWindow;
 //Terrain terrain;
 ChessBoard chessboard;
 Terrain heightmap;
+DirectionalLight mainLight;
+PointLight pointLights[MAX_POINT_LIGHTS];
+SpotLight spotLights[MAX_SPOT_LIGHT];
 
 GLfloat deltaTime = 0.0f;
 GLfloat lastTime = 0.0f;
@@ -41,14 +47,25 @@ int main()
 
 	glm::mat4 projection = glm::perspective(glm::radians(45.0f), mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 100.0f);
 
+
+	//LIGHTING HERE
+	mainLight = DirectionalLight(1.0f,1.0f,1.0f,
+								 0.0f,0.0f,
+								 0.0f,0.0f,-1.0f);
+
+	//POINT LIGHT
+	//pointLights[0] = PointLight();
+
+	
 	heightmap = Terrain();
 
 	//create chessboard obj
 	chessboard = ChessBoard();
-
+	//TERRAIN STUFF HERE
 	heightmap.LoadMeshData();	//loads mesh data and creates the mesh object
 	heightmap.LoadShaderData();	//loads the shader data from our shader file
 
+	//CHESS BOARD STUFF HERE
 	chessboard.LoadMeshes();		//createobjects
 	chessboard.LoadShaders();		//createShaders
 

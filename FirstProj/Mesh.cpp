@@ -15,6 +15,7 @@ Mesh::Mesh()
 	indexCount = 0;
 }
 
+//Custom method for the basic mesh 
 void Mesh::CreateMesh(GLfloat* vertices, unsigned int* indices, unsigned int numVertices, unsigned int numIndices)
 {
 	indexCount = numIndices;
@@ -106,6 +107,46 @@ void Mesh::CreateMesh(std::vector<float> Verts, std::vector<unsigned> Inds)
 	//unbind buffers
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+}
+
+void Mesh::CalcualteAVG_Normals(GLfloat * vertices, unsigned int * indices, unsigned int verticeCount, unsigned int indiceCount, unsigned int vLength, unsigned int normalOffset)
+{
+	for (size_t i = 0; i < indiceCount; i++)
+	{
+		unsigned int in0 = indices[i] * vLength;
+		unsigned int in1 = indices[i + 1] * vLength;
+		unsigned int in2 = indices[i + 2] * vLength;
+		//			xValue								yValue								zValue
+		glm::vec3 v1(vertices[in1] - vertices[in0], vertices[in1 + 1] - vertices[in0 + 1], vertices[in1 + 2] - vertices[in0 + 2]);
+		glm::vec3 v2(vertices[in2] - vertices[in0], vertices[in2 + 1] - vertices[in0 + 1], vertices[in2 + 2] - vertices[in0 + 2]);
+		glm::vec3 normal = glm::cross(v1, v2);
+		normal = glm::normalize(normal);
+
+		in0 += normalOffset;
+		in1 += normalOffset;
+		in2 += normalOffset;
+
+		vertices[in0] += normal.x;
+		vertices[in0 + 1] += normal.y;
+		vertices[in0 + 2] += normal.z;
+
+		vertices[in1] += normal.x;
+		vertices[in1 + 1] += normal.y;
+		vertices[in1 + 2] += normal.z;
+
+		vertices[in2] += normal.x;
+		vertices[in2 + 1] += normal.y;
+		vertices[in2 + 2] += normal.z;
+	}
+
+	for (size_t z = 0; z < verticeCount / vLength; z++)
+	{
+		unsigned int nOffset = z * vLength + normalOffset;
+		glm::vec3 vect(vertices[nOffset], vertices[nOffset + 1], vertices[nOffset + 2]);
+		vect = glm::normalize(vect);
+		vertices[nOffset] = vect.x; vertices[nOffset + 1] = vect.y; vertices[nOffset + 2] = vect.z;
+	}
+
 }
 
 void Mesh::renderMesh()
