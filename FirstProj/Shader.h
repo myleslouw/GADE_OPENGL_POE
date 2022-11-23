@@ -78,7 +78,7 @@ private:
 		GLuint uniformConstant;
 		GLuint uniformLinear;
 		GLuint uniformExponent;
-	} uniformPointLight[MAX_POINT_LIGHTS];
+	} uniformPointLights[MAX_POINT_LIGHTS];
 
 	GLuint uniformSpotLightCount;
 	//Info for SpotLights
@@ -96,7 +96,7 @@ private:
 		GLuint uniformDirection;
 		GLuint uniformEdge;
 
-	} uniformSpotLight[MAX_SPOT_LIGHT];
+	} uniformSpotLights[MAX_SPOT_LIGHT];
 
 #pragma endregion
 	void compileShader(const char* vertexCode, const char* fragmentCode);

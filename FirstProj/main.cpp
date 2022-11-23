@@ -47,29 +47,51 @@ int main()
 
 	glm::mat4 projection = glm::perspective(glm::radians(45.0f), mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 100.0f);
 
-
-	//LIGHTING HERE
+#pragma region ENGINE LIGHTING
 	mainLight = DirectionalLight(1.0f,1.0f,1.0f,
 								 0.0f,0.0f,
 								 0.0f,0.0f,-1.0f);
 
 	//POINT LIGHT
-	//pointLights[0] = PointLight();
+	unsigned int pointLightCount = 0;
+	pointLights[0] = PointLight(0.0f,1.0f,1.0f,
+								0.0f,1.0f,0.0f,
+								0.0f,0.0f,0.3f,
+								0.2f,0.1f);
+	pointLightCount++; //comment this line of code to see the spot light in the scene
 
-	
-	heightmap = Terrain();
+	pointLights[1] = PointLight(1.0f, 1.0f, 0.0f,
+								0.0f, 1.0f, -4.0f,
+								2.0f, 0.0f, 0.3f,
+								0.1f, 0.1f);
+	pointLightCount++;
 
-	//create chessboard obj
-	chessboard = ChessBoard();
+	unsigned int spotLightCount = 0;
+
+	spotLights[0] = SpotLight(1.0f, 1.0f, 1.0f,
+							  0.0f, 2.0f, 0.0f,
+							  0.0f, 0.0f, 0.0f,
+							 -1.0f, 0.0f, 1.0f,
+							  0.0f, 0.0f, 20.0f);
+	spotLightCount++;
+
+	spotLights[1] = SpotLight(1.0f, 1.0f, 1.0f,
+							  0.0f, 1.0f, 0.0f,
+							 -1.5f, 0.0f, -100.0f,
+							 -1.0f, 0.0f, 1.0f,
+							  0.0f, 0.0f, 20.0f);
+	spotLightCount++;
+#pragma endregion
+
 	//TERRAIN STUFF HERE
-	heightmap.LoadMeshData();	//loads mesh data and creates the mesh object
-	heightmap.LoadShaderData();	//loads the shader data from our shader file
+	//heightmap = Terrain();
+	//heightmap.LoadMeshData();	//loads mesh data and creates the mesh object
+//	heightmap.LoadShaderData();	//loads the shader data from our shader file
 
 	//CHESS BOARD STUFF HERE
+	chessboard = ChessBoard();
 	chessboard.LoadMeshes();		//createobjects
 	chessboard.LoadShaders();		//createShaders
-
-
 
 	//loop until window closed
 	while (!mainWindow.getShouldClose())
@@ -99,6 +121,21 @@ int main()
 		//generates the chessboard
 		chessboard.GenerateChessBoard(projection, globalCamera);
 
+#pragma region ChessBoard Lighting
+		//adding lighting to the specfic shader of an object in the scene
+		//for the white blocks
+		chessboard.shaderList[0]->setDirectional_Light(&mainLight);
+		chessboard.shaderList[0]->setPoint_Light(pointLights, pointLightCount);
+		chessboard.shaderList[0]->setSpot_Light(spotLights, spotLightCount);
+
+		chessboard.shaderList[1]->setDirectional_Light(&mainLight);
+		chessboard.shaderList[1]->setPoint_Light(pointLights, pointLightCount);
+		chessboard.shaderList[1]->setSpot_Light(spotLights, spotLightCount);
+
+		chessboard.shaderList[2]->setDirectional_Light(&mainLight);
+		chessboard.shaderList[2]->setPoint_Light(pointLights, pointLightCount);
+		chessboard.shaderList[2]->setSpot_Light(spotLights, spotLightCount);
+#pragma endregion
 		//chessboard.AnimateChessPieces(projection, globalCamera, deltaTime);
 		//------------------------------------------------------------------
 

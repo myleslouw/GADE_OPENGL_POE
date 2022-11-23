@@ -1,4 +1,6 @@
-﻿  ChessBoard.cpp
+﻿  Camera.cpp
+  CamManager.cpp
+  ChessBoard.cpp
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\directionallight.h(40): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\directionallight.h(41): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\directionallight.h(43): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
@@ -10,28 +12,8 @@ d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.h(47): warning C42
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.h(48): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.h(49): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.h(50): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.h(35): error C2535: 'GLuint Shader::getViewLocation(void)': member function already defined or declared
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.h(34): note: see declaration of 'Shader::getViewLocation'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.h(37): error C2535: 'GLuint Shader::getAmbientIntensity(void)': member function already defined or declared
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.h(36): note: see declaration of 'Shader::getAmbientIntensity'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\chessboard.cpp(20): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\chessboard.cpp(227): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-  Shader.cpp
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\directionallight.h(40): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\directionallight.h(41): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\directionallight.h(43): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\directionallight.h(44): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.h(42): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.h(43): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.h(44): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.h(47): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.h(48): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.h(49): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.h(50): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.h(35): error C2535: 'GLuint Shader::getViewLocation(void)': member function already defined or declared
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.h(34): note: see declaration of 'Shader::getViewLocation'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.h(37): error C2535: 'GLuint Shader::getAmbientIntensity(void)': member function already defined or declared
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.h(36): note: see declaration of 'Shader::getAmbientIntensity'
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\chessboard.cpp(23): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\chessboard.cpp(243): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   main.cpp
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.h(17): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.h(18): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
@@ -46,12 +28,92 @@ d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.h(47): warning C42
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.h(48): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.h(49): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.h(50): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.h(35): error C2535: 'GLuint Shader::getViewLocation(void)': member function already defined or declared
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.h(34): note: see declaration of 'Shader::getViewLocation'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.h(37): error C2535: 'GLuint Shader::getAmbientIntensity(void)': member function already defined or declared
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.h(36): note: see declaration of 'Shader::getAmbientIntensity'
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\terrain.h(109): warning C4018: '<': signed/unsigned mismatch
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\terrain.h(111): warning C4018: '<': signed/unsigned mismatch
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\main.cpp(21): warning C4305: 'initializing': truncation from 'double' to 'float'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\main.cpp(61): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\terrain.h(79): warning C4101: 'u': unreferenced local variable
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\main.cpp(24): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\main.cpp(100): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+  Mesh.cpp
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\mesh.cpp(172): warning C4018: '<': signed/unsigned mismatch
+  Shader.cpp
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\directionallight.h(40): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\directionallight.h(41): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\directionallight.h(43): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\directionallight.h(44): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.h(42): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.h(43): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.h(44): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.h(47): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.h(48): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.h(49): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.h(50): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.cpp(304): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.cpp(303): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.cpp(302): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.cpp(317): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.cpp(316): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.cpp(315): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.cpp(314): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
+  Window.cpp
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.h(17): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.h(18): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.cpp(168): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.cpp(169): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.cpp(173): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.cpp(174): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.cpp(176): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.cpp(177): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
   Generating Code...
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.cpp(91): warning C4715: 'Window::Initialise': not all control paths return a value
+  LINK : D:\GADE7312_Project_repo\GADE_OpenGL_POE\Debug\FirstProj.exe not found or not built by the last incremental link; performing full link
+main.obj : error LNK2005: "public: __thiscall DirectionalLight::DirectionalLight(void)" (??0DirectionalLight@@QAE@XZ) already defined in ChessBoard.obj
+main.obj : error LNK2005: "public: __thiscall Light::Light(void)" (??0Light@@QAE@XZ) already defined in ChessBoard.obj
+main.obj : error LNK2005: "public: __thiscall Material::Material(void)" (??0Material@@QAE@XZ) already defined in ChessBoard.obj
+main.obj : error LNK2005: "public: __thiscall PointLight::PointLight(void)" (??0PointLight@@QAE@XZ) already defined in ChessBoard.obj
+main.obj : error LNK2005: "public: __thiscall SpotLight::SpotLight(void)" (??0SpotLight@@QAE@XZ) already defined in ChessBoard.obj
+main.obj : error LNK2005: "public: __thiscall DirectionalLight::~DirectionalLight(void)" (??1DirectionalLight@@QAE@XZ) already defined in ChessBoard.obj
+main.obj : error LNK2005: "public: __thiscall Light::~Light(void)" (??1Light@@QAE@XZ) already defined in ChessBoard.obj
+main.obj : error LNK2005: "public: __thiscall Material::~Material(void)" (??1Material@@QAE@XZ) already defined in ChessBoard.obj
+main.obj : error LNK2005: "public: __thiscall PointLight::~PointLight(void)" (??1PointLight@@QAE@XZ) already defined in ChessBoard.obj
+main.obj : error LNK2005: "public: __thiscall SpotLight::~SpotLight(void)" (??1SpotLight@@QAE@XZ) already defined in ChessBoard.obj
+Shader.obj : error LNK2005: "public: __thiscall DirectionalLight::DirectionalLight(void)" (??0DirectionalLight@@QAE@XZ) already defined in ChessBoard.obj
+Shader.obj : error LNK2005: "public: __thiscall Light::Light(void)" (??0Light@@QAE@XZ) already defined in ChessBoard.obj
+Shader.obj : error LNK2005: "public: __thiscall PointLight::PointLight(void)" (??0PointLight@@QAE@XZ) already defined in ChessBoard.obj
+Shader.obj : error LNK2005: "public: __thiscall SpotLight::SpotLight(void)" (??0SpotLight@@QAE@XZ) already defined in ChessBoard.obj
+Shader.obj : error LNK2005: "public: __thiscall DirectionalLight::~DirectionalLight(void)" (??1DirectionalLight@@QAE@XZ) already defined in ChessBoard.obj
+Shader.obj : error LNK2005: "public: __thiscall Light::~Light(void)" (??1Light@@QAE@XZ) already defined in ChessBoard.obj
+Shader.obj : error LNK2005: "public: __thiscall PointLight::~PointLight(void)" (??1PointLight@@QAE@XZ) already defined in ChessBoard.obj
+Shader.obj : error LNK2005: "public: __thiscall SpotLight::~SpotLight(void)" (??1SpotLight@@QAE@XZ) already defined in ChessBoard.obj
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+Mesh.obj : warning LNK4049: locally defined symbol ___glewBindBuffer imported
+Mesh.obj : warning LNK4049: locally defined symbol ___glewBufferData imported
+Mesh.obj : warning LNK4049: locally defined symbol ___glewDeleteBuffers imported
+Mesh.obj : warning LNK4049: locally defined symbol ___glewGenBuffers imported
+Mesh.obj : warning LNK4049: locally defined symbol ___glewEnableVertexAttribArray imported
+Mesh.obj : warning LNK4049: locally defined symbol ___glewVertexAttribPointer imported
+Mesh.obj : warning LNK4049: locally defined symbol ___glewBindVertexArray imported
+Mesh.obj : warning LNK4049: locally defined symbol ___glewDeleteVertexArrays imported
+Mesh.obj : warning LNK4049: locally defined symbol ___glewGenVertexArrays imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewActiveTexture imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewAttachShader imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewCompileShader imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewCreateProgram imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewCreateShader imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewDeleteProgram imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewGetProgramInfoLog imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewGetProgramiv imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewGetShaderInfoLog imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewGetShaderiv imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewGetUniformLocation imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewLinkProgram imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewShaderSource imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewUniform1f imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewUniform1i imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewUniform3f imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewUseProgram imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewValidateProgram imported
+Shader.obj : warning LNK4049: locally defined symbol ___glewGenerateMipmap imported
+Window.obj : warning LNK4217: locally defined symbol _glewInit@0 imported in function "public: int __thiscall Window::Initialise(void)" (?Initialise@Window@@QAEHXZ)
+Window.obj : warning LNK4217: locally defined symbol _glewGetErrorString@4 imported in function "public: int __thiscall Window::Initialise(void)" (?Initialise@Window@@QAEHXZ)
+D:\GADE7312_Project_repo\GADE_OpenGL_POE\Debug\FirstProj.exe : fatal error LNK1169: one or more multiply defined symbols found

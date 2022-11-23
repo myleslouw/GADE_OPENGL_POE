@@ -162,6 +162,8 @@ void ChessBoard::CreateCellBlock(glm::mat4 worldProjection, Camera worldCam, int
 	uniformModel = shaderList[shaderIndex]->getModelLocation();
 	uniformProjection = shaderList[shaderIndex]->getProjectionLocation();
 	uniformView = shaderList[shaderIndex]->getViewLocation();
+	uniformEyePos = shaderList[shaderIndex]->getEyePosition();
+	uniformSpecular_Int = shaderList[shaderIndex]->getSpecularIntensityLocation();
 
 	//translation on identity matrix
 	model = glm::mat4(1.0f);
@@ -176,6 +178,10 @@ void ChessBoard::CreateCellBlock(glm::mat4 worldProjection, Camera worldCam, int
 	glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 	glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(worldProjection));
 	glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(worldCam.calculateViewMatrix()));
+
+	//Applying the shiny Material
+	glUniform3f(uniformEyePos, worldCam.getCameraPosition().x, worldCam.getCameraPosition().y, worldCam.getCameraPosition().z);
+	shinyMaterial.UseMaterial(uniformSpecular_Int, uniformShininess);
 
 	//Textures
 	shaderList[shaderIndex]->UseTexture();
