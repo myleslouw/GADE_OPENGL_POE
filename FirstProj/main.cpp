@@ -48,47 +48,47 @@ int main()
 	glm::mat4 projection = glm::perspective(glm::radians(45.0f), mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 100.0f);
 
 #pragma region ENGINE LIGHTING
-	mainLight = DirectionalLight(1.0f,1.0f,1.0f,
-								 0.0f,0.0f,
-								 0.0f,0.0f,-1.0f);
+	mainLight = DirectionalLight(1.0f, 1.0f, 1.0f,
+		0.0f, 0.0f,
+		0.0f, 0.0f, -1.0f);
 
 	//POINT LIGHT
 	unsigned int pointLightCount = 0;
-	pointLights[0] = PointLight(0.0f,1.0f,1.0f,
-								0.0f,1.0f,0.0f,
-								0.0f,0.0f,0.3f,
-								0.2f,0.1f);
+	pointLights[0] = PointLight(0.0f, 1.0f, 1.0f,
+		0.0f, 1.0f, 0.0f,
+		0.0f, 0.0f, 0.3f,
+		0.2f, 0.1f);
 	pointLightCount++; //comment this line of code to see the spot light in the scene
 
 	pointLights[1] = PointLight(1.0f, 1.0f, 0.0f,
-								0.0f, 1.0f, -4.0f,
-								2.0f, 0.0f, 0.3f,
-								0.1f, 0.1f);
+		0.0f, 1.0f, -4.0f,
+		2.0f, 0.0f, 0.3f,
+		0.1f, 0.1f);
 	pointLightCount++;
 
 	unsigned int spotLightCount = 0;
 
 	spotLights[0] = SpotLight(1.0f, 1.0f, 1.0f,
-							  0.0f, 2.0f, 0.0f,
-							  0.0f, 0.0f, 0.0f,
-							 -1.0f, 0.0f, 1.0f,
-							  0.0f, 0.0f, 20.0f);
+		0.0f, 2.0f, 0.0f,
+		0.0f, 0.0f, 0.0f,
+		-1.0f, 0.0f, 1.0f,
+		0.0f, 0.0f, 20.0f);
 	spotLightCount++;
 
 	spotLights[1] = SpotLight(1.0f, 1.0f, 1.0f,
-							  0.0f, 1.0f, 0.0f,
-							 -1.5f, 0.0f, -100.0f,
-							 -1.0f, 0.0f, 1.0f,
-							  0.0f, 0.0f, 20.0f);
+		0.0f, 1.0f, 0.0f,
+		-1.5f, 0.0f, -100.0f,
+		-1.0f, 0.0f, 1.0f,
+		0.0f, 0.0f, 20.0f);
 	spotLightCount++;
 #pragma endregion
 
 	//TERRAIN STUFF HERE
-	//heightmap = Terrain();
-	//heightmap.LoadMeshData();	//loads mesh data and creates the mesh object
-//	heightmap.LoadShaderData();	//loads the shader data from our shader file
+	heightmap = Terrain();
+	heightmap.LoadMeshData();	//loads mesh data and creates the mesh object
+	heightmap.LoadShaderData();	//loads the shader data from our shader file
 
-	//CHESS BOARD STUFF HERE
+		//CHESS BOARD STUFF HERE
 	chessboard = ChessBoard();
 	chessboard.LoadMeshes();		//createobjects
 	chessboard.LoadShaders();		//createShaders
@@ -116,7 +116,7 @@ int main()
 
 		//-------------------------------------------------------------
 		//generate heightmap/terrain
-		//heightmap.GenerateTerrain(projection, globalCamera);
+		heightmap.GenerateTerrain(projection, globalCamera);
 
 		//generates the chessboard
 		chessboard.GenerateChessBoard(projection, globalCamera);
@@ -147,4 +147,43 @@ int main()
 	// glfw: Terminate, clearing all prev allocated GLFW resources
 	glfwTerminate();
 	return 0;
+}
+
+void CalcAverageNormals(unsigned int* indices, unsigned int indiceCount, GLfloat* vertices,
+	unsigned int verticeCount, unsigned int vLength, unsigned int normalOffset)
+{
+	for (size_t i = 0; i < indiceCount; i += 3)
+	{
+		unsigned int in0 = indices[i] * vLength;
+		unsigned int in1 = indices[i + 1] * vLength;
+		unsigned int in2 = indices[i + 2] * vLength;
+		glm::vec3 v1(vertices[in1] - vertices[in0], vertices[in1 + 1] - vertices[in0 + 1], vertices[in1 + 2] - vertices[in0 + 2]);
+		glm::vec3 v2(vertices[in2] - vertices[in0], vertices[in2 + 1] - vertices[in0 + 1], vertices[in2 + 2] - vertices[in0 + 2]);
+		glm::vec3 normal = glm::cross(v1, v2);
+		normal = glm::normalize(normal);
+
+		in0 += normalOffset;
+		in1 += normalOffset;
+		in2 += normalOffset;
+
+		vertices[in0] += normal.x;
+		vertices[in0 + 1] += normal.y;
+		vertices[in0 + 2] += normal.z;
+
+		vertices[in1] += normal.x;
+		vertices[in1 + 1] += normal.y;
+		vertices[in1 + 2] += normal.z;
+
+		vertices[in2] += normal.x;
+		vertices[in2 + 1] += normal.y;
+		vertices[in2 + 2] += normal.z;
+	}
+
+	for (size_t i = 0; i < verticeCount / vLength; i++)
+	{
+		unsigned int nOffset = i * vLength + normalOffset;
+		glm::vec3 vec(vertices[nOffset], vertices[nOffset + 1], vertices[nOffset + 2]);
+		vec = glm::normalize(vec);
+		vertices[nOffset] = vec.x; vertices[nOffset + 1] = vec.y; vertices[nOffset + 2] = vec.z;
+	}
 }

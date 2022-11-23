@@ -77,15 +77,13 @@ void ChessBoard::LoadMeshes()
 		-0.5,  0.5, -0.5,	0.0,2.0f,	0.0f,0.0f,0.0f,		//6 top left (top back)
 		 0.5,  0.5, -0.5,	1.0f,2.0f,	0.0f,0.0f,0.0f		//7 top right ( top back)
 	};
-
+	
 	//create obj
 	Mesh *cube = new Mesh();
 	//create obj mesh
 	cube->CreateMesh(CubeVertices, cubeIndices, sizeof(CubeVertices), sizeof(cubeIndices));
 	//adds it to list of meshes
-	meshList.push_back(cube);
-
-	meshList[0]->CalcualteAVG_Normals(CubeVertices, cubeIndices, 64, 36, 8, 5);
+	meshList.push_back(cube);	
 }
 
 void ChessBoard::LoadShaders()

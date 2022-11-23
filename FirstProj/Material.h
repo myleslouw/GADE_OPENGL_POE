@@ -19,25 +19,3 @@ private:
 	GLfloat specular_Intensity;
 	GLfloat shininess;
 };
-
-Material::Material()
-{
-	specular_Intensity = 0.0f;
-	shininess = 0.0f;
-}
-
-inline Material::Material(GLfloat sIntensity, GLfloat shine)
-{
-	specular_Intensity = sIntensity;
-	shininess = shine;
-}
-
-inline void Material::UseMaterial(GLuint specular_IntensityLoc, GLuint shinenessLoc)
-{
-	glUniform1f(specular_IntensityLoc, specular_Intensity);
-	glUniform1f(shinenessLoc, shininess);
-}
-
-Material::~Material()
-{
-}

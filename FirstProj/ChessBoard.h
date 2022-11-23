@@ -19,7 +19,7 @@
 #include "ChessAnimation.h"
 #include "Material.h"
 
-class ChessBoard
+class ChessBoard 
 {
 public:
 	//list of obj meshes and list of shaders available
