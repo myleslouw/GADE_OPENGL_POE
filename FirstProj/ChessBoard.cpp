@@ -33,6 +33,10 @@ ChessBoard::ChessBoard()
 	}
 
 	chessAnimation = ChessAnimation();
+
+	//LoadMeshes();
+//	LoadShaders();
+
 }
 
 void ChessBoard::LoadMeshes()
@@ -80,10 +84,12 @@ void ChessBoard::LoadMeshes()
 	
 	meshIndices = cubeIndices;
 	meshVertices = CubeVertices;
+
+	CalculateAVGNormals(meshIndices,36,meshVertices,64,8,5);
 	//create obj
 	Mesh *cube = new Mesh();
 	//create obj mesh
-	cube->CreateMesh(meshVertices, meshIndices, sizeof(meshVertices), sizeof(meshIndices));
+	cube->CreateMesh(&CubeVertices, meshIndices, sizeof(meshVertices), sizeof(meshIndices));
 	//adds it to list of meshes
 	meshList.push_back(cube);	
 }
@@ -109,6 +115,44 @@ void ChessBoard::LoadShaders()
 	shaderList[0]->LoadTexture(texture1);
 	shaderList[1]->LoadTexture(texture2);
 	shaderList[2]->LoadTexture(texture3);
+}
+
+void ChessBoard::CalculateAVGNormals(unsigned int * indices, unsigned int indiceCount, GLfloat * vertices, unsigned int verticeCount, unsigned int vLength, unsigned int normalOffset)
+{
+	for (size_t i = 0; i < indiceCount; i += 3)
+	{
+		unsigned int in0 = indices[i] * vLength;
+		unsigned int in1 = indices[i + 1] * vLength;
+		unsigned int in2 = indices[i + 2] * vLength;
+		glm::vec3 v1(vertices[in1] - vertices[in0], vertices[in1 + 1] - vertices[in0 + 1], vertices[in1 + 2] - vertices[in0 + 2]);
+		glm::vec3 v2(vertices[in2] - vertices[in0], vertices[in2 + 1] - vertices[in0 + 1], vertices[in2 + 2] - vertices[in0 + 2]);
+		glm::vec3 normal = glm::cross(v1, v2);
+		normal = glm::normalize(normal);
+
+		in0 += normalOffset;
+		in1 += normalOffset;
+		in2 += normalOffset;
+
+		vertices[in0] += normal.x;
+		vertices[in0 + 1] += normal.y;
+		vertices[in0 + 2] += normal.z;
+
+		vertices[in1] += normal.x;
+		vertices[in1 + 1] += normal.y;
+		vertices[in1 + 2] += normal.z;
+
+		vertices[in2] += normal.x;
+		vertices[in2 + 1] += normal.y;
+		vertices[in2 + 2] += normal.z;
+	}
+
+	for (size_t i = 0; i < verticeCount / vLength; i++)
+	{
+		unsigned int nOffset = i * vLength + normalOffset;
+		glm::vec3 vec(vertices[nOffset], vertices[nOffset + 1], vertices[nOffset + 2]);
+		vec = glm::normalize(vec);
+		vertices[nOffset] = vec.x; vertices[nOffset + 1] = vec.y; vertices[nOffset + 2] = vec.z;
+	}
 }
 
 //Creates the base that the chess board will be on 
