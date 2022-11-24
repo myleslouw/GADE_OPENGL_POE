@@ -28,47 +28,55 @@ void Camera::keyControl(bool* keys, GLfloat deltaTime)
 {
 	GLfloat velocity = moveSpeed * deltaTime;
 
-	//movement
-	if (keys[GLFW_KEY_W])
+	//if the camera is not locked
+	if (!CameraLocked)
 	{
-		position += front * velocity;
-	}
+		//movement
+		if (keys[GLFW_KEY_W])
+		{
+			position += front * velocity;
+		}
 
-	if (keys[GLFW_KEY_S])
-	{
-		position -= front * velocity;
-	}
+		if (keys[GLFW_KEY_S])
+		{
+			position -= front * velocity;
+		}
 
-	if (keys[GLFW_KEY_A])
-	{
-		position -= right * velocity;
-	}
+		if (keys[GLFW_KEY_A])
+		{
+			position -= right * velocity;
+		}
 
-	if (keys[GLFW_KEY_D])
-	{
-		position += right * velocity;
+		if (keys[GLFW_KEY_D])
+		{
+			position += right * velocity;
+		}
 	}
 }
 
 void Camera::mouseControl(GLfloat xChange, GLfloat yChange)
 {
-	xChange *= turnSpeed;
-	yChange *= turnSpeed;
-
-	yaw += xChange;
-	pitch += yChange;
-
-	if (pitch > 89.0f)
+	//move if the camera is not locked
+	if (!CameraLocked)
 	{
-		pitch = 89.0f;
-	}
+		xChange *= turnSpeed;
+		yChange *= turnSpeed;
 
-	if (pitch < -89.0f)
-	{
-		pitch = -89.0f;
-	}
+		yaw += xChange;
+		pitch += yChange;
 
-	update();
+		if (pitch > 89.0f)
+		{
+			pitch = 89.0f;
+		}
+
+		if (pitch < -89.0f)
+		{
+			pitch = -89.0f;
+		}
+
+		update();
+	}
 }
 
 glm::mat4 Camera::calculateViewMatrix()
