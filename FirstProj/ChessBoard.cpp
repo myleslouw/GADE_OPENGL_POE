@@ -78,10 +78,12 @@ void ChessBoard::LoadMeshes()
 		 0.5,  0.5, -0.5,	1.0f,2.0f,	0.0f,0.0f,0.0f		//7 top right ( top back)
 	};
 	
+	meshIndices = cubeIndices;
+	meshVertices = CubeVertices;
 	//create obj
 	Mesh *cube = new Mesh();
 	//create obj mesh
-	cube->CreateMesh(CubeVertices, cubeIndices, sizeof(CubeVertices), sizeof(cubeIndices));
+	cube->CreateMesh(meshVertices, meshIndices, sizeof(meshVertices), sizeof(meshIndices));
 	//adds it to list of meshes
 	meshList.push_back(cube);	
 }

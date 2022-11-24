@@ -92,6 +92,7 @@ int main()
 	chessboard = ChessBoard();
 	chessboard.LoadMeshes();		//createobjects
 	chessboard.LoadShaders();		//createShaders
+	CalcAverageNormals(chessboard.meshIndices,sizeof(chessboard.meshIndices),chessboard.meshVertices,sizeof(chessboard.meshVertices),8,5);
 
 	//loop until window closed
 	while (!mainWindow.getShouldClose())

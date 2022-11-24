@@ -26,6 +26,8 @@ public:
 	std::vector<Mesh*> meshList;		//0 - cube
 	std::vector<Shader*> shaderList;	//0 - white, 1 - black,  2 - grey for border
 
+	GLfloat* meshVertices;
+	unsigned int* meshIndices;
 	Material shinyMaterial;
 	Material dullMaterial;
 

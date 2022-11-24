@@ -1,6 +1,13 @@
 ﻿  ChessBoard.cpp
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\chessboard.cpp(23): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\chessboard.cpp(85): warning C4018: '<': signed/unsigned mismatch
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\chessboard.cpp(113): warning C4018: '<': signed/unsigned mismatch
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\chessboard.cpp(286): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-  FirstProj.vcxproj -> D:\GADE7312_Project_repo\GADE_OpenGL_POE\Debug\FirstProj.exe
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\chessboard.cpp(243): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  main.cpp
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.h(17): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.h(18): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\terrain.h(109): warning C4018: '<': signed/unsigned mismatch
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\terrain.h(111): warning C4018: '<': signed/unsigned mismatch
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\terrain.h(79): warning C4101: 'u': unreferenced local variable
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\main.cpp(24): warning C4305: 'initializing': truncation from 'double' to 'float'
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\main.cpp(95): error C3861: 'CalcAverageNormals': identifier not found
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\main.cpp(101): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+  Generating Code...
