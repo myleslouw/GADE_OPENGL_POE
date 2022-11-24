@@ -115,6 +115,9 @@ void Window::handleKeys(GLFWwindow* window, int key, int code, int action, int m
 	//handles key presses
 	Window* theWindow = static_cast<Window*>(glfwGetWindowUserPointer(window));
 
+	//INPUT HERE ALLOWS FOR ONLY 1 PRESS (Camera class does many depending on fps)
+
+	//close window
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 	{
 		printf("CLOSING");
@@ -127,6 +130,8 @@ void Window::handleKeys(GLFWwindow* window, int key, int code, int action, int m
 		printf("CAMERA INCREMENT");
 		IncrementIndex();							//decrements the index  (method in CamManager)
 		globalCamera.ChangeCameraPosition();		//calls the method on the global camera to change the position (method in Camera)
+		//lock camera movement
+		LockCamera();
 	}
 
 	if (key == GLFW_KEY_LEFT && action == GLFW_PRESS)
@@ -134,6 +139,8 @@ void Window::handleKeys(GLFWwindow* window, int key, int code, int action, int m
 		printf("CAMERA DECREMENT");
 		DecrementIndex();							//decrements the index  (method in CamManager)
 		globalCamera.ChangeCameraPosition();		//calls the method on the global camera to change the position (method in Camera)
+		//lock camera movement
+		LockCamera();
 	}
 
 	//-------------------------------------------------------
@@ -145,6 +152,17 @@ void Window::handleKeys(GLFWwindow* window, int key, int code, int action, int m
 		//if space is pressed start/stop the animation
 		animationActive = !animationActive;
 	}
+	//------------------------------
+
+	//CAMERA LOCKING
+
+	if (key == GLFW_KEY_TAB && action == GLFW_PRESS)
+	{
+		//if tab is pressed it will lock/unlock the camera
+		AlternateLock();
+	}
+
+	//--------------------
 
 	if (key >= 0 && key < 1024)
 	{

@@ -5,7 +5,12 @@
 
 extern int CamIndex;
 extern Camera globalCamera;
+extern bool CameraLocked;
 
 void IncrementIndex();
 void DecrementIndex();
+
+void LockCamera();
+void UnlockCamera();
+void AlternateLock();
 
