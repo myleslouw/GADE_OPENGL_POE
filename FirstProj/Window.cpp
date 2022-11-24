@@ -1,6 +1,7 @@
 #include "Window.h"
 #include "CamManager.h"
 #include "AnimationManager.h"
+#include "FPSManager.h"
 
 Window::Window()
 {
@@ -118,29 +119,29 @@ void Window::handleKeys(GLFWwindow* window, int key, int code, int action, int m
 	//INPUT HERE ALLOWS FOR ONLY 1 PRESS (Camera class does many depending on fps)
 
 	//close window
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+	if (key == GLFW_KEY_BACKSPACE && action == GLFW_PRESS)
 	{
 		printf("CLOSING");
 		glfwSetWindowShouldClose(window, GL_TRUE);
 	}
 
+	//TOGGLE FPS
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+	{
+		AlternateFPS();
+	}
+
 	//CAMERA SWITCHING --------------------------------------
 	if (key == GLFW_KEY_RIGHT && action == GLFW_PRESS)
 	{
-		printf("CAMERA INCREMENT");
 		IncrementIndex();							//decrements the index  (method in CamManager)
-		globalCamera.ChangeCameraPosition();		//calls the method on the global camera to change the position (method in Camera)
-		//lock camera movement
-		LockCamera();
+		globalCamera.ChangeCameraPosition();		//calls the method on the global camera to change the position (method in Camera) and locks the camera
 	}
 
 	if (key == GLFW_KEY_LEFT && action == GLFW_PRESS)
 	{
-		printf("CAMERA DECREMENT");
 		DecrementIndex();							//decrements the index  (method in CamManager)
-		globalCamera.ChangeCameraPosition();		//calls the method on the global camera to change the position (method in Camera)
-		//lock camera movement
-		LockCamera();
+		globalCamera.ChangeCameraPosition();		//calls the method on the global camera to change the position (method in Camera) and locks the camera
 	}
 
 	//-------------------------------------------------------
@@ -159,7 +160,8 @@ void Window::handleKeys(GLFWwindow* window, int key, int code, int action, int m
 	if (key == GLFW_KEY_TAB && action == GLFW_PRESS)
 	{
 		//if tab is pressed it will lock/unlock the camera
-		AlternateLock();
+		printf("alternating");
+		globalCamera.AlternateLock();
 	}
 
 	//--------------------

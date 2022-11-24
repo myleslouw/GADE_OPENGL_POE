@@ -1,14 +1,12 @@
 #include "CamManager.h"
 
-#include <iostream>
 int CamIndex = 0;
 Camera globalCamera = Camera();
-bool CameraLocked = false;
-
 
 //be able to increment and decrement index
 void IncrementIndex()
 {
+	printf("CAMERA INCREMENT");
 	CamIndex++;
 	if (CamIndex > 2)
 	{
@@ -18,6 +16,7 @@ void IncrementIndex()
 
 void DecrementIndex()
 {
+	printf("CAMERA DECREMENT");
 	CamIndex--;
 	if (CamIndex < 0)
 	{
@@ -25,17 +24,4 @@ void DecrementIndex()
 	}
 }
 
-void LockCamera()
-{
-	CameraLocked = true;
-}
 
-void UnlockCamera()
-{
-	CameraLocked = false;
-}
-
-void AlternateLock()
-{
-	CameraLocked = !CameraLocked;
-}

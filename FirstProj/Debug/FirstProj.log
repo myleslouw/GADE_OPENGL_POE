@@ -1,2 +1,25 @@
-﻿  FPSCounter.cpp
+﻿  CamManager.cpp
+  Camera.cpp
+  ChessBoard.cpp
+c:\users\myles\desktop\openglroot\github\gade_opengl_poe\firstproj\chessboard.cpp(20): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\myles\desktop\openglroot\github\gade_opengl_poe\firstproj\chessboard.cpp(226): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  Window.cpp
+c:\users\myles\desktop\openglroot\github\gade_opengl_poe\firstproj\window.h(17): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
+c:\users\myles\desktop\openglroot\github\gade_opengl_poe\firstproj\window.h(18): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
+c:\users\myles\desktop\openglroot\github\gade_opengl_poe\firstproj\window.cpp(188): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\myles\desktop\openglroot\github\gade_opengl_poe\firstproj\window.cpp(189): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\myles\desktop\openglroot\github\gade_opengl_poe\firstproj\window.cpp(193): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\myles\desktop\openglroot\github\gade_opengl_poe\firstproj\window.cpp(194): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\myles\desktop\openglroot\github\gade_opengl_poe\firstproj\window.cpp(196): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+c:\users\myles\desktop\openglroot\github\gade_opengl_poe\firstproj\window.cpp(197): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+  main.cpp
+c:\users\myles\desktop\openglroot\github\gade_opengl_poe\firstproj\window.h(17): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
+c:\users\myles\desktop\openglroot\github\gade_opengl_poe\firstproj\window.h(18): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
+c:\users\myles\desktop\openglroot\github\gade_opengl_poe\firstproj\terrain.h(109): warning C4018: '<': signed/unsigned mismatch
+c:\users\myles\desktop\openglroot\github\gade_opengl_poe\firstproj\terrain.h(111): warning C4018: '<': signed/unsigned mismatch
+c:\users\myles\desktop\openglroot\github\gade_opengl_poe\firstproj\terrain.h(79): warning C4101: 'u': unreferenced local variable
+c:\users\myles\desktop\openglroot\github\gade_opengl_poe\firstproj\main.cpp(22): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\myles\desktop\openglroot\github\gade_opengl_poe\firstproj\main.cpp(64): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+  Generating Code...
+c:\users\myles\desktop\openglroot\github\gade_opengl_poe\firstproj\window.cpp(92): warning C4715: 'Window::Initialise': not all control paths return a value
   FirstProj.vcxproj -> C:\Users\Myles\Desktop\OpenGLRoot\Github\GADE_OpenGL_POE\Debug\FirstProj.exe

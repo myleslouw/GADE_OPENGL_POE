@@ -138,6 +138,7 @@
     <ClCompile Include="ChessAnimation.cpp" />
     <ClCompile Include="ChessBoard.cpp" />
     <ClCompile Include="FPSCounter.cpp" />
+    <ClCompile Include="FPSManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="ChessAnimation.h" />
     <ClInclude Include="ChessBoard.h" />
     <ClInclude Include="FPSCounter.h" />
+    <ClInclude Include="FPSManager.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Terrain.h" />

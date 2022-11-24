@@ -1,6 +1,5 @@
 #pragma once
 #include <GL\glew.h>
-#include <stdio.h>
 
 #include <glm/glm.hpp>
 #include <glm\gtc\matrix_transform.hpp>
@@ -32,6 +31,12 @@ public:
 	glm::vec3 worldUp;
 
 	void ChangeCameraPosition();
+
+
+	bool CameraLocked;
+	void UnlockCamera();
+	void LockCamera();
+	void AlternateLock();
 
 	~Camera();
 

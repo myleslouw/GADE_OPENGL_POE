@@ -21,17 +21,20 @@ Camera::Camera(glm::vec3 startPosition, glm::vec3 startUp, GLfloat startYaw, GLf
 	moveSpeed = startMoveSpeed;
 	turnSpeed = startTurnSpeed;
 
+	CameraLocked = false;
+
 	update();
 }
 
 void Camera::keyControl(bool* keys, GLfloat deltaTime)
 {
-	GLfloat velocity = moveSpeed * deltaTime;
-
-	//if the camera is not locked
 	if (!CameraLocked)
 	{
-		//movement
+		GLfloat velocity = moveSpeed * deltaTime;
+
+		//if the camera is not locked
+
+			//movement
 		if (keys[GLFW_KEY_W])
 		{
 			position += front * velocity;
@@ -75,8 +78,9 @@ void Camera::mouseControl(GLfloat xChange, GLfloat yChange)
 			pitch = -89.0f;
 		}
 
-		update();
+		//update();
 	}
+	update();
 }
 
 glm::mat4 Camera::calculateViewMatrix()
@@ -106,6 +110,23 @@ void Camera::ChangeCameraPosition()
 	position.z = camPositions[CamIndex].position.z;
 	pitch = camPositions[CamIndex].pitch;
 	yaw = camPositions[CamIndex].yaw;
+
+	//locks camera poision after movement
+	LockCamera();
+}
+
+void Camera::UnlockCamera()
+{
+	CameraLocked = false;
+}
+void Camera::LockCamera()
+{
+	CameraLocked = true;
+}
+
+void Camera::AlternateLock()
+{
+	CameraLocked = !CameraLocked;
 }
 
 Camera::~Camera()
