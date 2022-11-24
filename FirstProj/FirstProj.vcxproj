@@ -137,6 +137,7 @@
     <ClCompile Include="CamManager.cpp" />
     <ClCompile Include="ChessAnimation.cpp" />
     <ClCompile Include="ChessBoard.cpp" />
+    <ClCompile Include="FPSCounter.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -149,6 +150,7 @@
     <ClInclude Include="CamManager.h" />
     <ClInclude Include="ChessAnimation.h" />
     <ClInclude Include="ChessBoard.h" />
+    <ClInclude Include="FPSCounter.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Terrain.h" />

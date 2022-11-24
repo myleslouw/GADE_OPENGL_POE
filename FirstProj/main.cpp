@@ -17,6 +17,7 @@
 #include "CamManager.h"		//used for storing global instance of the camera 
 #include "ChessBoard.h"	//Generate the chessboard 
 #include "Terrain.h"	//Generates the heightmap data
+#include "FPSCounter.h"
 
 const float degreeToRadians = 3.14159265 / 100.0f;
 
@@ -25,6 +26,7 @@ Window mainWindow;
 //Terrain terrain;
 ChessBoard chessboard;
 Terrain heightmap;
+FPSCounter fpsCounter;
 
 GLfloat deltaTime = 0.0f;
 GLfloat lastTime = 0.0f;
@@ -52,6 +54,7 @@ int main()
 	chessboard.LoadMeshes();		//createobjects
 	chessboard.LoadShaders();		//createShaders
 
+	fpsCounter = FPSCounter();
 
 
 	//loop until window closed
@@ -74,8 +77,12 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
-
 		//-------------------------------------------------------------
+		//fps counter
+
+		fpsCounter.ShowFPS(mainWindow.getMainWindow(), glfwGetTime());
+
+
 		//generate heightmap/terrain
 		heightmap.GenerateTerrain(projection, globalCamera);
 
