@@ -57,7 +57,7 @@ private:
 #pragma region Light Structs
 
 	//Info for directional light
-	struct directional_Light_str
+	struct 
 	{
 		GLuint uniformColour;
 		GLuint uniformAmbient_Int;
@@ -68,7 +68,7 @@ private:
 
 	GLuint uniformPointLightCount;
 	//Info for Point Light 
-	struct point_Light_str
+	struct 
 	{
 		GLuint uniformColour;
 		GLuint uniformAmbient_Int;
@@ -82,7 +82,7 @@ private:
 
 	GLuint uniformSpotLightCount;
 	//Info for SpotLights
-	struct spot_Light_str
+	struct 
 	{
 		GLuint uniformColour;
 		GLuint uniformAmbient_Int;

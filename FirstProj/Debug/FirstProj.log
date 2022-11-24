@@ -1,6 +1,14 @@
 ﻿  ChessBoard.cpp
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\chessboard.cpp(23): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\chessboard.cpp(287): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  Shader.cpp
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.cpp(304): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.cpp(303): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.cpp(302): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.cpp(317): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.cpp(316): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.cpp(315): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.cpp(314): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
   main.cpp
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.h(17): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.h(18): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data

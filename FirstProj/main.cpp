@@ -88,7 +88,7 @@ int main()
 	heightmap.LoadMeshData();	//loads mesh data and creates the mesh object
 	heightmap.LoadShaderData();	//loads the shader data from our shader file
 
-		//CHESS BOARD STUFF HERE
+	//CHESS BOARD STUFF HERE
 	chessboard = ChessBoard();
 	chessboard.LoadMeshes();		//createobjects
 	chessboard.LoadShaders();		//createShaders

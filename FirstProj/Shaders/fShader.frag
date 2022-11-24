@@ -42,15 +42,15 @@ struct Material
 {
 	float specular_Intensity;
 	float shininess;
-}
+};
 
 uniform int pointLightCount;
 uniform int spotLightCount;
 
 //lighting
 uniform DirectionalLight directionalLight;
-uniform PointLight PointLights[MAX_POINT_LIGHTS];
-uniform SpotLight SpotLights[MAX_SPOT_LIGHTS];
+uniform PointLight pointLights[MAX_POINT_LIGHTS];
+uniform SpotLight spotLights[MAX_SPOT_LIGHTS];
 
 //texture sampler
 uniform sampler2D texture1;
@@ -83,12 +83,12 @@ vec4 CalcLightByDirection(Light light, vec3 direction)
 }
 vec4 CalcDirectionalLight()
 {
-	return CalcLightByDirection();
+	return CalcLightByDirection(directionalLight.base,directionalLight.direction);
 }
 
 vec4 CalcPointLight(PointLight pLight)
 {
-	vec3 distance = FragPos - pLight.position;
+	vec3 direction = FragPos - pLight.position;
 	float distance = length(direction);
 	direction = normalize(direction);
 
@@ -118,7 +118,7 @@ vec4 CalcPointLights()
 	vec4 totalColour = vec4(0,0,0,0);
 	for(int i =0; i<pointLightCount;i++)
 	{
-			totalColour+= CalcPointLight(PointLights[i]);
+			totalColour+= CalcPointLight(pointLights[i]);
 	}
 	return totalColour;
 }
@@ -128,7 +128,7 @@ vec4 CalcSpotLights()
 	vec4 totalColour = vec4(0,0,0,0);
 	for(int i =0; i<spotLightCount;i++)
 	{
-			totalColour+= CalcSpotLight(SpotLights[i]);
+			totalColour+= CalcSpotLight(spotLights[i]);
 	}
 	return totalColour;
 }
@@ -136,7 +136,9 @@ vec4 CalcSpotLights()
 void main()														
 {	
 	vec4 finalColour = CalcDirectionalLight();
-	finalColour += CalcPointLights();
-	finalColour += CalcSpotLights();
-	colour = texture(texture1,UV) * finalColour;																					
+	//finalColour += CalcPointLights();
+	//finalColour += CalcSpotLights();
+	//colour = texture(texture1,UV) * finalColour;	
+	//colour = texture(texture1,UV);	
+	colour = vCol*finalColour;												
 }
