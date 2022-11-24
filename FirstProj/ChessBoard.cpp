@@ -35,7 +35,7 @@ ChessBoard::ChessBoard()
 	chessAnimation = ChessAnimation();
 
 	//LoadMeshes();
-//	LoadShaders();
+	//LoadShaders();
 
 }
 
@@ -81,17 +81,17 @@ void ChessBoard::LoadMeshes()
 		-0.5,  0.5, -0.5,	0.0,2.0f,	0.0f,0.0f,0.0f,		//6 top left (top back)
 		 0.5,  0.5, -0.5,	1.0f,2.0f,	0.0f,0.0f,0.0f		//7 top right ( top back)
 	};
-	
-	meshIndices = cubeIndices;
-	meshVertices = CubeVertices;
 
-	CalculateAVGNormals(meshIndices,36,meshVertices,64,8,5);
+	//meshIndices = cubeIndices;
+//	meshVertices = CubeVertices;
+
+	CalculateAVGNormals(cubeIndices, 36, CubeVertices, 64, 8, 5);
 	//create obj
 	Mesh *cube = new Mesh();
 	//create obj mesh
-	cube->CreateMesh(&CubeVertices, meshIndices, sizeof(meshVertices), sizeof(meshIndices));
+	cube->CreateMesh(CubeVertices, cubeIndices, sizeof(CubeVertices), sizeof(cubeIndices));
 	//adds it to list of meshes
-	meshList.push_back(cube);	
+	meshList.push_back(cube);
 }
 
 void ChessBoard::LoadShaders()
@@ -199,7 +199,7 @@ void ChessBoard::CreateCellBlock(glm::mat4 worldProjection, Camera worldCam, int
 	////USED FOR CREATING ALL THE BLOCKS ON THE CHESSBOARD
 	//uses the shader given via params
 
-	
+
 	shaderList[shaderIndex]->useShader();		//glUseProgram
 	//glUniform1i(glGetUniformLocation(shaderList[shaderIndex]->shaderID, "texture"), 0);
 	//uniform stuff

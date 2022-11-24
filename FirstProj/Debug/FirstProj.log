@@ -1,11 +1,5 @@
 ﻿  ChessBoard.cpp
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\chessboard.cpp(23): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\chessboard.cpp(92): error C2664: 'void Mesh::CreateMesh(std::vector<float,std::allocator<_Ty>>,std::vector<unsigned int,std::allocator<unsigned int>>)': cannot convert argument 1 from 'GLfloat (*)[64]' to 'GLfloat *'
-          with
-          [
-              _Ty=float
-          ]
-  d:\gade7312_project_repo\gade_opengl_poe\firstproj\chessboard.cpp(92): note: Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\chessboard.cpp(287): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   main.cpp
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.h(17): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
@@ -16,3 +10,4 @@ d:\gade7312_project_repo\gade_opengl_poe\firstproj\terrain.h(79): warning C4101:
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\main.cpp(24): warning C4305: 'initializing': truncation from 'double' to 'float'
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\main.cpp(101): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
   Generating Code...
+  FirstProj.vcxproj -> D:\GADE7312_Project_repo\GADE_OpenGL_POE\Debug\FirstProj.exe

@@ -39,7 +39,7 @@ public:
 
 	void LoadShaders();
 
-	
+
 
 	void CreateBorderBlock(glm::mat4 worldProjection, Camera worldCam, int shaderIndex);
 
@@ -62,7 +62,7 @@ private:
 	const char* texture2;
 	const char* texture3;
 
-	
+
 
 	float GetRandomHeight();
 
