@@ -1,7 +1,7 @@
 #include "PointLight.h"
 PointLight::PointLight() : Light()
 {
-	position = glm::vec3(0.0f, 0.0f, 1.0f);
+	position = glm::vec3(0.0f, 0.0f, -1.0f);
 	constant = 1.0f;
 	linear = 0.0f;
 	exponent = 0.0f;

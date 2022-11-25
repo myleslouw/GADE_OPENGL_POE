@@ -17,8 +17,8 @@ ChessBoard::ChessBoard()
 	texture2 = "Textures/BrickSloppy_OG.png";
 	texture3 = "Textures/Pavement_OG.png";
 
-	//shinyMaterial = Material();
-	//dullMaterial = Material();
+	shinyMaterial = Material(1.0f,23);
+	dullMaterial = Material(0.4f,12);
 
 	lowestHeight = -20;
 	highestHeight = 70;
@@ -170,15 +170,15 @@ void ChessBoard::CreateBorderBlock(glm::mat4 worldProjection, Camera worldCam, i
 	uniformModel = shaderList[shaderIndex]->getModelLocation();
 	uniformProjection = shaderList[shaderIndex]->getProjectionLocation();
 	uniformView = shaderList[shaderIndex]->getViewLocation();
-	//uniformEyePos = shaderList[shaderIndex]->getEyePosition();
-	//uniformSpecular_Int = shaderList[shaderIndex]->getSpecularIntensityLocation();
-	//uniformShininess = shaderList[shaderIndex]->getShininessLocation();
+	uniformEyePos = shaderList[shaderIndex]->getEyePosition();
+	uniformSpecular_Int = shaderList[shaderIndex]->getSpecularIntensityLocation();
+	uniformShininess = shaderList[shaderIndex]->getShininessLocation();
 
 
 	//Lighting to shaderList
-	//shaderList[shaderIndex]->setDirectional_Light(&dLight);
-	//shaderList[shaderIndex]->setPoint_Lights(pLight, PLightCount);
-	//shaderList[shaderIndex]->setSpot_Lights(sLight, SLightCount);
+	shaderList[shaderIndex]->setDirectional_Light(&dLight);
+	shaderList[shaderIndex]->setPoint_Lights(pLight, PLightCount);
+	shaderList[shaderIndex]->setSpot_Lights(sLight, SLightCount);
 
 
 	//translation on identity matrix
@@ -196,8 +196,8 @@ void ChessBoard::CreateBorderBlock(glm::mat4 worldProjection, Camera worldCam, i
 	glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(worldCam.calculateViewMatrix()));
 
 	//Applying shiny specular
-	//glUniform3f(uniformEyePos, worldCam.getCameraPosition().x, worldCam.getCameraPosition().y, worldCam.getCameraPosition().z);
-	//shinyMaterial.UseMaterial(uniformSpecular_Int, uniformShininess);
+	glUniform3f(uniformEyePos, worldCam.getCameraPosition().x, worldCam.getCameraPosition().y, worldCam.getCameraPosition().z);
+	dullMaterial.UseMaterial(uniformSpecular_Int, uniformShininess);
 	//Textures
 	shaderList[shaderIndex]->UseTexture();
 
@@ -218,17 +218,17 @@ void ChessBoard::CreateCellBlock(glm::mat4 worldProjection, Camera worldCam, int
 	uniformModel = shaderList[shaderIndex]->getModelLocation();
 	uniformProjection = shaderList[shaderIndex]->getProjectionLocation();
 	uniformView = shaderList[shaderIndex]->getViewLocation();
-	//uniformEyePos = shaderList[shaderIndex]->getEyePosition();
-	//uniformSpecular_Int = shaderList[shaderIndex]->getSpecularIntensityLocation();
-	//uniformShininess = shaderList[shaderIndex]->getShininessLocation();
+	uniformEyePos = shaderList[shaderIndex]->getEyePosition();
+	uniformSpecular_Int = shaderList[shaderIndex]->getSpecularIntensityLocation();
+	uniformShininess = shaderList[shaderIndex]->getShininessLocation();
 
 	//glm::vec3 lowerLight = worldCam.getCameraPosition();
 	//lowerLight.y -= 0.3f;
 
 	//Lighting to shaderList
-	//shaderList[shaderIndex]->setDirectional_Light(&dLight);
-	//shaderList[shaderIndex]->setPoint_Lights(pLight, PLightCount);
-	//shaderList[shaderIndex]->setSpot_Lights(sLight, SLightCount);
+	shaderList[shaderIndex]->setDirectional_Light(&dLight);
+	shaderList[shaderIndex]->setPoint_Lights(pLight, PLightCount);
+	shaderList[shaderIndex]->setSpot_Lights(sLight, SLightCount);
 
 
 	//translation on identity matrix
@@ -246,8 +246,9 @@ void ChessBoard::CreateCellBlock(glm::mat4 worldProjection, Camera worldCam, int
 	glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(worldCam.calculateViewMatrix()));
 
 	//Applying the shiny Material
-	//glUniform3f(uniformEyePos, worldCam.getCameraPosition().x, worldCam.getCameraPosition().y, worldCam.getCameraPosition().z);
-	//shinyMaterial.UseMaterial(uniformSpecular_Int, uniformShininess);
+	glUniform3f(uniformEyePos, worldCam.getCameraPosition().x, worldCam.getCameraPosition().y, worldCam.getCameraPosition().z);
+	shinyMaterial.UseMaterial(uniformSpecular_Int, uniformShininess);
+
 
 	//Textures
 	shaderList[shaderIndex]->UseTexture();

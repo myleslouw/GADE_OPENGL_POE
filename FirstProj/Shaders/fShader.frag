@@ -126,9 +126,9 @@ vec4 CalcPointLights()
 vec4 CalcSpotLights()
 {
 	vec4 totalColour = vec4(0,0,0,0);
-	for(int i =0; i<spotLightCount;i++)
+	for(int i = 0; i<spotLightCount;i++)
 	{
-			totalColour+= CalcSpotLight(spotLights[i]);
+			totalColour += CalcSpotLight(spotLights[i]);
 	}
 	return totalColour;
 }
@@ -140,8 +140,7 @@ void main()
 	finalColour += CalcSpotLights();
 
 	colour = texture(texture1,UV);	
-	//colour = texture(texture1,UV);	
 	//colour = vec4(FragPos,0.1) *finalColour;
-	//colour = vCol * finalColour;	
+	//colour = vCol * finalColour;
 	//colour = finalColour;											
 }
