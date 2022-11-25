@@ -60,6 +60,9 @@ int main()
 
 	//loads textures into vector
 	std::vector<std::string> skyboxFaces;
+
+	//SKYBOX IMAGES (ONLY THIS WORKS, ALL OTHERS HAVE A SIDEWAYES TOP AND BOTTOM
+	//LAKE
 	skyboxFaces.push_back("Textures/Skybox/cupertin-lake_rt.tga");
 	skyboxFaces.push_back("Textures/Skybox/cupertin-lake_lf.tga");
 	skyboxFaces.push_back("Textures/Skybox/cupertin-lake_up.tga");

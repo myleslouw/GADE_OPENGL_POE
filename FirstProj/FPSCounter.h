@@ -10,6 +10,7 @@ public:
 
 private:
 	double prevTime, currentTime, timeDifference;
+
 	unsigned int counter;
 };
 
