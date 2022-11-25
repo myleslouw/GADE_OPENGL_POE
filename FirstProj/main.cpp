@@ -165,7 +165,7 @@ int main()
 		fpsCounter.ShowFPS(mainWindow.getMainWindow(), glfwGetTime());
 
 		//generate heightmap/terrain
-	//	heightmap.GenerateTerrain(projection, globalCamera);
+	heightmap.GenerateTerrain(projection, globalCamera);
 
 		//generates the chessboard
 		chessboard.GenerateChessBoard(projection, globalCamera, mainLight, pointLights, spotLights, 3, 3);
