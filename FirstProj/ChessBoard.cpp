@@ -222,6 +222,9 @@ void ChessBoard::CreateCellBlock(glm::mat4 worldProjection, Camera worldCam, int
 	uniformSpecular_Int = shaderList[shaderIndex]->getSpecularIntensityLocation();
 	uniformShininess = shaderList[shaderIndex]->getShininessLocation();
 
+	glm::vec3 lowerLight = worldCam.getCameraPosition();
+	lowerLight.y -= 0.3f;
+
 	//Lighting to shaderList
 	shaderList[shaderIndex]->setDirectional_Light(&dLight);
 	shaderList[shaderIndex]->setPoint_Lights(pLight, PLightCount);

@@ -60,7 +60,7 @@ int main()
 	chessboard.LoadShaders();		//createShaders
 
 	//ENGINE MATERIALS
-	nShinyMat = Material(1.0f,32);
+	nShinyMat = Material(1.0f, 32);
 	nDullMat = Material(0.3f, 4);
 
 
@@ -73,7 +73,7 @@ int main()
 #pragma region ENGINE LIGHTING
 	mainLight = DirectionalLight(1.0f, 1.0f, 1.0f,
 		0.0f, 0.0f,
-		0.0f, 0.0f, -1.0f);
+		0.0f, 0.0f, 2.0f);
 
 	//POINT LIGHT
 	unsigned int pointLightCount = 0;
@@ -81,13 +81,13 @@ int main()
 		0.0f, 1.0f, 0.0f,
 		0.0f, 0.0f, 0.3f,
 		0.2f, 0.1f);
-	pointLightCount++; //comment this line of code to see the spot light in the scene
+	//pointLightCount++; //comment this line of code to see the spot light in the scene
 
 	pointLights[1] = PointLight(1.0f, 1.0f, 0.0f,
 		0.0f, 1.0f, -4.0f,
 		2.0f, 0.0f, 0.3f,
 		0.1f, 0.1f);
-	pointLightCount++;
+	//pointLightCount++;
 
 	unsigned int spotLightCount = 0;
 
@@ -96,14 +96,14 @@ int main()
 		0.0f, 0.0f, 0.0f,
 		-1.0f, 0.0f, 1.0f,
 		0.0f, 0.0f, 20.0f);
-	spotLightCount++;
+	//	spotLightCount++;
 
 	spotLights[1] = SpotLight(1.0f, 1.0f, 1.0f,
 		0.0f, 1.0f, 0.0f,
 		-1.5f, 0.0f, -100.0f,
 		-1.0f, 0.0f, 1.0f,
 		0.0f, 0.0f, 20.0f);
-	spotLightCount++;
+	//spotLightCount++;
 #pragma endregion
 
 	glm::mat4 projection = glm::perspective(glm::radians(45.0f), mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 100.0f);
@@ -136,28 +136,28 @@ int main()
 		heightmap.GenerateTerrain(projection, globalCamera);
 
 		//generates the chessboard
-		chessboard.GenerateChessBoard(projection, globalCamera, mainLight, pointLights, spotLights, pointLightCount, spotLightCount);
-	//	nShinyMat.UseMaterial(chessboard.uniformSpecular_Int,chessboard.uniformShininess);
+		chessboard.GenerateChessBoard(projection, globalCamera, mainLight, pointLights, spotLights, 0, 0);
+		//	nShinyMat.UseMaterial(chessboard.uniformSpecular_Int,chessboard.uniformShininess);
 
 #pragma region ChessBoard Lighting
 		//adding lighting to the specfic shader of an object in the scene
 
 		//WHITE BLOCK shader
 		/*chessboard.shaderList[0]->setDirectional_Light(&mainLight);
-		chessboard.shaderList[0]->setPoint_Light(pointLights, pointLightCount);
-		chessboard.shaderList[0]->setSpot_Light(spotLights, spotLightCount);
+		chessboard.shaderList[0]->setPoint_Lights(pointLights, pointLightCount);
+		chessboard.shaderList[0]->setSpot_Lights(spotLights, spotLightCount);
 
 		//BLACK BLOCK shader
 		chessboard.shaderList[1]->setDirectional_Light(&mainLight);
-		chessboard.shaderList[1]->setPoint_Light(pointLights, pointLightCount);
-		chessboard.shaderList[1]->setSpot_Light(spotLights, spotLightCount);*/
+		chessboard.shaderList[1]->setPoint_Lights(pointLights, pointLightCount);
+		chessboard.shaderList[1]->setSpot_Lights(spotLights, spotLightCount);
 
 		//BORDER block shader
-		/*chessboard.shaderList[2]->setDirectional_Light(&mainLight);
+		chessboard.shaderList[2]->setDirectional_Light(&mainLight);
 		chessboard.shaderList[2]->setPoint_Lights(pointLights, pointLightCount);
 		chessboard.shaderList[2]->setSpot_Lights(spotLights, spotLightCount);*/
 #pragma endregion
-		chessboard.AnimateChessPieces(projection, globalCamera, deltaTime,mainLight,pointLights,spotLights,pointLightCount,spotLightCount);
+		chessboard.AnimateChessPieces(projection, globalCamera, deltaTime, mainLight, pointLights, spotLights, 0, 0);
 		//------------------------------------------------------------------
 
 		glUseProgram(0);	//unassigning the shader

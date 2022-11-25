@@ -138,8 +138,10 @@ void main()
 	vec4 finalColour = CalcDirectionalLight();
 	finalColour += CalcPointLights();
 	finalColour += CalcSpotLights();
-	//colour = texture(texture1,UV) * finalColour;	
-	//colour = finalColour;
+
+	colour = texture(texture1,UV);	
 	//colour = texture(texture1,UV);	
-	colour = vec4(FragPos,1.0);												
+	//colour = vec4(FragPos,0.1) *finalColour;
+	//colour = vCol * finalColour;	
+	//colour = finalColour;											
 }
