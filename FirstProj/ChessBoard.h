@@ -17,13 +17,22 @@
 #include "Shader.h"
 #include "Camera.h"
 #include "ChessAnimation.h"
+#include "Material.h"
 
-class ChessBoard
+class ChessBoard 
 {
 public:
 	//list of obj meshes and list of shaders available
 	std::vector<Mesh*> meshList;		//0 - cube
 	std::vector<Shader*> shaderList;	//0 - white, 1 - black,  2 - grey for border
+
+	GLuint	uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformEyePos = 0, uniformSpecular_Int = 0, uniformShininess = 0;
+
+	GLfloat* meshVertices;
+	unsigned int* meshIndices;
+
+	Material shinyMaterial;
+	Material dullMaterial;
 
 	ChessAnimation chessAnimation;
 
@@ -33,13 +42,19 @@ public:
 
 	void LoadShaders();
 
-	void CreateBorderBlock(glm::mat4 worldProjection, Camera worldCam, int shaderIndex);
 
-	void CreateCellBlock(glm::mat4 worldProjection, Camera worldCam, int shaderIndex, glm::vec3 pos, glm::vec3 scale);
 
-	void GenerateChessBoard(glm::mat4 worldProjection, Camera worldCam);
+	void CreateBorderBlock(glm::mat4 worldProjection, Camera worldCam, int shaderIndex, DirectionalLight dLight, PointLight* pLight, SpotLight* sLight,
+						   unsigned int PLightCount, unsigned int SLightCount);
 
-	void AnimateChessPieces(glm::mat4 worldProjection, Camera worldCam, GLfloat deltaTime);
+	void CreateCellBlock(glm::mat4 worldProjection, Camera worldCam, int shaderIndex, DirectionalLight dLight, PointLight* pLight, SpotLight* sLight,
+						 unsigned int PLightCount, unsigned int SLightCount, glm::vec3 pos, glm::vec3 scale);
+
+	void GenerateChessBoard(glm::mat4 worldProjection, Camera worldCam, DirectionalLight dLight, PointLight* pLight, SpotLight* sLight,
+							unsigned int PLightCount, unsigned int SLightCount);
+
+	void AnimateChessPieces(glm::mat4 worldProjection, Camera worldCam, GLfloat deltaTime, DirectionalLight dLight, PointLight* pLight, SpotLight* sLight,
+							unsigned int PLightCount, unsigned int SLightCount);
 
 
 	~ChessBoard();
@@ -54,10 +69,14 @@ private:
 	const char* texture2;
 	const char* texture3;
 
+
+
 	float GetRandomHeight();
 
-	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0;
+	//GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformEyePos = 0, uniformSpecular_Int = 0, uniformShininess = 0;
 
+	void CalculateAVGNormals(unsigned int* indices, unsigned int indiceCount, GLfloat* vertices,
+		unsigned int verticeCount, unsigned int vLength, unsigned int normalOffset);
 	glm::mat4 model;
 
 	//array for a 8 by 8 grid of random heights

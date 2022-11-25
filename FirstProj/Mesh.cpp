@@ -15,11 +15,10 @@ Mesh::Mesh()
 	indexCount = 0;
 }
 
+//Custom method for the basic mesh 
 void Mesh::CreateMesh(GLfloat* vertices, unsigned int* indices, unsigned int numVertices, unsigned int numIndices)
 {
 	indexCount = numIndices;
-
-
 	//generates a vertex array with the VBO
 	glGenVertexArrays(1, &VAO);
 	//binds it
@@ -51,23 +50,41 @@ void Mesh::CreateMesh(GLfloat* vertices, unsigned int* indices, unsigned int num
    //Stride(take a vertex value and skip n amount)
    // Offset(where the data starts))
 	//Vertex attributes
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 	//                     \\
  	//                      \\   
 	//enable Attribute 0     \/
 	glEnableVertexAttribArray(0);
 	//texture Attributes
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
 	//                     \\
  	//                      \\   
 	//enable Attribute 1     \/
 	glEnableVertexAttribArray(1);
+
+	//Normal attributes
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(5 * sizeof(float)));
+	//                     \\
+ 	//                      \\   
+	//enable Attribute 2     \/
+	glEnableVertexAttribArray(2);
+
+
 	//unbinding
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 
 	glBindVertexArray(0);
+
+
+#pragma region Calculating Normals
+	//CalcualteAVGNormals(indices, numIndices, vertices, numVertices, 8, 5);
+#pragma endregion
+
+
+
+
 }
 
 //Custom VAO buffers for the Terrain 
@@ -97,6 +114,9 @@ void Mesh::CreateMesh(std::vector<float> Verts, std::vector<unsigned> Inds)
 	//unbind buffers
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+
+
 }
 
 void Mesh::CreateSkyboxMesh(GLfloat *vertices, unsigned int *indices, unsigned int numOfVertices, unsigned int numOfIndices)
