@@ -5,6 +5,9 @@ ChessBoard::ChessBoard()
 	uniformProjection = 0;
 	uniformModel = 0;
 	uniformView = 0;
+	uniformEyePos = 0;
+	uniformSpecular_Int = 0;
+	uniformShininess = 0;
 	vColourShader = "Shaders/vColourShader.vert";
 	vWhiteShader = "Shaders/vWhiteShader.vert";
 	vBorderShader = "Shaders/vBorderShader.vert";
@@ -14,8 +17,8 @@ ChessBoard::ChessBoard()
 	texture2 = "Textures/BrickSloppy_OG.png";
 	texture3 = "Textures/Pavement_OG.png";
 
-	shinyMaterial = Material(1.0f, 32);
-	dullMaterial = Material(0.3f, 4);
+	//shinyMaterial = Material();
+	//dullMaterial = Material();
 
 	lowestHeight = -20;
 	highestHeight = 70;
@@ -156,19 +159,27 @@ void ChessBoard::CalculateAVGNormals(unsigned int * indices, unsigned int indice
 }
 
 //Creates the base that the chess board will be on 
-void ChessBoard::CreateBorderBlock(glm::mat4 worldProjection, Camera worldCam, int shaderIndex)
+void ChessBoard::CreateBorderBlock(glm::mat4 worldProjection, Camera worldCam, int shaderIndex, DirectionalLight dLight, PointLight* pLight, SpotLight* sLight,
+	unsigned int PLightCount, unsigned int SLightCount)
 {
 	//THIS IS ONLY USED FOR BORDER
 	//gets the shader from the param
-	//shaderList[shaderIndex]->LoadTexture(texture3);
+
 	shaderList[shaderIndex]->useShader();		//glUseProgram
-	//glUniform1i(glGetUniformLocation(shaderList[shaderIndex]->shaderID, "texture"), 0);
-	//uniforms
+
 	uniformModel = shaderList[shaderIndex]->getModelLocation();
 	uniformProjection = shaderList[shaderIndex]->getProjectionLocation();
 	uniformView = shaderList[shaderIndex]->getViewLocation();
 	uniformEyePos = shaderList[shaderIndex]->getEyePosition();
 	uniformSpecular_Int = shaderList[shaderIndex]->getSpecularIntensityLocation();
+	uniformShininess = shaderList[shaderIndex]->getShininessLocation();
+
+
+	//Lighting to shaderList
+	shaderList[shaderIndex]->setDirectional_Light(&dLight);
+	shaderList[shaderIndex]->setPoint_Lights(pLight, PLightCount);
+	shaderList[shaderIndex]->setSpot_Lights(sLight, SLightCount);
+
 
 	//translation on identity matrix
 	model = glm::mat4(1.0f);
@@ -190,15 +201,16 @@ void ChessBoard::CreateBorderBlock(glm::mat4 worldProjection, Camera worldCam, i
 	//Textures
 	shaderList[shaderIndex]->UseTexture();
 
+
 	//renders the first element which is the border
 	meshList[0]->renderMesh();
 }
 
-void ChessBoard::CreateCellBlock(glm::mat4 worldProjection, Camera worldCam, int shaderIndex, glm::vec3 pos, glm::vec3 scale)
+void ChessBoard::CreateCellBlock(glm::mat4 worldProjection, Camera worldCam, int shaderIndex, DirectionalLight dLight, PointLight* pLight, SpotLight* sLight,
+	unsigned int PLightCount, unsigned int SLightCount, glm::vec3 pos, glm::vec3 scale)
 {
 	////USED FOR CREATING ALL THE BLOCKS ON THE CHESSBOARD
 	//uses the shader given via params
-
 
 	shaderList[shaderIndex]->useShader();		//glUseProgram
 	//glUniform1i(glGetUniformLocation(shaderList[shaderIndex]->shaderID, "texture"), 0);
@@ -208,6 +220,13 @@ void ChessBoard::CreateCellBlock(glm::mat4 worldProjection, Camera worldCam, int
 	uniformView = shaderList[shaderIndex]->getViewLocation();
 	uniformEyePos = shaderList[shaderIndex]->getEyePosition();
 	uniformSpecular_Int = shaderList[shaderIndex]->getSpecularIntensityLocation();
+	uniformShininess = shaderList[shaderIndex]->getShininessLocation();
+
+	//Lighting to shaderList
+	shaderList[shaderIndex]->setDirectional_Light(&dLight);
+	shaderList[shaderIndex]->setPoint_Lights(pLight, PLightCount);
+	shaderList[shaderIndex]->setSpot_Lights(sLight, SLightCount);
+
 
 	//translation on identity matrix
 	model = glm::mat4(1.0f);
@@ -233,13 +252,14 @@ void ChessBoard::CreateCellBlock(glm::mat4 worldProjection, Camera worldCam, int
 	meshList[0]->renderMesh();
 }
 
-void ChessBoard::GenerateChessBoard(glm::mat4 worldProjection, Camera worldCam)
+void ChessBoard::GenerateChessBoard(glm::mat4 worldProjection, Camera worldCam, DirectionalLight dLight, PointLight* pLight, SpotLight* sLight,
+									unsigned int PLightCount, unsigned int SLightCount)
 {
 	//THIS RENDERS ALL THE ITEMS FOR THE CHESS BOARD
 
 	//1st
 	//border
-	CreateBorderBlock(worldProjection, worldCam, 2);
+	CreateBorderBlock(worldProjection, worldCam, 2, dLight, pLight, sLight, PLightCount, SLightCount);
 
 	//2nd
 	//8 by 8 grid of blocks
@@ -260,18 +280,20 @@ void ChessBoard::GenerateChessBoard(glm::mat4 worldProjection, Camera worldCam)
 			float height = 0; //rndmHeights[i][j];
 
 			//renders the block with the correct info										//1 by 1 by 1 block 
-			CreateCellBlock(worldProjection, worldCam, shaderNum, glm::vec3(x, height, z), glm::vec3(1, 1, 1));
+			CreateCellBlock(worldProjection, worldCam, shaderNum, dLight, pLight, sLight, PLightCount, SLightCount,
+							glm::vec3(x, height, z), glm::vec3(1, 1, 1));
 		}
 	}
 }
 
-void ChessBoard::AnimateChessPieces(glm::mat4 worldProjection, Camera worldCam, GLfloat deltaTime)
+void ChessBoard::AnimateChessPieces(glm::mat4 worldProjection, Camera worldCam, GLfloat deltaTime, DirectionalLight dLight, PointLight* pLight, SpotLight* sLight,	
+									unsigned int PLightCount, unsigned int SLightCount)
 {
 	//draws the pieces
 	//the position param is taken from the vec3 array and those are changed to move the pieces
 	for (size_t i = 0; i < 16; i++)
 	{
-		CreateCellBlock(worldProjection, worldCam, 2, glm::vec3(chessAnimation.chessPieces[i].x, chessAnimation.chessPieces[i].y, chessAnimation.chessPieces[i].z), glm::vec3(0.5, 1, 0.5));
+		CreateCellBlock(worldProjection, worldCam, 2,dLight,pLight,sLight,PLightCount,SLightCount, glm::vec3(chessAnimation.chessPieces[i].x, chessAnimation.chessPieces[i].y, chessAnimation.chessPieces[i].z), glm::vec3(0.5, 1, 0.5));
 	}
 
 	//animation cycle

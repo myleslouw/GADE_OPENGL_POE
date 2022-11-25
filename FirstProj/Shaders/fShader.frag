@@ -6,7 +6,7 @@ in vec3 FragPos;
 
 out vec4 colour;
 
-const int MAX_POINT_LIGHTS =3;
+const int MAX_POINT_LIGHTS = 3;
 const int MAX_SPOT_LIGHTS = 3;
 
 struct Light
@@ -116,9 +116,9 @@ vec4 CalcSpotLight(SpotLight sLight)
 vec4 CalcPointLights()
 {
 	vec4 totalColour = vec4(0,0,0,0);
-	for(int i =0; i<pointLightCount;i++)
+	for(int i = 0; i<pointLightCount;i++)
 	{
-			totalColour+= CalcPointLight(pointLights[i]);
+			totalColour += CalcPointLight(pointLights[i]);
 	}
 	return totalColour;
 }
@@ -136,9 +136,10 @@ vec4 CalcSpotLights()
 void main()														
 {	
 	vec4 finalColour = CalcDirectionalLight();
-	//finalColour += CalcPointLights();
-	//finalColour += CalcSpotLights();
+	finalColour += CalcPointLights();
+	finalColour += CalcSpotLights();
 	//colour = texture(texture1,UV) * finalColour;	
+	//colour = finalColour;
 	//colour = texture(texture1,UV);	
-	colour = vCol*finalColour;												
+	colour = vec4(FragPos,1.0);												
 }

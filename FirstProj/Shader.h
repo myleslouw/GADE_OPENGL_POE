@@ -42,8 +42,8 @@ public:
 #pragma endregion
 
 	void setDirectional_Light(DirectionalLight* dLight);
-	void setPoint_Light(PointLight* pLight, unsigned int lightCount);
-	void setSpot_Light(SpotLight* sLight, unsigned int lightCount);
+	void setPoint_Lights(PointLight* pLight, unsigned int lightCount);
+	void setSpot_Lights(SpotLight* sLight, unsigned int lightCount);
 
 	void useShader();
 	void clearShader();
@@ -61,7 +61,7 @@ private:
 	{
 		GLuint uniformColour;
 		GLuint uniformAmbient_Int;
-		GLuint uniformDiffuse_int;
+		GLuint uniformDiffuse_Int;
 		GLuint uniformDirection;
 
 	} unifomDirectionalLight;
@@ -72,7 +72,7 @@ private:
 	{
 		GLuint uniformColour;
 		GLuint uniformAmbient_Int;
-		GLuint uniformDiffuse_int;
+		GLuint uniformDiffuse_Int;
 
 		GLuint uniformPosition;
 		GLuint uniformConstant;
