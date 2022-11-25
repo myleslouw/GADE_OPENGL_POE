@@ -75,11 +75,11 @@ vec4 CalcLightByDirection(Light light, vec3 direction)
 		if(specularFactor > 0.0f)
 		{
 			specularFactor = pow(specularFactor,material.shininess);
-			specularColour = vec4(light.colour*material.specular_Intensity*specularFactor,1.0f);
+			specularColour = vec4(light.colour * material.specular_Intensity * specularFactor,1.0f);
 		}
 	}
 
-	return (ambientColour+ diffuseColour + specularColour);
+	return (ambientColour + diffuseColour + specularColour);
 }
 vec4 CalcDirectionalLight()
 {
@@ -126,9 +126,9 @@ vec4 CalcPointLights()
 vec4 CalcSpotLights()
 {
 	vec4 totalColour = vec4(0,0,0,0);
-	for(int i =0; i<spotLightCount;i++)
+	for(int i = 0; i<spotLightCount;i++)
 	{
-			totalColour+= CalcSpotLight(spotLights[i]);
+			totalColour += CalcSpotLight(spotLights[i]);
 	}
 	return totalColour;
 }
@@ -139,9 +139,7 @@ void main()
 	finalColour += CalcPointLights();
 	finalColour += CalcSpotLights();
 
-	colour = texture(texture1,UV);	
+	//colour = vec4(FragPos,1.0) * finalColour;
 	//colour = texture(texture1,UV);	
-	//colour = vec4(FragPos,0.1) *finalColour;
-	//colour = vCol * finalColour;	
-	//colour = finalColour;											
+	colour = texture(texture1,UV) * finalColour;
 }

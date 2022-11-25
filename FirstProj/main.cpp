@@ -77,39 +77,44 @@ int main()
 	globalCamera = Camera(glm::vec3(0.0f, 10.0f, 10.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, -45.0f, 2.0f, 0.5f);
 
 #pragma region ENGINE LIGHTING
-	mainLight = DirectionalLight(1.0f, 1.0f, 1.0f,
-		0.0f, 0.0f,
-		0.0f, 0.0f, 2.0f);
+	mainLight = DirectionalLight(1.0f, 1.0f, 1.0f,	//RBG
+								0.0f, 0.0f,			//Ambient and Diffuse Intensity
+								0.0f, 0.0f, -1.0f);	//xyz Direction
 
 	//POINT LIGHT
 	unsigned int pointLightCount = 0;
-	pointLights[0] = PointLight(0.0f, 1.0f, 1.0f,
-		0.0f, 1.0f, 0.0f,
-		0.0f, 0.0f, 0.3f,
-		0.2f, 0.1f);
-	//pointLightCount++; //comment this line of code to see the spot light in the scene
+	pointLights[0] = PointLight(0.0f, 1.0f, 1.0f,	//RBG
+								0.0f, 1.0f,			//Ambient and Diffuse Intensity
+								3.0f, 0.0f, 0.0f,	//xyz Position
+								0.3f,0.2f, 0.1f);	//con, lin, exp
 
-	pointLights[1] = PointLight(1.0f, 1.0f, 0.0f,
-		0.0f, 1.0f, -4.0f,
-		2.0f, 0.0f, 0.3f,
-		0.1f, 0.1f);
-	//pointLightCount++;
+	pointLightCount++; //comment this line of code to see the spot light in the scene
+	
+
+	pointLights[1] = PointLight(1.0f, 1.0f, 0.0f,	//RBG
+								0.0f, 1.0f,			//Ambient and Diffuse Intensity
+								-4.0f, 0.0f, 0.0f,	//xyz Position
+								0.3f, 0.1f, 0.1f);	//con, lin, exp
+	pointLightCount++;
 
 	unsigned int spotLightCount = 0;
 
-	spotLights[0] = SpotLight(1.0f, 1.0f, 1.0f,
-		0.0f, 2.0f, 0.0f,
-		0.0f, 0.0f, 0.0f,
-		-1.0f, 0.0f, 1.0f,
-		0.0f, 0.0f, 20.0f);
-	//	spotLightCount++;
+	spotLights[0] = SpotLight(1.0f, 1.0f, 1.0f,		//RBG
+							  0.0f, 2.0f,			//Ambient and Diffuse Intensity
+							  0.0f, 0.0f, 0.0f,		//xyz Position
+							  0.0f,-1.0f, 0.0f,		//xyz Direction
+							  1.0f, 0.0f, 0.0f,		//con, lin, exp
+							  30.0f);				//edges
+	spotLightCount++;
 
-	spotLights[1] = SpotLight(1.0f, 1.0f, 1.0f,
-		0.0f, 1.0f, 0.0f,
-		-1.5f, 0.0f, -100.0f,
-		-1.0f, 0.0f, 1.0f,
-		0.0f, 0.0f, 20.0f);
-	//spotLightCount++;
+	spotLights[1] = SpotLight(1.0f, 1.0f, 1.0f,		//RGB
+							  0.0f, 1.0f,			//Ambient and Diffuse Intesity
+							  0.0f,-1.5f, 0.0f,		//xyz Position
+							 -100.0f,-1.0f, 0.0f,	//xyz Direction
+							  1.0f, 0.0f, 0.0f,		//con, lin, exp
+							  45.0f);				//edges
+//	spotLightCount++;
+	
 #pragma endregion
 
 	glm::mat4 projection = glm::perspective(glm::radians(45.0f), mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 100.0f);
@@ -120,6 +125,7 @@ int main()
 
 	//SKYBOX IMAGES (ONLY THIS WORKS, ALL OTHERS HAVE A SIDEWAYES TOP AND BOTTOM
 	//LAKE
+#pragma region SKY BOX CODE
 	skyboxFaces.push_back("Textures/Skybox/cupertin-lake_rt.tga");
 	skyboxFaces.push_back("Textures/Skybox/cupertin-lake_lf.tga");
 	skyboxFaces.push_back("Textures/Skybox/cupertin-lake_up.tga");
@@ -128,6 +134,7 @@ int main()
 	skyboxFaces.push_back("Textures/Skybox/cupertin-lake_ft.tga");
 
 	skybox = SkyBox(skyboxFaces);
+#pragma endregion
 
 	//loop until window closed
 	while (!mainWindow.getShouldClose())
@@ -157,31 +164,13 @@ int main()
 
 		fpsCounter.ShowFPS(mainWindow.getMainWindow(), glfwGetTime());
 
-
 		//generate heightmap/terrain
-		heightmap.GenerateTerrain(projection, globalCamera);
+	//	heightmap.GenerateTerrain(projection, globalCamera);
 
 		//generates the chessboard
-		chessboard.GenerateChessBoard(projection, globalCamera, mainLight, pointLights, spotLights, 0, 0);
+		chessboard.GenerateChessBoard(projection, globalCamera, mainLight, pointLights, spotLights, 3, 3);
 
-#pragma region ChessBoard Lighting
-		//adding lighting to the specfic shader of an object in the scene
-
-		//WHITE BLOCK shader
-		/*chessboard.shaderList[0]->setDirectional_Light(&mainLight);
-		chessboard.shaderList[0]->setPoint_Lights(pointLights, pointLightCount);
-		chessboard.shaderList[0]->setSpot_Lights(spotLights, spotLightCount);
-		//BLACK BLOCK shader
-		chessboard.shaderList[1]->setDirectional_Light(&mainLight);
-		chessboard.shaderList[1]->setPoint_Lights(pointLights, pointLightCount);
-		chessboard.shaderList[1]->setSpot_Lights(spotLights, spotLightCount);
-		//BORDER block shader
-		chessboard.shaderList[2]->setDirectional_Light(&mainLight);
-		chessboard.shaderList[2]->setPoint_Lights(pointLights, pointLightCount);
-		chessboard.shaderList[2]->setSpot_Lights(spotLights, spotLightCount);*/
-#pragma endregion
-
-		chessboard.AnimateChessPieces(projection, globalCamera, deltaTime, mainLight, pointLights, spotLights, 0, 0);
+		chessboard.AnimateChessPieces(projection, globalCamera, deltaTime, mainLight, pointLights, spotLights, 3, 3);
 		//------------------------------------------------------------------
 
 		glUseProgram(0);	//unassigning the shader
