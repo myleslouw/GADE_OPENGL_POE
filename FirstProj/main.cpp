@@ -19,6 +19,10 @@
 #include "Terrain.h"	//Generates the heightmap data
 #include "FPSCounter.h"	//fps counter
 #include "SkyBox.h"		//skybox
+#include "Material.h" //Materials for the objects in scene
+#include "DirectionalLight.h" //Generates the mainlight in the scene
+#include "PointLight.h" //Generates the PointLight for the scene
+#include "SpotLight.h"	//Generate the SpotLight for the scene
 
 const float degreeToRadians = 3.14159265 / 100.0f;
 
@@ -30,6 +34,15 @@ Terrain heightmap;
 FPSCounter fpsCounter;
 SkyBox skybox;
 
+Material nShinyMat;
+Material nDullMat;
+
+//Lighting objects
+DirectionalLight mainLight;
+
+PointLight pointLights[MAX_POINT_LIGHTS];
+SpotLight spotLights[MAX_SPOT_LIGHT];
+
 GLfloat deltaTime = 0.0f;
 GLfloat lastTime = 0.0f;
 
@@ -39,11 +52,7 @@ int main()
 	mainWindow = Window(800, 600);
 	mainWindow.Initialise();
 
-	//CAMERA HERE
-	//sets the global instance to the current scene camera
-	globalCamera = Camera(glm::vec3(0.0f, 10.0f, 10.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, -45.0f, 2.0f, 0.5f);
 
-	glm::mat4 projection = glm::perspective(glm::radians(45.0f), mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 100.0f);
 
 	heightmap = Terrain();
 
@@ -57,6 +66,54 @@ int main()
 	chessboard.LoadShaders();		//createShaders
 
 	fpsCounter = FPSCounter();
+
+	//ENGINE MATERIALS
+	nShinyMat = Material(1.0f, 32);
+	nDullMat = Material(0.3f, 4);
+
+
+	//CAMERA HERE
+	//sets the global instance to the current scene camera
+	globalCamera = Camera(glm::vec3(0.0f, 10.0f, 10.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, -45.0f, 2.0f, 0.5f);
+
+#pragma region ENGINE LIGHTING
+	mainLight = DirectionalLight(1.0f, 1.0f, 1.0f,
+		0.0f, 0.0f,
+		0.0f, 0.0f, 2.0f);
+
+	//POINT LIGHT
+	unsigned int pointLightCount = 0;
+	pointLights[0] = PointLight(0.0f, 1.0f, 1.0f,
+		0.0f, 1.0f, 0.0f,
+		0.0f, 0.0f, 0.3f,
+		0.2f, 0.1f);
+	//pointLightCount++; //comment this line of code to see the spot light in the scene
+
+	pointLights[1] = PointLight(1.0f, 1.0f, 0.0f,
+		0.0f, 1.0f, -4.0f,
+		2.0f, 0.0f, 0.3f,
+		0.1f, 0.1f);
+	//pointLightCount++;
+
+	unsigned int spotLightCount = 0;
+
+	spotLights[0] = SpotLight(1.0f, 1.0f, 1.0f,
+		0.0f, 2.0f, 0.0f,
+		0.0f, 0.0f, 0.0f,
+		-1.0f, 0.0f, 1.0f,
+		0.0f, 0.0f, 20.0f);
+	//	spotLightCount++;
+
+	spotLights[1] = SpotLight(1.0f, 1.0f, 1.0f,
+		0.0f, 1.0f, 0.0f,
+		-1.5f, 0.0f, -100.0f,
+		-1.0f, 0.0f, 1.0f,
+		0.0f, 0.0f, 20.0f);
+	//spotLightCount++;
+#pragma endregion
+
+	glm::mat4 projection = glm::perspective(glm::radians(45.0f), mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 100.0f);
+
 
 	//loads textures into vector
 	std::vector<std::string> skyboxFaces;
@@ -105,9 +162,26 @@ int main()
 		heightmap.GenerateTerrain(projection, globalCamera);
 
 		//generates the chessboard
-		chessboard.GenerateChessBoard(projection, globalCamera);
+		chessboard.GenerateChessBoard(projection, globalCamera, mainLight, pointLights, spotLights, 0, 0);
 
-		chessboard.AnimateChessPieces(projection, globalCamera, deltaTime);
+#pragma region ChessBoard Lighting
+		//adding lighting to the specfic shader of an object in the scene
+
+		//WHITE BLOCK shader
+		/*chessboard.shaderList[0]->setDirectional_Light(&mainLight);
+		chessboard.shaderList[0]->setPoint_Lights(pointLights, pointLightCount);
+		chessboard.shaderList[0]->setSpot_Lights(spotLights, spotLightCount);
+		//BLACK BLOCK shader
+		chessboard.shaderList[1]->setDirectional_Light(&mainLight);
+		chessboard.shaderList[1]->setPoint_Lights(pointLights, pointLightCount);
+		chessboard.shaderList[1]->setSpot_Lights(spotLights, spotLightCount);
+		//BORDER block shader
+		chessboard.shaderList[2]->setDirectional_Light(&mainLight);
+		chessboard.shaderList[2]->setPoint_Lights(pointLights, pointLightCount);
+		chessboard.shaderList[2]->setSpot_Lights(spotLights, spotLightCount);*/
+#pragma endregion
+
+		chessboard.AnimateChessPieces(projection, globalCamera, deltaTime, mainLight, pointLights, spotLights, 0, 0);
 		//------------------------------------------------------------------
 
 		glUseProgram(0);	//unassigning the shader

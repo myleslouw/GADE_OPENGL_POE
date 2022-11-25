@@ -1,2 +1,3 @@
-﻿  SkyBox.cpp
+﻿  Mesh.cpp
+c:\users\myles\desktop\openglroot\github\gade_opengl_poe\firstproj\mesh.cpp(171): warning C4018: '<': signed/unsigned mismatch
   FirstProj.vcxproj -> C:\Users\Myles\Desktop\OpenGLRoot\Github\GADE_OpenGL_POE\Debug\FirstProj.exe
