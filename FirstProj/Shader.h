@@ -11,10 +11,11 @@ class Shader
 {
 public:
 	unsigned int texTure;
-	GLuint shaderID, uniformProjection, uniformModel, uniformView;
+	GLuint shaderID, uniformProjection, uniformModel, uniformView, uniformTexture;
 	Shader();
 
 	void CreateFromFiles(const char* vertexLocation, const char* fragmentLocation);
+	void CreateSkyboxFromFiles(const char* vertexLocation, const char* fragmentLocation);
 
 	void LoadTexture(const char* fileLocation);
 	void UseTexture();
@@ -25,6 +26,7 @@ public:
 	GLuint getViewLocation();
 	void useShader();
 	void clearShader();
+	void Validate();
 
 	~Shader();
 
@@ -32,6 +34,9 @@ private:
 	//GLuint shaderID, uniformProjection, uniformModel, uniformView;
 
 	void compileShader(const char* vertexCode, const char* fragmentCode);
+	void compileSkyboxShader(const char* vertexCode, const char* fragmentCode);
 	void addShader(GLuint theProgram, const char* shaderCode, GLenum shaderType);
+
+	void compileProgram();
 };
 

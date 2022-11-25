@@ -18,6 +18,16 @@ void Shader::CreateFromFiles(const char* vertexLocation, const char* fragmentLoc
 
 	compileShader(vertexCode, fragmentCode);
 }
+
+void Shader::CreateSkyboxFromFiles(const char* vertexLocation, const char* fragmentLocation)
+{
+	std::string vertexString = ReadFile(vertexLocation);
+	std::string fragmentString = ReadFile(fragmentLocation);
+	const char* vertexCode = vertexString.c_str();
+	const char* fragmentCode = fragmentString.c_str();
+
+	compileSkyboxShader(vertexCode, fragmentCode);
+}
 //Method used to call texture from File
 void Shader::LoadTexture(const char* fileLocation)
 {
@@ -151,6 +161,43 @@ void Shader::compileShader(const char* vertexCode, const char* fragmentCode)
 
 }
 
+void Shader::compileSkyboxShader(const char* vertexCode, const char* fragmentCode)
+{
+	shaderID = glCreateProgram();
+
+	if (!shaderID)
+	{
+		printf("Error creating shader program!\n");
+		return;
+	}
+
+	addShader(shaderID, vertexCode, GL_VERTEX_SHADER);
+	addShader(shaderID, fragmentCode, GL_FRAGMENT_SHADER);
+
+	compileProgram();
+}
+void Shader::compileProgram() {
+
+	GLint result = 0;
+	GLchar eLog[1024] = { 0 };
+
+	glLinkProgram(shaderID);
+	glGetProgramiv(shaderID, GL_LINK_STATUS, &result);
+	if (!result)
+	{
+		glGetProgramInfoLog(shaderID, sizeof(eLog), NULL, eLog);
+		printf("Error linking program: '%s'\n", eLog);
+		return;
+	}
+
+	uniformProjection = glGetUniformLocation(shaderID, "projection");
+	uniformModel = glGetUniformLocation(shaderID, "model");
+	uniformView = glGetUniformLocation(shaderID, "view");
+	
+	//uniformTexture = glGetUniformLocation(shaderID, "theTexture");
+	
+}
+
 GLuint Shader::getProjectionLocation()
 {
 	return uniformProjection;
@@ -189,7 +236,20 @@ void Shader::clearShader()
 
 }
 
+void Shader::Validate()
+{
+	GLint result = 0;
+	GLchar eLog[1024] = { 0 };
 
+	glValidateProgram(shaderID);
+	glGetProgramiv(shaderID, GL_VALIDATE_STATUS, &result);
+	if (!result)
+	{
+		glGetProgramInfoLog(shaderID, sizeof(eLog), NULL, eLog);
+		printf("Error validating program: '%s'\n", eLog);
+		return;
+	}
+}
 
 void Shader::addShader(GLuint theProgram, const char* shaderCode, GLenum shaderType)
 {
