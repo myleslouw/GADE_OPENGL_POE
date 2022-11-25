@@ -2,16 +2,19 @@
 
 #include "FPSManager.h"
 
+
 FPSCounter::FPSCounter()
 {
 	currentTime = 0.0;
 	prevTime = 0.0;
 	timeDifference = 0.0;
 	counter = 0;
+
 }
 
 void FPSCounter::ShowFPS(GLFWwindow* window, double time)
 {
+
 	//if it must show fps
 	if (fpsEnabled)
 	{
@@ -28,6 +31,7 @@ void FPSCounter::ShowFPS(GLFWwindow* window, double time)
 			prevTime = currentTime;
 			counter = 0;
 		}
+
 	}
 	else {
 		glfwSetWindowTitle(window, "OpenGL Window");

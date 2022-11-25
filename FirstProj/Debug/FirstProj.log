@@ -1,9 +1,2 @@
-﻿  main.cpp
-c:\users\myles\desktop\openglroot\github\gade_opengl_poe\firstproj\window.h(17): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
-c:\users\myles\desktop\openglroot\github\gade_opengl_poe\firstproj\window.h(18): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
-c:\users\myles\desktop\openglroot\github\gade_opengl_poe\firstproj\terrain.h(109): warning C4018: '<': signed/unsigned mismatch
-c:\users\myles\desktop\openglroot\github\gade_opengl_poe\firstproj\terrain.h(111): warning C4018: '<': signed/unsigned mismatch
-c:\users\myles\desktop\openglroot\github\gade_opengl_poe\firstproj\terrain.h(79): warning C4101: 'u': unreferenced local variable
-c:\users\myles\desktop\openglroot\github\gade_opengl_poe\firstproj\main.cpp(23): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\myles\desktop\openglroot\github\gade_opengl_poe\firstproj\main.cpp(76): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+﻿  SkyBox.cpp
   FirstProj.vcxproj -> C:\Users\Myles\Desktop\OpenGLRoot\Github\GADE_OpenGL_POE\Debug\FirstProj.exe
