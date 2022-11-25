@@ -13,7 +13,6 @@
 const int MAX_POINT_LIGHTS = 3;
 const int MAX_SPOT_LIGHT = 3;
 
-
 class Shader
 {
 public:

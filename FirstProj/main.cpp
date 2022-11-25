@@ -24,6 +24,8 @@
 #include "PointLight.h" //Generates the PointLight for the scene
 #include "SpotLight.h"	//Generate the SpotLight for the scene
 
+
+
 const float degreeToRadians = 3.14159265 / 100.0f;
 
 Window mainWindow;

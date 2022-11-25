@@ -76,7 +76,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)/External Resources/GLM;$(SolutionDir)/External Resources/GLFW/cc/include;$(SolutionDir)/External Resources/GLEW/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)/External Resources/Asimp/include;$(SolutionDir)/External Resources/GLM;$(SolutionDir)/External Resources/GLFW/cc/include;$(SolutionDir)/External Resources/GLEW/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,6 +131,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\ModelImports\Model.cpp" />
+    <ClCompile Include="..\..\ModelImports\Texture.cpp" />
     <ClCompile Include="AnimationManager.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraPosition.cpp" />
@@ -151,6 +153,8 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\ModelImports\Model.h" />
+    <ClInclude Include="..\..\ModelImports\Texture.h" />
     <ClInclude Include="AnimationManager.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraPosition.h" />
