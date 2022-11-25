@@ -18,7 +18,7 @@ class Shader
 {
 public:
 	unsigned int texTure;
-	GLuint shaderID, uniformProjection, uniformModel, uniformView, uniformTexture, uniformEyePos, uniformSpecular_Int, uniformShininess;;
+	GLuint shaderID, uniformProjection, uniformModel, uniformView, uniformTexture, uniformEyePos, uniformSpecular_Int, uniformShininess;
 	Shader();
 
 	void CreateFromFiles(const char* vertexLocation, const char* fragmentLocation);
