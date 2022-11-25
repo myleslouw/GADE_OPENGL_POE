@@ -85,7 +85,7 @@ int main()
 	unsigned int pointLightCount = 0;
 	pointLights[0] = PointLight(0.0f, 1.0f, 1.0f,	//RBG
 								0.0f, 1.0f,			//Ambient and Diffuse Intensity
-								0.0f, 0.0f, 0.0f,	//xyz Direction
+								3.0f, 0.0f, 0.0f,	//xyz Position
 								0.3f,0.2f, 0.1f);	//con, lin, exp
 
 	pointLightCount++; //comment this line of code to see the spot light in the scene
@@ -93,7 +93,7 @@ int main()
 
 	pointLights[1] = PointLight(1.0f, 1.0f, 0.0f,	//RBG
 								0.0f, 1.0f,			//Ambient and Diffuse Intensity
-								-4.0f, 2.0f, 0.0f,	//xyz Position
+								-4.0f, 0.0f, 0.0f,	//xyz Position
 								0.3f, 0.1f, 0.1f);	//con, lin, exp
 	pointLightCount++;
 
@@ -104,7 +104,7 @@ int main()
 							  0.0f, 0.0f, 0.0f,		//xyz Position
 							  0.0f,-1.0f, 0.0f,		//xyz Direction
 							  1.0f, 0.0f, 0.0f,		//con, lin, exp
-							  20.0f);				//edges
+							  30.0f);				//edges
 	spotLightCount++;
 
 	spotLights[1] = SpotLight(1.0f, 1.0f, 1.0f,		//RGB
@@ -112,8 +112,8 @@ int main()
 							  0.0f,-1.5f, 0.0f,		//xyz Position
 							 -100.0f,-1.0f, 0.0f,	//xyz Direction
 							  1.0f, 0.0f, 0.0f,		//con, lin, exp
-							  20.0f);				//edges
-	spotLightCount++;
+							  45.0f);				//edges
+//	spotLightCount++;
 	
 #pragma endregion
 

@@ -75,11 +75,11 @@ vec4 CalcLightByDirection(Light light, vec3 direction)
 		if(specularFactor > 0.0f)
 		{
 			specularFactor = pow(specularFactor,material.shininess);
-			specularColour = vec4(light.colour*material.specular_Intensity*specularFactor,1.0f);
+			specularColour = vec4(light.colour * material.specular_Intensity * specularFactor,1.0f);
 		}
 	}
 
-	return (ambientColour+ diffuseColour + specularColour);
+	return (ambientColour + diffuseColour + specularColour);
 }
 vec4 CalcDirectionalLight()
 {
