@@ -17,7 +17,8 @@
 #include "CamManager.h"		//used for storing global instance of the camera 
 #include "ChessBoard.h"	//Generate the chessboard 
 #include "Terrain.h"	//Generates the heightmap data
-#include "FPSCounter.h"
+#include "FPSCounter.h"	//fps counter
+#include "SkyBox.h"		//skybox
 
 const float degreeToRadians = 3.14159265 / 100.0f;
 
@@ -27,6 +28,7 @@ Window mainWindow;
 ChessBoard chessboard;
 Terrain heightmap;
 FPSCounter fpsCounter;
+SkyBox skybox;
 
 GLfloat deltaTime = 0.0f;
 GLfloat lastTime = 0.0f;
@@ -56,6 +58,16 @@ int main()
 
 	fpsCounter = FPSCounter();
 
+	//loads textures into vector
+	std::vector<std::string> skyboxFaces;
+	skyboxFaces.push_back("Textures/Skybox/cupertin-lake_rt.tga");
+	skyboxFaces.push_back("Textures/Skybox/cupertin-lake_lf.tga");
+	skyboxFaces.push_back("Textures/Skybox/cupertin-lake_up.tga");
+	skyboxFaces.push_back("Textures/Skybox/cupertin-lake_dn.tga");
+	skyboxFaces.push_back("Textures/Skybox/cupertin-lake_bk.tga");
+	skyboxFaces.push_back("Textures/Skybox/cupertin-lake_ft.tga");
+
+	skybox = SkyBox(skyboxFaces);
 
 	//loop until window closed
 	while (!mainWindow.getShouldClose())
@@ -78,6 +90,9 @@ int main()
 
 
 		//-------------------------------------------------------------
+		//skybox
+		skybox.DrawSkybox(globalCamera.calculateViewMatrix(), projection);
+
 		//fps counter
 
 		fpsCounter.ShowFPS(mainWindow.getMainWindow(), glfwGetTime());
