@@ -139,8 +139,7 @@ void main()
 	finalColour += CalcPointLights();
 	finalColour += CalcSpotLights();
 
-	colour = texture(texture1,UV);	
-	//colour = vec4(FragPos,0.1) *finalColour;
-	//colour = vCol * finalColour;
-	//colour = finalColour;											
+	//colour = vec4(FragPos,1.0) * finalColour;
+	//colour = texture(texture1,UV);	
+	colour = texture(texture1,UV) * finalColour;
 }

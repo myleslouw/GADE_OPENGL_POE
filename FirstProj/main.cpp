@@ -85,10 +85,11 @@ int main()
 	unsigned int pointLightCount = 0;
 	pointLights[0] = PointLight(0.0f, 1.0f, 1.0f,	//RBG
 								0.0f, 1.0f,			//Ambient and Diffuse Intensity
-								4.0f, 0.0f, 0.0f,	//xyz Direction
+								0.0f, 0.0f, 0.0f,	//xyz Direction
 								0.3f,0.2f, 0.1f);	//con, lin, exp
 
 	pointLightCount++; //comment this line of code to see the spot light in the scene
+	
 
 	pointLights[1] = PointLight(1.0f, 1.0f, 0.0f,	//RBG
 								0.0f, 1.0f,			//Ambient and Diffuse Intensity
@@ -113,6 +114,7 @@ int main()
 							  1.0f, 0.0f, 0.0f,		//con, lin, exp
 							  20.0f);				//edges
 	spotLightCount++;
+	
 #pragma endregion
 
 	glm::mat4 projection = glm::perspective(glm::radians(45.0f), mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 100.0f);
@@ -163,12 +165,12 @@ int main()
 		fpsCounter.ShowFPS(mainWindow.getMainWindow(), glfwGetTime());
 
 		//generate heightmap/terrain
-		heightmap.GenerateTerrain(projection, globalCamera);
+	//	heightmap.GenerateTerrain(projection, globalCamera);
 
 		//generates the chessboard
-		chessboard.GenerateChessBoard(projection, globalCamera, mainLight, pointLights, spotLights, 0, 0);
+		chessboard.GenerateChessBoard(projection, globalCamera, mainLight, pointLights, spotLights, 3, 3);
 
-		chessboard.AnimateChessPieces(projection, globalCamera, deltaTime, mainLight, pointLights, spotLights, 0, 0);
+		chessboard.AnimateChessPieces(projection, globalCamera, deltaTime, mainLight, pointLights, spotLights, 3, 3);
 		//------------------------------------------------------------------
 
 		glUseProgram(0);	//unassigning the shader

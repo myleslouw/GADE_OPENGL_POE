@@ -1,76 +1,9 @@
-﻿  CamManager.cpp
-  Camera.cpp
-  ChessBoard.cpp
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\chessboard.cpp(26): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\chessboard.cpp(313): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-  Mesh.cpp
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\mesh.cpp(183): warning C4018: '<': signed/unsigned mismatch
-  Shader.cpp
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.cpp(437): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.cpp(436): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.cpp(435): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.cpp(450): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.cpp(449): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.cpp(448): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.cpp(447): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
-  SkyBox.cpp
-  Window.cpp
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.h(17): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.h(18): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.cpp(188): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.cpp(189): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.cpp(193): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.cpp(194): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.cpp(196): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.cpp(197): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-  main.cpp
+﻿  main.cpp
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.h(17): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.h(18): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\terrain.h(109): warning C4018: '<': signed/unsigned mismatch
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\terrain.h(111): warning C4018: '<': signed/unsigned mismatch
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\terrain.h(79): warning C4101: 'u': unreferenced local variable
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\main.cpp(27): warning C4305: 'initializing': truncation from 'double' to 'float'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\main.cpp(141): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-  Generating Code...
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.cpp(92): warning C4715: 'Window::Initialise': not all control paths return a value
-LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-DirectionalLight.obj : warning LNK4049: locally defined symbol ___glewUniform1f imported
-Material.obj : warning LNK4049: locally defined symbol ___glewUniform1f imported
-PointLight.obj : warning LNK4217: locally defined symbol ___glewUniform1f imported in function __ehhandler$??1PointLight@@QAE@XZ
-SpotLight.obj : warning LNK4049: locally defined symbol ___glewUniform1f imported
-DirectionalLight.obj : warning LNK4049: locally defined symbol ___glewUniform3f imported
-PointLight.obj : warning LNK4049: locally defined symbol ___glewUniform3f imported
-SpotLight.obj : warning LNK4049: locally defined symbol ___glewUniform3f imported
-Mesh.obj : warning LNK4049: locally defined symbol ___glewBindBuffer imported
-Mesh.obj : warning LNK4049: locally defined symbol ___glewBufferData imported
-Mesh.obj : warning LNK4049: locally defined symbol ___glewDeleteBuffers imported
-Mesh.obj : warning LNK4049: locally defined symbol ___glewGenBuffers imported
-Mesh.obj : warning LNK4049: locally defined symbol ___glewEnableVertexAttribArray imported
-Mesh.obj : warning LNK4049: locally defined symbol ___glewVertexAttribPointer imported
-Mesh.obj : warning LNK4049: locally defined symbol ___glewBindVertexArray imported
-Mesh.obj : warning LNK4049: locally defined symbol ___glewDeleteVertexArrays imported
-Mesh.obj : warning LNK4049: locally defined symbol ___glewGenVertexArrays imported
-Shader.obj : warning LNK4049: locally defined symbol ___glewActiveTexture imported
-SkyBox.obj : warning LNK4049: locally defined symbol ___glewActiveTexture imported
-Shader.obj : warning LNK4049: locally defined symbol ___glewAttachShader imported
-Shader.obj : warning LNK4049: locally defined symbol ___glewCompileShader imported
-Shader.obj : warning LNK4049: locally defined symbol ___glewCreateProgram imported
-Shader.obj : warning LNK4049: locally defined symbol ___glewCreateShader imported
-Shader.obj : warning LNK4049: locally defined symbol ___glewDeleteProgram imported
-Shader.obj : warning LNK4049: locally defined symbol ___glewGetProgramInfoLog imported
-Shader.obj : warning LNK4049: locally defined symbol ___glewGetProgramiv imported
-Shader.obj : warning LNK4049: locally defined symbol ___glewGetShaderInfoLog imported
-Shader.obj : warning LNK4049: locally defined symbol ___glewGetShaderiv imported
-Shader.obj : warning LNK4049: locally defined symbol ___glewGetUniformLocation imported
-Shader.obj : warning LNK4049: locally defined symbol ___glewLinkProgram imported
-Shader.obj : warning LNK4049: locally defined symbol ___glewShaderSource imported
-Shader.obj : warning LNK4049: locally defined symbol ___glewUniform1i imported
-Shader.obj : warning LNK4049: locally defined symbol ___glewUseProgram imported
-Shader.obj : warning LNK4049: locally defined symbol ___glewValidateProgram imported
-Shader.obj : warning LNK4049: locally defined symbol ___glewGenerateMipmap imported
-SkyBox.obj : warning LNK4049: locally defined symbol ___glewUniformMatrix4fv imported
-Window.obj : warning LNK4217: locally defined symbol _glewInit@0 imported in function "public: int __thiscall Window::Initialise(void)" (?Initialise@Window@@QAEHXZ)
-Window.obj : warning LNK4217: locally defined symbol _glewGetErrorString@4 imported in function "public: int __thiscall Window::Initialise(void)" (?Initialise@Window@@QAEHXZ)
-glew32s.lib(glew.obj) : warning LNK4099: PDB 'glew_static.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'D:\GADE7312_Project_repo\GADE_OpenGL_POE\Debug\glew_static.pdb'; linking object as if no debug info
+d:\gade7312_project_repo\gade_opengl_poe\firstproj\main.cpp(143): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
   FirstProj.vcxproj -> D:\GADE7312_Project_repo\GADE_OpenGL_POE\Debug\FirstProj.exe

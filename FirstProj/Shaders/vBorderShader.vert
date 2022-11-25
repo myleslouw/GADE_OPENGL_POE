@@ -21,7 +21,8 @@ void main()
 
 	UV = vec2(VertexUV.x,VertexUV.y);
 
-	Normals = mat3(transpose(inverse(model))) * norm;
+	//Normals = mat3(transpose(inverse(model))) * norm;
+	Normals = norm;
 	
-	FragPos = (model*vec4(pos,1.0)).xyz;
+	FragPos = vec3(model*vec4(pos,1.0));
 }
