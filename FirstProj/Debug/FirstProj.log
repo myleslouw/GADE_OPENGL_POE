@@ -1,59 +1,10 @@
 ﻿  Model.cpp
 d:\gade7312_project_repo\gade_opengl_poe\external resources\asimp\include\assimp\defs.h(55): fatal error C1083: Cannot open include file: 'assimp/config.h': No such file or directory
-  Texture.cpp
-  AnimationManager.cpp
-  Camera.cpp
-  CameraPosition.cpp
-  CamManager.cpp
-  ChessAnimation.cpp
-  ChessBoard.cpp
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\chessboard.cpp(26): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\chessboard.cpp(313): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-  DirectionalLight.cpp
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\directionallight.cpp(18): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\directionallight.cpp(19): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\directionallight.cpp(21): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\directionallight.cpp(22): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-  FPSCounter.cpp
-  FPSManager.cpp
-  Light.cpp
   main.cpp
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.h(17): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.h(18): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\terrain.h(109): warning C4018: '<': signed/unsigned mismatch
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\terrain.h(111): warning C4018: '<': signed/unsigned mismatch
 d:\gade7312_project_repo\gade_opengl_poe\firstproj\terrain.h(79): warning C4101: 'u': unreferenced local variable
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\main.cpp(27): warning C4305: 'initializing': truncation from 'double' to 'float'
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\main.cpp(143): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
-  Material.cpp
-  Mesh.cpp
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\mesh.cpp(183): warning C4018: '<': signed/unsigned mismatch
-  PointLight.cpp
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.cpp(22): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.cpp(23): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.cpp(24): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.cpp(27): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.cpp(28): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.cpp(29): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\pointlight.cpp(30): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
-  Shader.cpp
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.cpp(437): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.cpp(436): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.cpp(435): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.cpp(449): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.cpp(448): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.cpp(447): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\shader.cpp(446): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
-  SkyBox.cpp
-  SpotLight.cpp
-  Window.cpp
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.h(17): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.h(18): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.cpp(188): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.cpp(189): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.cpp(193): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.cpp(194): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.cpp(196): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.cpp(197): warning C4244: '=': conversion from 'double' to 'GLfloat', possible loss of data
+d:\gade7312_project_repo\gade_opengl_poe\external resources\asimp\include\assimp\defs.h(55): fatal error C1083: Cannot open include file: 'assimp/config.h': No such file or directory
   Generating Code...
-d:\gade7312_project_repo\gade_opengl_poe\firstproj\window.cpp(92): warning C4715: 'Window::Initialise': not all control paths return a value

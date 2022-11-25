@@ -24,7 +24,8 @@
 #include "PointLight.h" //Generates the PointLight for the scene
 #include "SpotLight.h"	//Generate the SpotLight for the scene
 
-
+#include "Model.h"
+#include "Texture.h"
 
 const float degreeToRadians = 3.14159265 / 100.0f;
 
@@ -36,8 +37,15 @@ Terrain heightmap;
 FPSCounter fpsCounter;
 SkyBox skybox;
 
+Texture zebreaTex;
+Model king;
+Model Castle;
+Model Pawn;
+
 Material nShinyMat;
 Material nDullMat;
+
+
 
 //Lighting objects
 DirectionalLight mainLight;
@@ -72,6 +80,14 @@ int main()
 	//ENGINE MATERIALS
 	nShinyMat = Material(1.0f, 32);
 	nDullMat = Material(0.3f, 4);
+
+	zebreaTex = Texture((char*)"Textures/ZebraTexture.png");
+	zebreaTex.LoadTexture();
+
+	king = Model();
+	king.LoadModel("Models/KingLowPoly_V01.fbx");
+	Pawn.LoadModel("Models/PawnLowPoly_V01.fbx");
+	Castle.LoadModel("Models/CastleLowPoly_V02.fbx");
 
 
 	//CAMERA HERE
@@ -119,6 +135,8 @@ int main()
 	
 #pragma endregion
 
+	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0,
+		uniformEyePosition = 0, uniformSpecularIntensity = 0, uniformShininess = 0;
 	glm::mat4 projection = glm::perspective(glm::radians(45.0f), mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 100.0f);
 
 
@@ -174,6 +192,8 @@ int main()
 
 		chessboard.AnimateChessPieces(projection, globalCamera, deltaTime, mainLight, pointLights, spotLights, 3, 3);
 		//------------------------------------------------------------------
+		//models
+
 
 		glUseProgram(0);	//unassigning the shader
 
