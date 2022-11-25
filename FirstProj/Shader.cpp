@@ -243,6 +243,10 @@ void Shader::compileLightingShader(const char* vertexCode, const char* fragmentC
 	uniformModel = glGetUniformLocation(shaderID, "model");
 	uniformProjection = glGetUniformLocation(shaderID, "projection");
 	uniformView = glGetUniformLocation(shaderID, "view");
+
+#pragma region Light Shader
+
+
 	unifomDirectionalLight.uniformAmbient_Int = glGetUniformLocation(shaderID, "DiretionalLight.base.ambient_Intensity");	//update start
 	unifomDirectionalLight.uniformColour = glGetUniformLocation(shaderID, "DiretionalLight.base.colour");
 	unifomDirectionalLight.uniformDirection = glGetUniformLocation(shaderID, "DiretionalLight.direction");
@@ -317,6 +321,8 @@ void Shader::compileLightingShader(const char* vertexCode, const char* fragmentC
 		snprintf(locBuff, sizeof(locBuff), "spotLights[%d].edge", (int)i);
 		uniformSpotLights[i].uniformEdge = glGetUniformLocation(shaderID, locBuff);
 	}
+#pragma endregion
+
 }
 
 void Shader::compileProgram() {

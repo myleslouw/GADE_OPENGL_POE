@@ -8,6 +8,7 @@ Mesh::Mesh()
 	//VBO= Vertex Buffer Object
 	//IBO = Indices Buffer Object
 	//TBO = Texture Buffer Object
+	LightVAO = 0;
 	VAO = 0;
 	VBO = 0;
 	IBO = 0;
@@ -145,6 +146,17 @@ void Mesh::CreateSkyboxMesh(GLfloat *vertices, unsigned int *indices, unsigned i
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 	glBindVertexArray(0);
+}
+
+void Mesh::CreateLightMesh(GLfloat * vertices, unsigned int * indices, unsigned int VCount, unsigned int ICount)
+{
+	//generates a vertex array with the LightVAO
+	glGenVertexArrays(1, &LightVAO);
+	//binds it
+	glBindVertexArray(LightVAO);
+	//only need to bind VBO as we don't need to create our own.
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 }
 
 

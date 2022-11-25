@@ -162,29 +162,11 @@ int main()
 
 		fpsCounter.ShowFPS(mainWindow.getMainWindow(), glfwGetTime());
 
-
 		//generate heightmap/terrain
 		heightmap.GenerateTerrain(projection, globalCamera);
 
 		//generates the chessboard
 		chessboard.GenerateChessBoard(projection, globalCamera, mainLight, pointLights, spotLights, 0, 0);
-
-#pragma region ChessBoard Lighting
-		//adding lighting to the specfic shader of an object in the scene
-
-		//WHITE BLOCK shader
-		/*chessboard.shaderList[0]->setDirectional_Light(&mainLight);
-		chessboard.shaderList[0]->setPoint_Lights(pointLights, pointLightCount);
-		chessboard.shaderList[0]->setSpot_Lights(spotLights, spotLightCount);
-		//BLACK BLOCK shader
-		chessboard.shaderList[1]->setDirectional_Light(&mainLight);
-		chessboard.shaderList[1]->setPoint_Lights(pointLights, pointLightCount);
-		chessboard.shaderList[1]->setSpot_Lights(spotLights, spotLightCount);
-		//BORDER block shader
-		chessboard.shaderList[2]->setDirectional_Light(&mainLight);
-		chessboard.shaderList[2]->setPoint_Lights(pointLights, pointLightCount);
-		chessboard.shaderList[2]->setSpot_Lights(spotLights, spotLightCount);*/
-#pragma endregion
 
 		chessboard.AnimateChessPieces(projection, globalCamera, deltaTime, mainLight, pointLights, spotLights, 0, 0);
 		//------------------------------------------------------------------
